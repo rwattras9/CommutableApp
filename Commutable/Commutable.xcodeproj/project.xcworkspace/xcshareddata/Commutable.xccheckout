@@ -5,36 +5,36 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>98E9FB52-6883-4CB1-A512-9DA73697B66E</string>
+	<string>FDAAA22E-F892-4BF6-B04C-35E43D865E58</string>
 	<key>IDESourceControlProjectName</key>
 	<string>Commutable</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>F588E1C5-FEA4-46D2-A84E-DC66B1720EEC</key>
-		<string>https://github.com/EsCaliente/Commutable.git</string>
+		<key>21E81E6B-5A2E-46F1-8668-D8D156AD5F2E</key>
+		<string>https://github.com/rwattras9/CommutableApp.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Commutable/Commutable.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>F588E1C5-FEA4-46D2-A84E-DC66B1720EEC</key>
+		<key>21E81E6B-5A2E-46F1-8668-D8D156AD5F2E</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/EsCaliente/Commutable.git</string>
+	<string>https://github.com/rwattras9/CommutableApp.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>F588E1C5-FEA4-46D2-A84E-DC66B1720EEC</string>
+	<string>21E81E6B-5A2E-46F1-8668-D8D156AD5F2E</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>F588E1C5-FEA4-46D2-A84E-DC66B1720EEC</string>
+			<string>21E81E6B-5A2E-46F1-8668-D8D156AD5F2E</string>
 			<key>IDESourceControlWCCName</key>
-			<string>Commutable</string>
+			<string>CommutableApp</string>
 		</dict>
 	</array>
 </dict>

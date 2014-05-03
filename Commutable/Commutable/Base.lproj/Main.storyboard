@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="8YX-ce-x5E">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="8YX-ce-x5E">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -59,7 +59,6 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="commuteName" destination="rRz-kk-c9q" id="ulN-Ep-P8G"/>
-                                    <segue destination="TMf-ia-h7y" kind="push" identifier="Edit Commute Screen" id="OVh-F6-Rhe"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -68,7 +67,13 @@
                             <outlet property="delegate" destination="o2j-li-IZm" id="NoF-uh-4Cr"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Commutes" id="vvy-P3-rPr"/>
+                    <navigationItem key="navigationItem" title="Commutes" id="vvy-P3-rPr">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="7XS-7v-cED">
+                            <connections>
+                                <segue destination="j6h-T4-pAW" kind="modal" id="Zu5-tB-z7j"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3EJ-D8-NtH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -82,13 +87,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="WBp-fM-ddA">
-                            <rect key="frame" x="0.0" y="445" width="320" height="44"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="Create Commute">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                        </button>
                         <sections>
                             <tableViewSection headerTitle="Starting Location" id="yn8-St-o0B">
                                 <cells>
@@ -187,11 +185,23 @@
                             <outlet property="delegate" destination="TMf-ia-h7y" id="INO-Bd-ROP"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Commute Creator" id="4V8-nu-PcX"/>
+                    <navigationItem key="navigationItem" title="Commute Creator" id="4V8-nu-PcX">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Qvd-fd-qEB">
+                            <connections>
+                                <segue destination="9Ty-L7-11m" kind="unwind" unwindAction="unwindToCommutesTable:" id="ADP-Wk-95C"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="Kfd-wo-5Vz">
+                            <connections>
+                                <segue destination="9Ty-L7-11m" kind="unwind" unwindAction="unwindToCommutesTable:" id="7ya-tg-WPF"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ruE-9Q-uFq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="9Ty-L7-11m" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1655" y="953"/>
+            <point key="canvasLocation" x="2181" y="953"/>
         </scene>
         <!--Location Creator View Controller - Create A New Location-->
         <scene sceneID="gmJ-Kn-X7o">
@@ -209,13 +219,13 @@
                                 <rect key="frame" x="142" y="140" width="97" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6cL-m0-fua">
                                 <rect key="frame" x="142" y="178" width="97" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="go"/>
                             </textField>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Street Address:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xES-x9-Mb0">
                                 <rect key="frame" x="20" y="144" width="119" height="21"/>
@@ -239,23 +249,28 @@
                                 <rect key="frame" x="142" y="102" width="97" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ytr-cn-nxh">
-                                <rect key="frame" x="94" y="320" width="133" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Save New Location">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Create A New Location" id="m4V-7s-pG8"/>
+                    <navigationItem key="navigationItem" title="Create A New Location" id="m4V-7s-pG8">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="ch4-OL-EEy">
+                            <connections>
+                                <segue destination="Rwd-ra-nTm" kind="unwind" unwindAction="unwindToCommuteCreatorTable:" id="NEZ-LJ-Ynw"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="pn6-eA-ll3">
+                            <connections>
+                                <segue destination="Rwd-ra-nTm" kind="unwind" unwindAction="unwindToCommuteCreatorTable:" id="nzv-A4-86Y"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YJB-aV-HdM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Rwd-ra-nTm" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2279" y="560"/>
+            <point key="canvasLocation" x="2805" y="560"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Vex-rW-GRa">
@@ -295,6 +310,24 @@
             </objects>
             <point key="canvasLocation" x="653" y="560"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="316-im-JuD">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="j6h-T4-pAW" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="olr-Rj-0ay">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="TMf-ia-h7y" kind="relationship" relationship="rootViewController" id="f63-ks-QhQ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9jp-ar-daz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1655" y="953"/>
+        </scene>
     </scenes>
     <resources>
         <image name="first" width="30" height="30"/>
@@ -305,6 +338,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="6v9-SP-gsF"/>
+        <segue reference="BKt-IC-ABg"/>
     </inferredMetricsTieBreakers>
 </document>
