@@ -2,7 +2,7 @@
 //  CommuteCreatorTableViewController.m
 //  Commutable
 //
-//  Created by Edward Damisch on 4/13/14.
+//  Created by Edward Damisch and Rick Wattras on 4/13/14.
 //  Copyright (c) 2014 Commutable. All rights reserved.
 //
 

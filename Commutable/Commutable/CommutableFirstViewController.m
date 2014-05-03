@@ -15,8 +15,10 @@
 
 @implementation CommutableFirstViewController{
     BOOL firstLocationUpdate_;
+    
 }
 @synthesize mapView;
+
 
 - (void)viewDidLoad
 {
@@ -25,11 +27,6 @@
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:89.00
                                                             longitude:43.00
                                                                  zoom:1];
-    
-    // Create the GMSMapView with the camera position.
-    //self.mapView.camera = camera;
-    
-    mapView = [GMSMapView mapWithFrame:CGRectMake(0, 28, 320, 491) camera:camera];
     mapView.myLocationEnabled = YES;
     mapView.settings.compassButton = YES;
     mapView.trafficEnabled = YES;
@@ -40,13 +37,13 @@
                  options:NSKeyValueObservingOptionNew
                   context:NULL];
     
-    self.view = mapView;
+    // Add the map to the custom View
+    [mapView setCamera:camera];
     
     // Ask for My Location data after the map has already been added to the UI.
     dispatch_async(dispatch_get_main_queue(), ^{
         mapView.myLocationEnabled = YES;
     });
-    
 }
 
 
