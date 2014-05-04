@@ -30,6 +30,7 @@
 		2CE53F1518F98C44005BCEC9 /* CommutableTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CE53F1418F98C44005BCEC9 /* CommutableTests.m */; };
 		2CE53F2018F991AF005BCEC9 /* CommutesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CE53F1F18F991AF005BCEC9 /* CommutesTableViewController.m */; };
 		2CE53F2318F9921D005BCEC9 /* CommutesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CE53F2218F9921D005BCEC9 /* CommutesTableViewCell.m */; };
+		2CF4DA8A19169A3C003762D3 /* LocationItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CF4DA8919169A3C003762D3 /* LocationItem.m */; };
 		79AB6D01191099350013E1D6 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79AB6D00191099340013E1D6 /* GoogleMaps.framework */; };
 		79AB6D051910997C0013E1D6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79AB6D041910997C0013E1D6 /* AVFoundation.framework */; };
 		79AB6D07191099830013E1D6 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79AB6D06191099830013E1D6 /* CoreData.framework */; };
@@ -88,6 +89,8 @@
 		2CE53F1F18F991AF005BCEC9 /* CommutesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommutesTableViewController.m; sourceTree = "<group>"; };
 		2CE53F2118F9921D005BCEC9 /* CommutesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommutesTableViewCell.h; sourceTree = "<group>"; };
 		2CE53F2218F9921D005BCEC9 /* CommutesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommutesTableViewCell.m; sourceTree = "<group>"; };
+		2CF4DA8819169A3C003762D3 /* LocationItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationItem.h; sourceTree = "<group>"; };
+		2CF4DA8919169A3C003762D3 /* LocationItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationItem.m; sourceTree = "<group>"; };
 		79AB6D00191099340013E1D6 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
 		79AB6D041910997C0013E1D6 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		79AB6D06191099830013E1D6 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -196,10 +199,12 @@
 				2CE53EFC18F98C43005BCEC9 /* CommutableFirstViewController.m */,
 				2CE53F1E18F991AF005BCEC9 /* CommutesTableViewController.h */,
 				2CE53F1F18F991AF005BCEC9 /* CommutesTableViewController.m */,
-				2CD2FFFE18FB3559005F1338 /* CommuteCreatorTableViewController.h */,
-				2CD2FFFF18FB3559005F1338 /* CommuteCreatorTableViewController.m */,
 				2CE53F2118F9921D005BCEC9 /* CommutesTableViewCell.h */,
 				2CE53F2218F9921D005BCEC9 /* CommutesTableViewCell.m */,
+				2CD2FFFE18FB3559005F1338 /* CommuteCreatorTableViewController.h */,
+				2CD2FFFF18FB3559005F1338 /* CommuteCreatorTableViewController.m */,
+				2CF4DA8819169A3C003762D3 /* LocationItem.h */,
+				2CF4DA8919169A3C003762D3 /* LocationItem.m */,
 				2CE53F0118F98C43005BCEC9 /* Images.xcassets */,
 				2CE53EED18F98C43005BCEC9 /* Supporting Files */,
 			);
@@ -343,6 +348,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CE53F2318F9921D005BCEC9 /* CommutesTableViewCell.m in Sources */,
+				2CF4DA8A19169A3C003762D3 /* LocationItem.m in Sources */,
 				2CD2000318FB3B0D005F1338 /* LocationCreatorViewController.m in Sources */,
 				2CE53EFD18F98C43005BCEC9 /* CommutableFirstViewController.m in Sources */,
 				2CE53F2018F991AF005BCEC9 /* CommutesTableViewController.m in Sources */,
