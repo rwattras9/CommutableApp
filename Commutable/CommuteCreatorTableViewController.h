@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CommuteCreatorTableViewController : UITableViewController
+@interface CommuteCreatorTableViewController : UITableViewController <UIPickerViewDataSource,UIPickerViewDelegate>
+@property (strong, nonatomic) IBOutlet UILabel *existingStartingLocation;
+@property (strong, nonatomic) IBOutlet UIPickerView *existingStartingLocationsPicker;
 
 //Unwind Transition to go back to CommuteCreatorTableViewController
 - (IBAction)unwindToCommuteCreatorTable:(UIStoryboardSegue *)segue;
