@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LocationItem.h"
+
 
 @interface LocationCreatorViewController : UIViewController
+
+@property LocationItem *locationItem;
 
 @end

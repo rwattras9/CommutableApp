@@ -9,6 +9,10 @@
 #import "LocationCreatorViewController.h"
 
 @interface LocationCreatorViewController ()
+@property (strong, nonatomic) IBOutlet UITextField *locationNameTextField;
+@property (strong, nonatomic) IBOutlet UITextField *streetAddressTextField;
+@property (strong, nonatomic) IBOutlet UITextField *zipCodeTextField;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *saveNewLocationButton;
 
 @end
 
@@ -35,7 +39,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -43,7 +47,14 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    if (sender != self.saveNewLocationButton) return;
+    //check to see if Location Name text field is populated, then create a new Location Item object with the location Name populated.
+    if (self.locationNameTextField.text.length > 0){
+        self.locationItem = [[LocationItem alloc] init];
+        self.locationItem.locationName = self.locationNameTextField.text;
+    }
 }
-*/
+
 
 @end

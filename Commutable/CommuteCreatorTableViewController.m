@@ -8,6 +8,7 @@
 
 #import "CommuteCreatorTableViewController.h"
 #import "LocationItem.h"
+#import "LocationCreatorViewController.h"
 @interface CommuteCreatorTableViewController ()
 
 @property NSMutableArray *locationsArray;
@@ -18,8 +19,12 @@
 
 - (IBAction) unwindToCommuteCreatorTable:(UIStoryboardSegue *)segue
 {
-
-    
+    LocationCreatorViewController *source = [segue sourceViewController];
+    LocationItem *location = source.locationItem;
+    if (location != nil){
+        [self.locationsArray addObject:location];
+        [self.existingStartingLocationsPicker reloadAllComponents];
+    }
     
 }
 
