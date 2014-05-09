@@ -11,5 +11,7 @@
 @interface LocationItem : NSObject
 
 @property NSString *locationName;
+@property NSString *locationAddress;
+@property NSString *locationZipCode;
 
 @end
