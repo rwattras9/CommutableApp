@@ -24,6 +24,7 @@
     if (location != nil){
         [self.locationsArray addObject:location];
         [self.existingStartingLocationsPicker reloadAllComponents];
+        [self.existingDestinationLocationsPicker reloadAllComponents];
     }
     
 }
