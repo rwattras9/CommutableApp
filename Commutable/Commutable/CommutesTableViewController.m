@@ -9,17 +9,41 @@
 #import "CommutesTableViewController.h"
 //import CommutesTableViewCell, since we'll be modifying the contents
 #import "CommutesTableViewCell.h"
-
+#import "CommuteItem.h"
+#import "CommuteCreatorTableViewController.h"
 
 @interface CommutesTableViewController ()
+
+
 
 @end
 
 @implementation CommutesTableViewController
 
+- (void) loadInitialData {
+    
+    //Placeholder data
+    CommuteItem *commute1 = [[CommuteItem alloc] init];
+    commute1.commuteName = @"Morning Commute";
+    [self.commuteArray addObject:commute1];
+    CommuteItem *commute2 = [[CommuteItem alloc] init];
+    commute2.commuteName = @"Evening Commute";
+    [self.commuteArray addObject:commute2];
+    CommuteItem *commute3 = [[CommuteItem alloc] init];
+    commute3.commuteName = @"Saturday Commute";
+    [self.commuteArray addObject:commute3];
+    
+    
+}
+
 - (IBAction)unwindToCommutesTable:(UIStoryboardSegue *)segue
 {
-    
+    CommuteCreatorTableViewController *source = [segue sourceViewController];
+    CommuteItem *commute = source.commuteItem;
+    if (commute != nil) {
+        [self.commuteArray addObject:commute];
+        [self.tableView reloadData];
+    }
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -34,12 +58,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //This is a placeholder
-    //This should query the commute names specified in the Commute Creation Screen
     
-    _commuteNamesArray = @[@"Morning Commute",
-                      @"Evening Commute",
-                      @"Saturday Commute"];
+    //initalize array of commutes
+    self.commuteArray = [[NSMutableArray alloc] init];
+    
+    [self loadInitialData];
+    
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -66,7 +90,7 @@
 {
 
     // Return the number of rows in the section.
-    return _commuteNamesArray.count;
+    return [self.commuteArray count];
 }
 
 //This returns the correct Commute information from the arrays
@@ -78,9 +102,13 @@
 
     // Configure the cell...
     
-    long row = [indexPath row];
+    CommuteItem *commuteItem = [self.commuteArray objectAtIndex:indexPath.row];
+    cell.textLabel.text = commuteItem.commuteName;
     
-    cell.commuteName.text = _commuteNamesArray[row];
+    //old from other tutorial. Probably can delete.
+    //long row = [indexPath row];
+    
+    //cell.commuteName.text = _commuteArray[row];
     
     return cell;
 }

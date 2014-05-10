@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CommuteItem.h"
 
 @interface CommuteCreatorTableViewController : UITableViewController <UIPickerViewDataSource,UIPickerViewDelegate>
 @property (strong, nonatomic) IBOutlet UILabel *existingStartingLocation;
 @property (strong, nonatomic) IBOutlet UIPickerView *existingStartingLocationsPicker;
 @property (strong, nonatomic) IBOutlet UIPickerView *existingDestinationLocationsPicker;
+
+@property CommuteItem *commuteItem;
 
 
 //Unwind Transition to go back to CommuteCreatorTableViewController

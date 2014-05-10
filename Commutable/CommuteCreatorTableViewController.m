@@ -11,7 +11,9 @@
 #import "LocationCreatorViewController.h"
 @interface CommuteCreatorTableViewController ()
 
+@property (strong, nonatomic) IBOutlet UITextField *commuteNameTextField;
 @property NSMutableArray *locationsArray;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *commuteCreatorDoneButton;
 
 @end
 
@@ -37,6 +39,20 @@
     location2.locationName = @"Work";
     [self.locationsArray addObject:location2];
 
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    //check to see if it was the Done or Cancel button that was tapped
+    if (sender != self.commuteCreatorDoneButton) return;
+    
+    //Placeholder until I get error handling in.
+    if (self.commuteNameTextField.text.length > 0) {
+        self.commuteItem = [[CommuteItem alloc] init];
+        self.commuteItem.commuteName = self.commuteNameTextField.text;
+        
+    }
+    
 }
     
 - (id)initWithStyle:(UITableViewStyle)style
