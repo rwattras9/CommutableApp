@@ -35,9 +35,13 @@
 - (void) loadInitialData {
     LocationItem *location1 = [[LocationItem alloc] init];
     location1.locationName = @"Home";
+    location1.locationAddress = @"13N467 Chisholm Trail";
+    location1.locationZipCode = @"60124";
     [self.locationsArray addObject:location1];
     LocationItem *location2 = [[LocationItem alloc] init];
     location2.locationName = @"Work";
+    location2.locationAddress = @"835 North Michigan Ave";
+    location2.locationZipCode = @"60611";
     [self.locationsArray addObject:location2];
 
 }
