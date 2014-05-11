@@ -15,6 +15,7 @@
 @property NSMutableArray *locationsArray;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *commuteCreatorDoneButton;
 
+
 @end
 
 @implementation CommuteCreatorTableViewController
@@ -46,10 +47,24 @@
     //check to see if it was the Done or Cancel button that was tapped
     if (sender != self.commuteCreatorDoneButton) return;
     
-    //Placeholder until I get error handling in.
+    //The single condition is a placeholder until I get full error handling in.
     if (self.commuteNameTextField.text.length > 0) {
         self.commuteItem = [[CommuteItem alloc] init];
         self.commuteItem.commuteName = self.commuteNameTextField.text;
+        //set the Commute Item's starting address
+        self.commuteItem.commuteStartingAddress = [[self.locationsArray objectAtIndex:[_existingStartingLocationsPicker selectedRowInComponent:0]] locationAddress];
+        //NSLog(@"The value of commuteStartingAddress is %@", self.commuteItem.commuteStartingAddress);
+        
+        //set the Commute Item's starting zip
+        self.commuteItem.commuteStartingZipCode = [[self.locationsArray objectAtIndex:[_existingStartingLocationsPicker selectedRowInComponent:0]] locationZipCode];
+        
+        //set the Commute Item's Destination Address
+        self.commuteItem.commuteDestinationAddress = [[self.locationsArray objectAtIndex:[_existingDestinationLocationsPicker selectedRowInComponent:0]] locationAddress];
+        
+        //set the Commute Item's Destination Zip Code
+        self.commuteItem.commuteDestinationZipCode = [[self.locationsArray objectAtIndex:[_existingDestinationLocationsPicker selectedRowInComponent:0]] locationZipCode];
+        
+        //To do: set the Commute Item's Schedule
         
     }
     
@@ -106,6 +121,7 @@
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
     
     NSLog(@"The selected row is %d", row);
+    
 }
 
 @end
