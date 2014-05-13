@@ -23,6 +23,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // New build with HTML
+    NSError *error = nil;
+    // create NSString from local HTML file and add it to the webView
+    NSString *html = [[NSString alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"index" ofType:@"html"] encoding:NSUTF8StringEncoding error:&error];
+    [self.mapView loadHTMLString:html baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
+    [self.view sendSubviewToBack:self.mapView];
+    
+    
+    
+    /* Original build with UIView
+     
 	// Do any additional setup after loading the view, typically from a nib.
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:89.00
                                                             longitude:43.00
@@ -44,21 +56,29 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         mapView.myLocationEnabled = YES;
     });
+     
+     */
 }
 
+- (IBAction)routeButton:(id)sender {
+    
+    [self.mapView stringByEvaluatingJavaScriptFromString:@"calculateRoute(50.777682, 6.077163, 50.779347, 6.059429)"];  
+    
+}
 
-
+/* Original build with UIView
 - (void)dealloc {
   [mapView removeObserver:self
                forKeyPath:@"myLocation"
                   context:NULL];
 }
-
+*/
 
     
 #pragma mark - KVO updates
     
-- (void)observeValueForKeyPath:(NSString *)keyPath
+/* Original build with UIView
+ - (void)observeValueForKeyPath:(NSString *)keyPath
                         ofObject:(id)object
                           change:(NSDictionary *)change
                          context:(void *)context {
@@ -70,6 +90,7 @@
                                                          zoom:14];
     }
 }
+ */
 
 
 - (void)didReceiveMemoryWarning

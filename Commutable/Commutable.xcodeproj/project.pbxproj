@@ -32,6 +32,8 @@
 		2CE53F2018F991AF005BCEC9 /* CommutesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CE53F1F18F991AF005BCEC9 /* CommutesTableViewController.m */; };
 		2CE53F2318F9921D005BCEC9 /* CommutesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CE53F2218F9921D005BCEC9 /* CommutesTableViewCell.m */; };
 		2CF4DA8A19169A3C003762D3 /* LocationItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CF4DA8919169A3C003762D3 /* LocationItem.m */; };
+		790DA2231920C4D10011C2DE /* map.html in Resources */ = {isa = PBXBuildFile; fileRef = 790DA2221920C4D10011C2DE /* map.html */; };
+		793066931921CD3100E02239 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = 793066921921CD3100E02239 /* index.html */; };
 		79AB6D01191099350013E1D6 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79AB6D00191099340013E1D6 /* GoogleMaps.framework */; };
 		79AB6D051910997C0013E1D6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79AB6D041910997C0013E1D6 /* AVFoundation.framework */; };
 		79AB6D07191099830013E1D6 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79AB6D06191099830013E1D6 /* CoreData.framework */; };
@@ -94,6 +96,8 @@
 		2CE53F2218F9921D005BCEC9 /* CommutesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommutesTableViewCell.m; sourceTree = "<group>"; };
 		2CF4DA8819169A3C003762D3 /* LocationItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationItem.h; sourceTree = "<group>"; };
 		2CF4DA8919169A3C003762D3 /* LocationItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationItem.m; sourceTree = "<group>"; };
+		790DA2221920C4D10011C2DE /* map.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = map.html; sourceTree = "<group>"; };
+		793066921921CD3100E02239 /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
 		79AB6D00191099340013E1D6 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
 		79AB6D041910997C0013E1D6 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		79AB6D06191099830013E1D6 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -212,6 +216,8 @@
 				2CF4DA8919169A3C003762D3 /* LocationItem.m */,
 				2CE53F0118F98C43005BCEC9 /* Images.xcassets */,
 				2CE53EED18F98C43005BCEC9 /* Supporting Files */,
+				790DA2221920C4D10011C2DE /* map.html */,
+				793066921921CD3100E02239 /* index.html */,
 			);
 			path = Commutable;
 			sourceTree = "<group>";
@@ -331,6 +337,8 @@
 				2C0BC58F18FA0BB600CF12F7 /* Car Icon v2 Gradient without Windows 120x120.png in Resources */,
 				2C0BC58918FA0AE700CF12F7 /* Car Icon v2 Gradient Transparent Windows.png in Resources */,
 				2C0BC58B18FA0B9A00CF12F7 /* Car Icon v2 Gradient without Windows 58x58.png in Resources */,
+				793066931921CD3100E02239 /* index.html in Resources */,
+				790DA2231920C4D10011C2DE /* map.html in Resources */,
 				2C0BC58D18FA0BAD00CF12F7 /* Car Icon v2 Gradient without Windows 80x80.png in Resources */,
 				2CE53EF118F98C43005BCEC9 /* InfoPlist.strings in Resources */,
 				2CE53EFA18F98C43005BCEC9 /* Main.storyboard in Resources */,
