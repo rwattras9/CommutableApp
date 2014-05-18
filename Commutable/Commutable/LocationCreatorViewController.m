@@ -44,7 +44,11 @@
 
 //States whether the segue should be performed
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
-{//check to see if Location Name text field is populated
+{//Do nothing if it isn't the save button that triggers the segue
+    if (sender != self.saveNewLocationButton) return YES;
+    else{
+    
+    //check to see if Location Name text field is populated
     if (self.locationNameTextField.text.length > 0){
         
         //check to see if Address text field is populated,
@@ -66,7 +70,7 @@
         NSLog(@"Please enter a valid location name");
         return NO;
     }
-    
+    }
 }
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
