@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="8YX-ce-x5E">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="8YX-ce-x5E">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -38,7 +38,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qh2-T1-AhA" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="684" y="-127"/>
+            <point key="canvasLocation" x="653" y="-125"/>
         </scene>
         <!--Commutes Table View Controller - Commutes-->
         <scene sceneID="cBe-Hy-fao">
@@ -66,6 +66,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="commuteName" destination="rRz-kk-c9q" id="ulN-Ep-P8G"/>
+                                    <segue destination="TMf-ia-h7y" kind="push" identifier="editCommute" id="9PJ-aG-Amd"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -84,7 +85,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3EJ-D8-NtH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1179" y="560"/>
+            <point key="canvasLocation" x="1071" y="560"/>
         </scene>
         <!--Commute Creator Table View Controller - Commute Creator-->
         <scene sceneID="sXr-Tr-pVa">
@@ -281,7 +282,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ruE-9Q-uFq" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="9Ty-L7-11m" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2181" y="953"/>
+            <point key="canvasLocation" x="1905" y="560"/>
         </scene>
         <!--Location Creator View Controller - Create A New Location-->
         <scene sceneID="gmJ-Kn-X7o">
@@ -356,7 +357,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YJB-aV-HdM" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Rwd-ra-nTm" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2805" y="560"/>
+            <point key="canvasLocation" x="2307" y="560"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Vex-rW-GRa">
@@ -412,7 +413,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9jp-ar-daz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1655" y="953"/>
+            <point key="canvasLocation" x="1497" y="560"/>
         </scene>
     </scenes>
     <resources>
@@ -424,6 +425,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="BKt-IC-ABg"/>
+        <segue reference="9PJ-aG-Amd"/>
+        <segue reference="6v9-SP-gsF"/>
     </inferredMetricsTieBreakers>
 </document>

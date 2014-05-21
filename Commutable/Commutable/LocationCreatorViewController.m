@@ -18,6 +18,15 @@
 
 @implementation LocationCreatorViewController
 
+- (NSManagedObjectContext *)managedObjectContext {
+    NSManagedObjectContext *context = nil;
+    id delegate = [[UIApplication sharedApplication] delegate];
+    if ([delegate performSelector:@selector(managedObjectContext)]) {
+        context = [delegate managedObjectContext];
+    }
+    return context;
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -83,12 +92,29 @@
     if (sender != self.saveNewLocationButton) return;
     else{
         //create a new a new Location Item object with the location Zip Code, location Name, and the location Name populated
-        self.locationItem = [[LocationItem alloc] init];
-        self.locationItem.locationName = self.locationNameTextField.text;
-        self.locationItem.locationAddress = self.streetAddressTextField.text;
-        self.locationItem.locationZipCode = self.zipCodeTextField.text;}
+        
+        //using Core Data
+        NSManagedObjectContext *context = [self managedObjectContext];
+        
+        NSManagedObject *newLocation = [NSEntityDescription insertNewObjectForEntityForName:@"Location" inManagedObjectContext:context];
+        [newLocation setValue:self.locationNameTextField.text forKey:@"name"];
+        [newLocation setValue:self.streetAddressTextField.text forKey:@"address"];
+        [newLocation setValue:self.zipCodeTextField.text forKey:@"zipCode"];
+        
+        NSError *error = nil;
+        //save object to a persistant store
+        if (![context save:&error]) {
+            NSLog(@"Can't save, %@ %@", error, [error localizedDescription]);
+            
+        }
+        //[self dismissViewControllerAnimated:YES completion:nil];
+        //old method
+        //self.locationItem = [[LocationItem alloc] init];
+        //self.locationItem.locationName = self.locationNameTextField.text;
+        //self.locationItem.locationAddress = self.streetAddressTextField.text;
+        //self.locationItem.locationZipCode = self.zipCodeTextField.text;
     
+    }
 }
-
 
 @end

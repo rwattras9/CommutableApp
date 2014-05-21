@@ -15,7 +15,7 @@
 @property (strong, nonatomic) IBOutlet UIPickerView *existingDestinationLocationsPicker;
 
 @property CommuteItem *commuteItem;
-
+@property (strong) NSManagedObject *commute;
 
 //Unwind Transition to go back to CommuteCreatorTableViewController
 - (IBAction)unwindToCommuteCreatorTable:(UIStoryboardSegue *)segue;

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13D65" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Commute" syncable="YES">
+        <attribute name="alertTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="destinationAddress" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="destinationZip" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="startingAddress" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="startingZip" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Location" syncable="YES">
+        <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="zipCode" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Commute" positionX="-63" positionY="-18" width="128" height="133"/>
+        <element name="Location" positionX="196" positionY="-0" width="128" height="90"/>
+    </elements>
+</model>

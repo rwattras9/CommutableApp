@@ -12,6 +12,7 @@
 		2C0BC58B18FA0B9A00CF12F7 /* Car Icon v2 Gradient without Windows 58x58.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C0BC58A18FA0B9A00CF12F7 /* Car Icon v2 Gradient without Windows 58x58.png */; };
 		2C0BC58D18FA0BAD00CF12F7 /* Car Icon v2 Gradient without Windows 80x80.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C0BC58C18FA0BAD00CF12F7 /* Car Icon v2 Gradient without Windows 80x80.png */; };
 		2C0BC58F18FA0BB600CF12F7 /* Car Icon v2 Gradient without Windows 120x120.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C0BC58E18FA0BB600CF12F7 /* Car Icon v2 Gradient without Windows 120x120.png */; };
+		2CA120D61929637C004825D4 /* Commutable.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2CA120D41929637C004825D4 /* Commutable.xcdatamodeld */; };
 		2CC89D7B191558C2009F6F7E /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2CC89D7A191558C2009F6F7E /* GoogleMaps.bundle */; };
 		2CD2000018FB3559005F1338 /* CommuteCreatorTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD2FFFF18FB3559005F1338 /* CommuteCreatorTableViewController.m */; };
 		2CD2000318FB3B0D005F1338 /* LocationCreatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD2000218FB3B0D005F1338 /* LocationCreatorViewController.m */; };
@@ -66,6 +67,7 @@
 		2C0BC58A18FA0B9A00CF12F7 /* Car Icon v2 Gradient without Windows 58x58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Car Icon v2 Gradient without Windows 58x58.png"; sourceTree = "<group>"; };
 		2C0BC58C18FA0BAD00CF12F7 /* Car Icon v2 Gradient without Windows 80x80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Car Icon v2 Gradient without Windows 80x80.png"; sourceTree = "<group>"; };
 		2C0BC58E18FA0BB600CF12F7 /* Car Icon v2 Gradient without Windows 120x120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Car Icon v2 Gradient without Windows 120x120.png"; sourceTree = "<group>"; };
+		2CA120D51929637C004825D4 /* Commutable.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Commutable.xcdatamodel; sourceTree = "<group>"; };
 		2CC89D7A191558C2009F6F7E /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = GoogleMaps.framework/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
 		2CD2000118FB3B0D005F1338 /* LocationCreatorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationCreatorViewController.h; sourceTree = "<group>"; };
 		2CD2000218FB3B0D005F1338 /* LocationCreatorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationCreatorViewController.m; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 			children = (
 				2CE53EF518F98C43005BCEC9 /* CommutableAppDelegate.h */,
 				2CE53EF618F98C43005BCEC9 /* CommutableAppDelegate.m */,
+				2CA120D41929637C004825D4 /* Commutable.xcdatamodeld */,
 				2CE53EF818F98C43005BCEC9 /* Main.storyboard */,
 				2CE53EFB18F98C43005BCEC9 /* CommutableFirstViewController.h */,
 				2CE53EFC18F98C43005BCEC9 /* CommutableFirstViewController.m */,
@@ -362,6 +365,7 @@
 			files = (
 				2CE53F2318F9921D005BCEC9 /* CommutesTableViewCell.m in Sources */,
 				2CF4DA8A19169A3C003762D3 /* LocationItem.m in Sources */,
+				2CA120D61929637C004825D4 /* Commutable.xcdatamodeld in Sources */,
 				2CD2000318FB3B0D005F1338 /* LocationCreatorViewController.m in Sources */,
 				2CE53EFD18F98C43005BCEC9 /* CommutableFirstViewController.m in Sources */,
 				2CE53F2018F991AF005BCEC9 /* CommutesTableViewController.m in Sources */,
@@ -595,6 +599,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		2CA120D41929637C004825D4 /* Commutable.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				2CA120D51929637C004825D4 /* Commutable.xcdatamodel */,
+			);
+			currentVersion = 2CA120D51929637C004825D4 /* Commutable.xcdatamodel */;
+			path = Commutable.xcdatamodeld;
+			sourceTree = SOURCE_ROOT;
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 2CE53EDB18F98C43005BCEC9 /* Project object */;
 }
