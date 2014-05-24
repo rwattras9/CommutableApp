@@ -27,7 +27,7 @@
     // New build with HTML
     NSError *error = nil;
     // create NSString from local HTML file and add it to the webView
-    NSString *html = [[NSString alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"index" ofType:@"html"] encoding:NSUTF8StringEncoding error:&error];
+    NSString *html = [[NSString alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"map" ofType:@"html"] encoding:NSUTF8StringEncoding error:&error];
     [self.mapView loadHTMLString:html baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
     [self.view sendSubviewToBack:self.mapView];
     
