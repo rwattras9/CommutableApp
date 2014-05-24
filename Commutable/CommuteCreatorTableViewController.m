@@ -82,6 +82,17 @@
     if (self.commuteNameTextField.text.length > 0) {
         
         NSManagedObjectContext *context = [self managedObjectContext];
+        //update a Commute if the commute exists
+        if (self.commute){
+            [self.commute setValue:self.commuteNameTextField.text forKey:@"name"];
+            [self.commute setValue:[[self.locationsArray objectAtIndex:[_existingStartingLocationsPicker selectedRowInComponent:0]] valueForKey:@"address"] forKey:@"startingAddress"];
+            [self.commute setValue:self.commuteItem.commuteStartingZipCode = [[self.locationsArray objectAtIndex:[_existingStartingLocationsPicker selectedRowInComponent:0]] valueForKey:@"zipCode"] forKey:@"startingZip"];
+            [self.commute setValue:[[self.locationsArray objectAtIndex:[_existingDestinationLocationsPicker selectedRowInComponent:0]] valueForKey:@"address"] forKey:@"destinationAddress"];
+            [self.commute setValue:self.commuteItem.commuteStartingZipCode = [[self.locationsArray objectAtIndex:[_existingStartingLocationsPicker selectedRowInComponent:0]] valueForKey:@"zipCode"] forKey:@"destinationZip"];
+         //To do: Update Schedule
+        } else {
+        
+        //create a new Commute
         
         // Create a new managed object
         NSManagedObject *newCommute = [NSEntityDescription insertNewObjectForEntityForName:@"Commute" inManagedObjectContext:context];
@@ -103,7 +114,7 @@
         //Set Destination Zip
         [newCommute setValue:self.commuteItem.commuteStartingZipCode = [[self.locationsArray objectAtIndex:[_existingStartingLocationsPicker selectedRowInComponent:0]] valueForKey:@"zipCode"] forKey:@"destinationZip"];
         
-        
+        }
         //To do: set the Commute Item's Schedule
         
         NSError *error = nil;
