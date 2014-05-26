@@ -17,6 +17,7 @@
 @end
 
 @implementation LocationCreatorViewController
+@synthesize location;
 
 - (NSManagedObjectContext *)managedObjectContext {
     NSManagedObjectContext *context = nil;
@@ -40,6 +41,17 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    if (self.location) {
+        
+        [self.locationNameTextField setText:[self.location valueForKey:@"name"]];
+        [self.streetAddressTextField setText:[self.location valueForKey:@"address"]];
+        [self.zipCodeTextField setText:[self.location valueForKey:@"zipCode"]];
+        
+        //delete button show
+        
+        
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -88,13 +100,23 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     
+    //if sender is cancel button, do nothing.
+    //if sender is save button, create or update
+    
     //Do nothing if it isn't the save button that triggers the segue
     if (sender != self.saveNewLocationButton) return;
     else{
-        //create a new a new Location Item object with the location Zip Code, location Name, and the location Name populated
-        
         //using Core Data
         NSManagedObjectContext *context = [self managedObjectContext];
+        
+        //update the location
+        if (self.location){
+            [self.location setValue:self.locationNameTextField.text forKey:@"name"];
+            [self.location setValue:self.streetAddressTextField.text forKey:@"address"];
+            [self.location setValue:self.zipCodeTextField.text forKey:@"zipCode"];
+        }
+        
+        //create a new a new Location Item object with the location Zip Code, location Name, and the location Name populated
         
         NSManagedObject *newLocation = [NSEntityDescription insertNewObjectForEntityForName:@"Location" inManagedObjectContext:context];
         [newLocation setValue:self.locationNameTextField.text forKey:@"name"];
@@ -108,11 +130,6 @@
             
         }
         //[self dismissViewControllerAnimated:YES completion:nil];
-        //old method
-        //self.locationItem = [[LocationItem alloc] init];
-        //self.locationItem.locationName = self.locationNameTextField.text;
-        //self.locationItem.locationAddress = self.streetAddressTextField.text;
-        //self.locationItem.locationZipCode = self.zipCodeTextField.text;
     
     }
 }

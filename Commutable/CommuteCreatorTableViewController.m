@@ -14,6 +14,8 @@
 @property (strong, nonatomic) IBOutlet UITextField *commuteNameTextField;
 @property NSMutableArray *locationsArray;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *commuteCreatorDoneButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *commuteCreatorCancelButton;
+
 
 
 @end
@@ -48,72 +50,86 @@
 
 //old method to pass data to List of Locations
 - (IBAction) unwindToCommuteCreatorTable:(UIStoryboardSegue *)segue
-{/*
-    LocationCreatorViewController *source = [segue sourceViewController];
-    LocationItem *location = source.locationItem;
-    if (location != nil){
-        [self.locationsArray addObject:location];
-        [self.existingStartingLocationsPicker reloadAllComponents];
-        [self.existingDestinationLocationsPicker reloadAllComponents];
-    }
-    */
+{
 }
 
 - (void) loadInitialData {
-    /*LocationItem *location1 = [[LocationItem alloc] init];
-    location1.locationName = @"Home";
-    location1.locationAddress = @"13N467 Chisholm Trail";
-    location1.locationZipCode = @"60124";
-    [self.locationsArray addObject:location1];
-    LocationItem *location2 = [[LocationItem alloc] init];
-    location2.locationName = @"Work";
-    location2.locationAddress = @"835 North Michigan Ave";
-    location2.locationZipCode = @"60611";
-    [self.locationsArray addObject:location2];*/
 
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     //check to see if it was the Done or Cancel button that was tapped
-    if (sender != self.commuteCreatorDoneButton) return;
+    if (sender == self.commuteCreatorCancelButton) return;
     
+    //if sender is cancel, return (don't save, update, do anything
+        //done
+    //if sender is done button, update or create
+        //done
+    //if sender is edit button, pass location information
+        //done
+    //if sender is add button, load location creator
+        //done
+    
+    
+    //if sender is  starting location edit button, prepare to edit a location by passing location information
+    if ([[segue identifier] isEqualToString:@"EditStartingLocation"]) {
+        NSManagedObject *selectedLocation = [self.locationsArray objectAtIndex:[_existingStartingLocationsPicker selectedRowInComponent:0]];
+        NSLog(@"The selected Location is %@", selectedLocation);
+        LocationCreatorViewController *destViewController = segue.destinationViewController;
+        destViewController.location = selectedLocation;
+    }
+    
+    //if sender is destination location edit button, prepare to edit a location by passing location information
+    if ([[segue identifier] isEqualToString:@"EditDestinationLocation"]) {
+        NSManagedObject *selectedLocation = [self.locationsArray objectAtIndex:[_existingDestinationLocationsPicker selectedRowInComponent:0]];
+        NSLog(@"The selected Location is %@", selectedLocation);
+        LocationCreatorViewController *destViewController = segue.destinationViewController;
+        destViewController.location = selectedLocation;
+    }
+    
+    if (sender == self.commuteCreatorDoneButton) {
     //The single condition is a placeholder until I get full error handling in.
     if (self.commuteNameTextField.text.length > 0) {
         
         NSManagedObjectContext *context = [self managedObjectContext];
         //update a Commute if the commute exists
         if (self.commute){
+            //update name
             [self.commute setValue:self.commuteNameTextField.text forKey:@"name"];
+            //update starting address
             [self.commute setValue:[[self.locationsArray objectAtIndex:[_existingStartingLocationsPicker selectedRowInComponent:0]] valueForKey:@"address"] forKey:@"startingAddress"];
+            //update starting zip
             [self.commute setValue:self.commuteItem.commuteStartingZipCode = [[self.locationsArray objectAtIndex:[_existingStartingLocationsPicker selectedRowInComponent:0]] valueForKey:@"zipCode"] forKey:@"startingZip"];
+            //update destination address
             [self.commute setValue:[[self.locationsArray objectAtIndex:[_existingDestinationLocationsPicker selectedRowInComponent:0]] valueForKey:@"address"] forKey:@"destinationAddress"];
-            [self.commute setValue:self.commuteItem.commuteStartingZipCode = [[self.locationsArray objectAtIndex:[_existingStartingLocationsPicker selectedRowInComponent:0]] valueForKey:@"zipCode"] forKey:@"destinationZip"];
-         //To do: Update Schedule
+            //update destination zip
+            [self.commute setValue:self.commuteItem.commuteDestinationZipCode = [[self.locationsArray objectAtIndex:[_existingDestinationLocationsPicker selectedRowInComponent:0]] valueForKey:@"zipCode"] forKey:@"destinationZip"];
+            //To do: Update Schedule
         } else {
-        
-        //create a new Commute
-        
-        // Create a new managed object
-        NSManagedObject *newCommute = [NSEntityDescription insertNewObjectForEntityForName:@"Commute" inManagedObjectContext:context];
-        
-        //Set Commute Name
-        [newCommute setValue:self.self.commuteNameTextField.text forKey:@"name"];
-        
-        //Set Starting Address
-        [newCommute setValue:[[self.locationsArray objectAtIndex:[_existingStartingLocationsPicker selectedRowInComponent:0]] valueForKey:@"address"] forKey:@"startingAddress"];
-        NSLog(@"The value of commuteStartingAddress is %@", [newCommute valueForKey:@"startingAddress"]);
-        
-        //Set Starting Zip
-        [newCommute setValue:self.commuteItem.commuteStartingZipCode = [[self.locationsArray objectAtIndex:[_existingStartingLocationsPicker selectedRowInComponent:0]] valueForKey:@"zipCode"] forKey:@"startingZip"];
-        
-        //Set Destination Address
-        [newCommute setValue:[[self.locationsArray objectAtIndex:[_existingDestinationLocationsPicker selectedRowInComponent:0]] valueForKey:@"address"] forKey:@"destinationAddress"];
-        NSLog(@"The value of commuteDestinationAddress is %@", [newCommute valueForKey:@"destinationAddress"]);
-
-        //Set Destination Zip
-        [newCommute setValue:self.commuteItem.commuteStartingZipCode = [[self.locationsArray objectAtIndex:[_existingStartingLocationsPicker selectedRowInComponent:0]] valueForKey:@"zipCode"] forKey:@"destinationZip"];
-        
+            
+            //create a new Commute
+            
+            // Create a new managed object
+            NSManagedObject *newCommute = [NSEntityDescription insertNewObjectForEntityForName:@"Commute" inManagedObjectContext:context];
+            
+            //Set Commute Name
+            [newCommute setValue:self.self.commuteNameTextField.text forKey:@"name"];
+            
+            //Set Starting Address
+            [newCommute setValue:[[self.locationsArray objectAtIndex:[_existingStartingLocationsPicker selectedRowInComponent:0]] valueForKey:@"address"] forKey:@"startingAddress"];
+            NSLog(@"The value of commuteStartingAddress is %@", [newCommute valueForKey:@"startingAddress"]);
+            
+            //Set Starting Zip
+            [newCommute setValue:self.commuteItem.commuteStartingZipCode = [[self.locationsArray objectAtIndex:[_existingStartingLocationsPicker selectedRowInComponent:0]] valueForKey:@"zipCode"] forKey:@"startingZip"];
+            
+            //Set Destination Address
+            [newCommute setValue:[[self.locationsArray objectAtIndex:[_existingDestinationLocationsPicker selectedRowInComponent:0]] valueForKey:@"address"] forKey:@"destinationAddress"];
+            NSLog(@"The value of commuteDestinationAddress is %@", [newCommute valueForKey:@"destinationAddress"]);
+            
+            //Set Destination Zip
+            [newCommute setValue:self.commuteItem.commuteStartingZipCode = [[self.locationsArray objectAtIndex:[_existingStartingLocationsPicker selectedRowInComponent:0]] valueForKey:@"zipCode"] forKey:@"destinationZip"];
+            
         }
         //To do: set the Commute Item's Schedule
         
@@ -123,29 +139,7 @@
             NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
         }
         
-        
-        
-        /*
-        //old method
-        self.commuteItem = [[CommuteItem alloc] init];
-        self.commuteItem.commuteName = self.commuteNameTextField.text;
-        //set the Commute Item's starting address
-        self.commuteItem.commuteStartingAddress = [[self.locationsArray objectAtIndex:[_existingStartingLocationsPicker selectedRowInComponent:0]] valueForKey:@"address"];
-        NSLog(@"The value of commuteStartingAddress is %@", self.commuteItem.commuteStartingAddress);
-        
-        //set the Commute Item's starting zip
-        self.commuteItem.commuteStartingZipCode = [[self.locationsArray objectAtIndex:[_existingStartingLocationsPicker selectedRowInComponent:0]] valueForKey:@"zipCode"];
-        
-        //set the Commute Item's Destination Address
-        self.commuteItem.commuteDestinationAddress = [[self.locationsArray objectAtIndex:[_existingDestinationLocationsPicker selectedRowInComponent:0]] valueForKey:@"address"];
-        
-        //set the Commute Item's Destination Zip Code
-        self.commuteItem.commuteDestinationZipCode = [[self.locationsArray objectAtIndex:[_existingDestinationLocationsPicker selectedRowInComponent:0]] valueForKey:@"zipCode"];
-        
-        //To do: set the Commute Item's Schedule
-         */
-        
-    }
+    }}
     
 }
     
@@ -166,7 +160,10 @@
     
     //populate fields with commute properties from the prepareForSegue in CommutesTableViewController
     if (self.commute){
+        //populate commuteNameTextField with value of selected commute from Commutes Table
         [self.commuteNameTextField setText:[self.commute valueForKey:@"name"]];
+        //To do: set the location
+        
     }
     
     

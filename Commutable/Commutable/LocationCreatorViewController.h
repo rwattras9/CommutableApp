@@ -13,5 +13,6 @@
 @interface LocationCreatorViewController : UIViewController
 
 @property LocationItem *locationItem;
+@property (strong) NSManagedObject *location;
 
 @end
