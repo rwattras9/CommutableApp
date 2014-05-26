@@ -13,6 +13,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *streetAddressTextField;
 @property (strong, nonatomic) IBOutlet UITextField *zipCodeTextField;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *saveNewLocationButton;
+@property (strong, nonatomic) IBOutlet UIButton *deleteLocationButton;
 
 @end
 
@@ -36,12 +37,17 @@
     }
     return self;
 }
+- (IBAction)deleteLocation:(id)sender {
+    
+    //Delete the location
+    
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    [self.deleteLocationButton setHidden:YES];
     if (self.location) {
         
         [self.locationNameTextField setText:[self.location valueForKey:@"name"]];
@@ -49,7 +55,7 @@
         [self.zipCodeTextField setText:[self.location valueForKey:@"zipCode"]];
         
         //delete button show
-        
+        [self.deleteLocationButton setHidden:NO];
         
     }
 }
