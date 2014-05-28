@@ -354,6 +354,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                 </state>
                                 <connections>
                                     <action selector="deleteLocation:" destination="qfm-4w-opH" eventType="touchUpInside" id="KN0-X3-e7Y"/>
+                                    <segue destination="Rwd-ra-nTm" kind="unwind" unwindAction="unwindToCommuteCreatorTable:" id="R3T-WE-NVb"/>
                                 </connections>
                             </button>
                         </subviews>

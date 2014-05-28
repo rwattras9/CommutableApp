@@ -39,8 +39,19 @@
 }
 - (IBAction)deleteLocation:(id)sender {
     
-    //Delete the location
+    //To Do: Are you sure you want to delete the location?
     
+    //Delete the location
+    NSManagedObjectContext *context = [self managedObjectContext];
+    
+    [context deleteObject:self.location];
+    
+    NSError *error = nil;
+    if (![context save:&error]) {
+        NSLog(@"Can't Delete! %@ %@", error, [error localizedDescription]);
+        return;}
+    
+        
 }
 
 - (void)viewDidLoad
