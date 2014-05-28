@@ -45,7 +45,7 @@
                 var request = {
                     origin:start,
                     destination:end,
-                    travelMode: google.maps.DirectionsTravelMode.WALKING
+                    travelMode: google.maps.DirectionsTravelMode.DRIVING
                 };
                 directionsService.route(request, function(response, status) {
                                         if (status == google.maps.DirectionsStatus.OK) {
@@ -59,13 +59,17 @@
             // draws the inital map and shows userlocation
             function drawMap(latitude, longitude) {
                 var latlng = new google.maps.LatLng(latitude, longitude);
-                var myOptions = {
+                var mapOptions = {
                     disableDefaultUI: true,
                     zoom: 15,
                     center: latlng,
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 };
-                map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+                map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+                
+                var trafficLayer = new google.maps.TrafficLayer();
+                trafficLayer.setMap(map);
+                
                 google.maps.event.addListener(map, 'click', function() {if(infowindow){infowindow.close();}});
                 setMarkerAtPosition(latitude, longitude);
             }
