@@ -12,6 +12,11 @@
 		2C0BC58B18FA0B9A00CF12F7 /* Car Icon v2 Gradient without Windows 58x58.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C0BC58A18FA0B9A00CF12F7 /* Car Icon v2 Gradient without Windows 58x58.png */; };
 		2C0BC58D18FA0BAD00CF12F7 /* Car Icon v2 Gradient without Windows 80x80.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C0BC58C18FA0BAD00CF12F7 /* Car Icon v2 Gradient without Windows 80x80.png */; };
 		2C0BC58F18FA0BB600CF12F7 /* Car Icon v2 Gradient without Windows 120x120.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C0BC58E18FA0BB600CF12F7 /* Car Icon v2 Gradient without Windows 120x120.png */; };
+		2C19EE4D193A810A00745780 /* Commutable Logo 58px.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C19EE4A193A810A00745780 /* Commutable Logo 58px.png */; };
+		2C19EE4E193A810A00745780 /* Commutable Logo 80px.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C19EE4B193A810A00745780 /* Commutable Logo 80px.png */; };
+		2C19EE4F193A810A00745780 /* Commutable Logo 120px.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C19EE4C193A810A00745780 /* Commutable Logo 120px.png */; };
+		2C5B0000193A916700A229EA /* Commutes Tab Car Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C5BFFFF193A916700A229EA /* Commutes Tab Car Icon.png */; };
+		2C5B0002193A929D00A229EA /* Commutes Tab Car Icon 50px.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C5B0001193A929D00A229EA /* Commutes Tab Car Icon 50px.png */; };
 		2CA120D61929637C004825D4 /* Commutable.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2CA120D41929637C004825D4 /* Commutable.xcdatamodeld */; };
 		2CC89D7B191558C2009F6F7E /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2CC89D7A191558C2009F6F7E /* GoogleMaps.bundle */; };
 		2CD2000018FB3559005F1338 /* CommuteCreatorTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD2FFFF18FB3559005F1338 /* CommuteCreatorTableViewController.m */; };
@@ -66,6 +71,11 @@
 		2C0BC58A18FA0B9A00CF12F7 /* Car Icon v2 Gradient without Windows 58x58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Car Icon v2 Gradient without Windows 58x58.png"; sourceTree = "<group>"; };
 		2C0BC58C18FA0BAD00CF12F7 /* Car Icon v2 Gradient without Windows 80x80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Car Icon v2 Gradient without Windows 80x80.png"; sourceTree = "<group>"; };
 		2C0BC58E18FA0BB600CF12F7 /* Car Icon v2 Gradient without Windows 120x120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Car Icon v2 Gradient without Windows 120x120.png"; sourceTree = "<group>"; };
+		2C19EE4A193A810A00745780 /* Commutable Logo 58px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Commutable Logo 58px.png"; sourceTree = "<group>"; };
+		2C19EE4B193A810A00745780 /* Commutable Logo 80px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Commutable Logo 80px.png"; sourceTree = "<group>"; };
+		2C19EE4C193A810A00745780 /* Commutable Logo 120px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Commutable Logo 120px.png"; sourceTree = "<group>"; };
+		2C5B0001193A929D00A229EA /* Commutes Tab Car Icon 50px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Commutes Tab Car Icon 50px.png"; sourceTree = "<group>"; };
+		2C5BFFFF193A916700A229EA /* Commutes Tab Car Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Commutes Tab Car Icon.png"; sourceTree = "<group>"; };
 		2CA120D51929637C004825D4 /* Commutable.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Commutable.xcdatamodel; sourceTree = "<group>"; };
 		2CC89D7A191558C2009F6F7E /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = GoogleMaps.framework/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
 		2CD2000118FB3B0D005F1338 /* LocationCreatorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationCreatorViewController.h; sourceTree = "<group>"; };
@@ -225,6 +235,11 @@
 		2CE53EED18F98C43005BCEC9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2C5B0001193A929D00A229EA /* Commutes Tab Car Icon 50px.png */,
+				2C5BFFFF193A916700A229EA /* Commutes Tab Car Icon.png */,
+				2C19EE4A193A810A00745780 /* Commutable Logo 58px.png */,
+				2C19EE4B193A810A00745780 /* Commutable Logo 80px.png */,
+				2C19EE4C193A810A00745780 /* Commutable Logo 120px.png */,
 				2C0BC58A18FA0B9A00CF12F7 /* Car Icon v2 Gradient without Windows 58x58.png */,
 				2C0BC58818FA0AE700CF12F7 /* Car Icon v2 Gradient Transparent Windows.png */,
 				2C0BC58E18FA0BB600CF12F7 /* Car Icon v2 Gradient without Windows 120x120.png */,
@@ -332,14 +347,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C19EE4D193A810A00745780 /* Commutable Logo 58px.png in Resources */,
+				2C19EE4F193A810A00745780 /* Commutable Logo 120px.png in Resources */,
 				2CC89D7B191558C2009F6F7E /* GoogleMaps.bundle in Resources */,
 				2CE53F0218F98C43005BCEC9 /* Images.xcassets in Resources */,
 				2C0BC58F18FA0BB600CF12F7 /* Car Icon v2 Gradient without Windows 120x120.png in Resources */,
 				2C0BC58918FA0AE700CF12F7 /* Car Icon v2 Gradient Transparent Windows.png in Resources */,
 				2C0BC58B18FA0B9A00CF12F7 /* Car Icon v2 Gradient without Windows 58x58.png in Resources */,
+				2C5B0002193A929D00A229EA /* Commutes Tab Car Icon 50px.png in Resources */,
 				790DA2231920C4D10011C2DE /* map.html in Resources */,
+				2C19EE4E193A810A00745780 /* Commutable Logo 80px.png in Resources */,
 				2C0BC58D18FA0BAD00CF12F7 /* Car Icon v2 Gradient without Windows 80x80.png in Resources */,
 				2CE53EF118F98C43005BCEC9 /* InfoPlist.strings in Resources */,
+				2C5B0000193A916700A229EA /* Commutes Tab Car Icon.png in Resources */,
 				2CE53EFA18F98C43005BCEC9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -23,6 +23,23 @@
 @implementation CommuteCreatorTableViewController
 @synthesize commute;
 
+
+//Get the time selected from the UIDatePicker
+NSDate *alertTime;
+
+- (IBAction)alertTimeDatePicker:(UIDatePicker *)sender {
+    alertTime = sender.date;
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+    NSString *prettyVersion = [dateFormatter stringFromDate:alertTime];
+    NSLog(@"The selected time is %@", prettyVersion);
+    
+    //To do: Set the alert time to a commute property.
+}
+
+
+
+
 - (NSManagedObjectContext *)managedObjectContext
 {
     NSManagedObjectContext *context = nil;
