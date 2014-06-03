@@ -23,6 +23,10 @@
 @implementation CommuteCreatorTableViewController
 @synthesize commute;
 
+- (IBAction)dismissKeyboard:(id)sender {
+    
+    [sender resignFirstResponder];
+}
 
 //Get the time selected from the UIDatePicker
 NSDate *alertTime;

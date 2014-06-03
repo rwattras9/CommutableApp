@@ -15,6 +15,7 @@
 		2C19EE4D193A810A00745780 /* Commutable Logo 58px.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C19EE4A193A810A00745780 /* Commutable Logo 58px.png */; };
 		2C19EE4E193A810A00745780 /* Commutable Logo 80px.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C19EE4B193A810A00745780 /* Commutable Logo 80px.png */; };
 		2C19EE4F193A810A00745780 /* Commutable Logo 120px.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C19EE4C193A810A00745780 /* Commutable Logo 120px.png */; };
+		2C2F1009193D563200D24F4D /* RepeatScheduleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F1008193D563200D24F4D /* RepeatScheduleTableViewController.m */; };
 		2C5B0000193A916700A229EA /* Commutes Tab Car Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C5BFFFF193A916700A229EA /* Commutes Tab Car Icon.png */; };
 		2C5B0002193A929D00A229EA /* Commutes Tab Car Icon 50px.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C5B0001193A929D00A229EA /* Commutes Tab Car Icon 50px.png */; };
 		2CA120D61929637C004825D4 /* Commutable.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2CA120D41929637C004825D4 /* Commutable.xcdatamodeld */; };
@@ -74,6 +75,8 @@
 		2C19EE4A193A810A00745780 /* Commutable Logo 58px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Commutable Logo 58px.png"; sourceTree = "<group>"; };
 		2C19EE4B193A810A00745780 /* Commutable Logo 80px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Commutable Logo 80px.png"; sourceTree = "<group>"; };
 		2C19EE4C193A810A00745780 /* Commutable Logo 120px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Commutable Logo 120px.png"; sourceTree = "<group>"; };
+		2C2F1007193D563200D24F4D /* RepeatScheduleTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepeatScheduleTableViewController.h; sourceTree = "<group>"; };
+		2C2F1008193D563200D24F4D /* RepeatScheduleTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepeatScheduleTableViewController.m; sourceTree = "<group>"; };
 		2C5B0001193A929D00A229EA /* Commutes Tab Car Icon 50px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Commutes Tab Car Icon 50px.png"; sourceTree = "<group>"; };
 		2C5BFFFF193A916700A229EA /* Commutes Tab Car Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Commutes Tab Car Icon.png"; sourceTree = "<group>"; };
 		2CA120D51929637C004825D4 /* Commutable.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Commutable.xcdatamodel; sourceTree = "<group>"; };
@@ -225,6 +228,8 @@
 				2CD2000218FB3B0D005F1338 /* LocationCreatorViewController.m */,
 				2CF4DA8819169A3C003762D3 /* LocationItem.h */,
 				2CF4DA8919169A3C003762D3 /* LocationItem.m */,
+				2C2F1007193D563200D24F4D /* RepeatScheduleTableViewController.h */,
+				2C2F1008193D563200D24F4D /* RepeatScheduleTableViewController.m */,
 				2CE53F0118F98C43005BCEC9 /* Images.xcassets */,
 				2CE53EED18F98C43005BCEC9 /* Supporting Files */,
 				790DA2221920C4D10011C2DE /* map.html */,
@@ -383,6 +388,7 @@
 				2CF4DA8A19169A3C003762D3 /* LocationItem.m in Sources */,
 				2CA120D61929637C004825D4 /* Commutable.xcdatamodeld in Sources */,
 				2CD2000318FB3B0D005F1338 /* LocationCreatorViewController.m in Sources */,
+				2C2F1009193D563200D24F4D /* RepeatScheduleTableViewController.m in Sources */,
 				2CE53EFD18F98C43005BCEC9 /* CommutableFirstViewController.m in Sources */,
 				2CE53F2018F991AF005BCEC9 /* CommutesTableViewController.m in Sources */,
 				2C0AB596191EA5D200B1CCF0 /* CommuteItem.m in Sources */,
