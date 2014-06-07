@@ -20,6 +20,7 @@
 @implementation LocationCreatorViewController
 @synthesize location;
 
+
 - (NSManagedObjectContext *)managedObjectContext {
     NSManagedObjectContext *context = nil;
     id delegate = [[UIApplication sharedApplication] delegate];
@@ -33,6 +34,8 @@
 {
     [_locationNameTextField resignFirstResponder];
 }
+
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

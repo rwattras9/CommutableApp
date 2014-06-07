@@ -218,7 +218,6 @@ NSDate *alertTime;
 //
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
     
-    //old implementation
     //this returns the objects, not the locationName property
     return [[self.locationsArray objectAtIndex:row] valueForKey:@"Name"];
 }

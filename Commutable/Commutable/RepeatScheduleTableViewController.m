@@ -10,6 +10,9 @@
 
 @interface RepeatScheduleTableViewController ()
 
+@property NSMutableArray *recurranceDays;
+@property NSInteger selectedRow;
+
 @end
 
 @implementation RepeatScheduleTableViewController
@@ -99,5 +102,24 @@
     // Pass the selected object to the new view controller.
 }
 */
+#pragma mark - Table view delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    //The cell should immediately deselect after being tapped (not stay highlighted)
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    //get index of selected cell
+    self.selectedRow = indexPath.row;
+    
+    //Add or remove a checkmark
+    UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
+    
+    if (selectedCell.accessoryType == UITableViewCellAccessoryNone) {
+        selectedCell.accessoryType = UITableViewCellAccessoryCheckmark;
+        
+    }else{
+        selectedCell.accessoryType = UITableViewCellAccessoryNone;}
+   
+}
 
 @end
