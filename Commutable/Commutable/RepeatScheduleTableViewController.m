@@ -117,6 +117,7 @@
     if (selectedCell.accessoryType == UITableViewCellAccessoryNone) {
         selectedCell.accessoryType = UITableViewCellAccessoryCheckmark;
         
+        
     }else{
         selectedCell.accessoryType = UITableViewCellAccessoryNone;}
    

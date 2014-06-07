@@ -16,6 +16,7 @@
 @property NSString *commuteStartingZipCode;
 @property NSString *commuteDestinationAddress;
 @property NSString *commuteDestinationZipCode;
+@property NSDate *alertTime;
 //Need to add a property for the alert schedule and alert time.
 
 

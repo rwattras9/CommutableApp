@@ -15,7 +15,7 @@
 @property NSMutableArray *locationsArray;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *commuteCreatorDoneButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *commuteCreatorCancelButton;
-
+@property (strong, nonatomic) NSDate *alertTime;
 
 
 @end
@@ -29,16 +29,17 @@
 }
 
 //Get the time selected from the UIDatePicker
-NSDate *alertTime;
 
 - (IBAction)alertTimeDatePicker:(UIDatePicker *)sender {
-    alertTime = sender.date;
+    self.alertTime = sender.date;
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
-    NSString *prettyVersion = [dateFormatter stringFromDate:alertTime];
+    NSString *prettyVersion = [dateFormatter stringFromDate:self.alertTime];
     NSLog(@"The selected time is %@", prettyVersion);
     
     //To do: Set the alert time to a commute property.
+    
+    
 }
 
 
@@ -127,6 +128,8 @@ NSDate *alertTime;
             //update destination zip
             [self.commute setValue:self.commuteItem.commuteDestinationZipCode = [[self.locationsArray objectAtIndex:[_existingDestinationLocationsPicker selectedRowInComponent:0]] valueForKey:@"zipCode"] forKey:@"destinationZip"];
             //To do: Update Schedule
+            [self.commute setValue:self.alertTime forKey:@"alertTime"];
+            
         } else {
             
             //create a new Commute
@@ -151,8 +154,13 @@ NSDate *alertTime;
             //Set Destination Zip
             [newCommute setValue:self.commuteItem.commuteStartingZipCode = [[self.locationsArray objectAtIndex:[_existingStartingLocationsPicker selectedRowInComponent:0]] valueForKey:@"zipCode"] forKey:@"destinationZip"];
             
+            //Set Alert Time
+            [newCommute setValue:self.alertTime forKey:@"alertTime"];
+            NSLog(@"The value of alertTime is %@", [newCommute valueForKey:@"alertTime"]);
+            
         }
-        //To do: set the Commute Item's Schedule
+        
+
         
         NSError *error = nil;
         // Save the object to persistent store
