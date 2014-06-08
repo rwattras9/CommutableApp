@@ -25,8 +25,8 @@ static NSString *kMDDirectionsURL = @"http://maps.googleapis.com/maps/api/direct
 {
     NSArray *waypoints = query[@"waypoints"];
     NSString *origin = waypoints[0];
-    int waypointCount = [waypoints count];
-    int destinationPos = waypointCount - 1;
+    NSInteger waypointCount = [waypoints count];
+    NSInteger destinationPos = waypointCount - 1;
     NSString *destination = waypoints[destinationPos];
     NSString *sensor = query[@"sensor"];
     NSMutableString *url =
@@ -34,7 +34,7 @@ static NSString *kMDDirectionsURL = @"http://maps.googleapis.com/maps/api/direct
      kMDDirectionsURL, origin, destination, sensor];
     if(waypointCount > 2) {
         [url appendString:@"&waypoints=optimize:true"];
-        int wpCount = waypointCount-2;
+        NSInteger wpCount = waypointCount-2;
         for(int i=1;i<wpCount;i++){
             [url appendString: @"|"];
             [url appendString:[waypoints objectAtIndex:i]];
