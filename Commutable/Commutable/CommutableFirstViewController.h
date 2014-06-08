@@ -11,8 +11,6 @@
 
 @interface CommutableFirstViewController : UIViewController
 
-//@property (weak, nonatomic) IBOutlet GMSMapView *mapView;
-
-@property (weak, nonatomic) IBOutlet UIWebView *mapView;
+@property (weak, nonatomic) IBOutlet GMSMapView *mapView;
 
 @end

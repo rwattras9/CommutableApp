@@ -7,10 +7,11 @@
 //
 
 #import "CommutableFirstViewController.h"
-#import <GoogleMaps/GoogleMaps.h>
+#import "MDDirectionService.h"
 
-@interface CommutableFirstViewController ()
-
+@interface CommutableFirstViewController () <GMSMapViewDelegate>
+@property (strong, nonatomic) NSMutableArray *waypoints;
+@property (strong, nonatomic) NSMutableArray *waypointStrings;
 @end
 
 @implementation CommutableFirstViewController{
@@ -23,81 +24,108 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+	
+    self.waypoints = [NSMutableArray array];
+    self.waypointStrings = [NSMutableArray array];
     
-    // New build with HTML
-    NSError *error = nil;
-    // create NSString from local HTML file and add it to the webView
-    NSString *html = [[NSString alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"map" ofType:@"html"] encoding:NSUTF8StringEncoding error:&error];
-    [self.mapView loadHTMLString:html baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
-    [self.view sendSubviewToBack:self.mapView];
-    
-    
-    
-    /* Original build with UIView
-     
-	// Do any additional setup after loading the view, typically from a nib.
-    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:89.00
-                                                            longitude:43.00
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:43.0667
+                                                            longitude:-89.4000
                                                                  zoom:1];
+    
+    mapView = [GMSMapView mapWithFrame:CGRectMake(23, 27, 275, 350) camera:camera];
     mapView.myLocationEnabled = YES;
+    mapView.settings.scrollGestures = YES;
+    mapView.settings.zoomGestures = YES;
     mapView.settings.compassButton = YES;
+    mapView.settings.myLocationButton = YES;
     mapView.trafficEnabled = YES;
     
-    // Listen to the myLocation property of GMSMapView.
     [mapView addObserver:self
               forKeyPath:@"myLocation"
                  options:NSKeyValueObservingOptionNew
-                  context:NULL];
+                 context:NULL];
     
-    // Add the map to the custom View
-    [mapView setCamera:camera];
+    [self.view addSubview:mapView];
     
-    // Ask for My Location data after the map has already been added to the UI.
-    dispatch_async(dispatch_get_main_queue(), ^{
-        mapView.myLocationEnabled = YES;
-    });
-     
-     */
-}
-
-- (IBAction)routeButton:(id)sender {
+    CLLocationCoordinate2D coordinate1;
+    coordinate1.latitude = 43.0667;
+    coordinate1.longitude = -89.4000;
+    CLLocationCoordinate2D coordinate2;
+    coordinate2.latitude = 40.4417;
+    coordinate2.longitude = -80.00;
+    [self drawCoordinates:coordinate1 :coordinate2];
     
-    [self.mapView stringByEvaluatingJavaScriptFromString:@"calculateRoute(50.777682, 6.077163, 50.779347, 6.059429)"];  
+    
     
 }
 
-/* Original build with UIView
-- (void)dealloc {
-  [mapView removeObserver:self
-               forKeyPath:@"myLocation"
-                  context:NULL];
-}
-*/
-
-    
-#pragma mark - KVO updates
-    
-/* Original build with UIView
- - (void)observeValueForKeyPath:(NSString *)keyPath
-                        ofObject:(id)object
-                          change:(NSDictionary *)change
-                         context:(void *)context {
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context {
     if (!firstLocationUpdate_) {
         // If the first location update has not yet been recieved, then jump to that location.
         firstLocationUpdate_ = YES;
         CLLocation *location = [change objectForKey:NSKeyValueChangeNewKey];
         mapView.camera = [GMSCameraPosition cameraWithTarget:location.coordinate
-                                                         zoom:14];
+                                                        zoom:5];
     }
 }
- */
 
+- (void)dealloc {
+    [mapView removeObserver:self
+                 forKeyPath:@"myLocation"
+                    context:NULL];
+}
+
+
+//-(void)mapView:(GMSMapView *)mapView didTapAtCoordinate:(CLLocationCoordinate2D)coordinate
+-(void)drawCoordinates:(CLLocationCoordinate2D)coordinate1
+                      :(CLLocationCoordinate2D)coordinate2
+{
+    //NSLog(@"you tapped at %f, %f", coordinate.longitude, coordinate.latitude);
+    
+    //CLLocationCoordinate2D tapPosition = CLLocationCoordinate2DMake(coordinate.latitude, coordinate.longitude);
+    
+    GMSMarker *startMarker = [GMSMarker markerWithPosition:coordinate1];
+    GMSMarker *endMarker = [GMSMarker markerWithPosition:coordinate2];
+    startMarker.map = mapView;
+    endMarker.map = mapView;
+    //tapMarker.map = self.mapView;
+    [self.waypoints addObject:startMarker];
+    [self.waypoints addObject:endMarker];
+    
+    NSString *position1String = [NSString stringWithFormat:@"%f,%f", coordinate1.latitude,coordinate1.longitude];
+    NSString *position2String = [NSString stringWithFormat:@"%f,%f", coordinate2.latitude,coordinate2.longitude];
+    [self.waypointStrings addObject:position1String];
+    [self.waypointStrings addObject:position2String];
+    
+    if (self.waypoints.count > 1) {
+        NSDictionary *query = @{ @"sensor" : @"false",
+                                 @"waypoints" : self.waypointStrings };
+        MDDirectionService *mds = [[MDDirectionService alloc] init];
+        SEL selector = @selector(addDirections:);
+        [mds setDirectionsQuery:query
+                   withSelector:selector
+                   withDelegate:self];
+    }
+}
+
+-(void)addDirections:(NSDictionary *)json
+{
+    NSDictionary *routes = json[@"routes"][0];
+    NSDictionary *route = routes[@"overview_polyline"];
+    NSString *overview_route = route[@"points"];
+    GMSPath *path = [GMSPath pathFromEncodedPath:overview_route];
+    GMSPolyline *polyline = [GMSPolyline polylineWithPath:path];
+    polyline.strokeWidth = 10;
+    polyline.map = mapView;
+}
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 @end
