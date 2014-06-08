@@ -130,6 +130,16 @@
             //To do: Update Schedule
             [self.commute setValue:self.alertTime forKey:@"alertTime"];
             
+            //create Local Notification for this commute. This should probably be in core data
+            UILocalNotification *commuteNotification = [[UILocalNotification alloc] init];
+            
+            commuteNotification.fireDate = [commute valueForKey:@"alertTime"];
+            
+            //TO DO: Change variable one depending on time of day.
+            commuteNotification.alertBody = [NSString stringWithFormat:@"Good variable1, the best route to work is varible2"];
+            commuteNotification.soundName = UILocalNotificationDefaultSoundName;
+            [[UIApplication sharedApplication] scheduleLocalNotification:commuteNotification];
+            
         } else {
             
             //create a new Commute
@@ -157,6 +167,17 @@
             //Set Alert Time
             [newCommute setValue:self.alertTime forKey:@"alertTime"];
             NSLog(@"The value of alertTime is %@", [newCommute valueForKey:@"alertTime"]);
+            
+            //create Local Notification for this commute. This should probably be in Core Data.
+            UILocalNotification *commuteNotification = [[UILocalNotification alloc] init];
+            
+            commuteNotification.fireDate = [newCommute valueForKey:@"alertTime"];
+            
+            //TO DO: Change variable one depending on time of day.
+            commuteNotification.alertBody = [NSString stringWithFormat:@"Good variable1, the best route to work is varible2"];
+            commuteNotification.soundName = UILocalNotificationDefaultSoundName;
+            [[UIApplication sharedApplication] scheduleLocalNotification:commuteNotification];
+            
             
         }
         

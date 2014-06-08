@@ -14,7 +14,7 @@
         <attribute name="zipCode" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Commute" positionX="-63" positionY="-18" width="128" height="133"/>
+        <element name="Commute" positionX="-63" positionY="-18" width="128" height="135"/>
         <element name="Location" positionX="196" positionY="-0" width="128" height="90"/>
     </elements>
 </model>
