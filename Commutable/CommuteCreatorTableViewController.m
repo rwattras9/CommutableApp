@@ -9,13 +9,33 @@
 #import "CommuteCreatorTableViewController.h"
 #import "LocationItem.h"
 #import "LocationCreatorViewController.h"
+
+#define kDatePickerIndex 1
+#define kDatePickerCellHeight 216
+
 @interface CommuteCreatorTableViewController ()
 
 @property (strong, nonatomic) IBOutlet UITextField *commuteNameTextField;
 @property NSMutableArray *locationsArray;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *commuteCreatorDoneButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *commuteCreatorCancelButton;
+@property (strong, nonatomic) NSDateFormatter *dateFormatter;
 @property (strong, nonatomic) NSDate *alertTime;
+@property (strong, nonatomic) IBOutlet UILabel *alertTimeLabel;
+@property (strong, nonatomic) IBOutlet UIDatePicker *alertTimeDatePicker;
+@property (strong, nonatomic) IBOutlet UITableViewCell *alertTimeCell;
+//@property (strong, nonatomic) IBOutlet UIPickerView *startingLocationPicker;
+//@property (strong, nonatomic) IBOutlet UIPickerView *destinationLocationPicker;
+@property (strong, nonatomic) IBOutlet UITableViewCell *startingLocationCell;
+@property (strong, nonatomic) IBOutlet UITableViewCell *destinationLocationCell;
+@property (strong, nonatomic) IBOutlet UILabel *startingLocationLabel;
+@property (strong, nonatomic) IBOutlet UILabel *destinationLocationLabel;
+
+
+
+@property (assign) BOOL datePickerIsShowing;
+@property (assign) BOOL startingLocationPickerIsShowing;
+@property (assign) BOOL destinationLocationPickerIsShowing;
 
 
 @end
@@ -35,14 +55,223 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
     NSString *prettyVersion = [dateFormatter stringFromDate:self.alertTime];
-    NSLog(@"The selected time is %@", prettyVersion);
-    
+    //NSLog(@"The selected time is %@", prettyVersion);
+    self.alertTimeLabel.text = [NSString stringWithFormat:@"%@", prettyVersion];
     //To do: Set the alert time to a commute property.
     
     
 }
+//Sets the default value of Alert Date Picker
+- (void)setupAlertTimeLabel {
+    
+    self.dateFormatter = [[NSDateFormatter alloc] init];
+    [self.dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    [self.dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+    
+    NSDate *defaultDate = [NSDate date];
+    
+    self.alertTimeLabel.text = [self.dateFormatter stringFromDate:defaultDate];
+    self.alertTimeLabel.textColor = [self.tableView tintColor];
+    
+    self.alertTime = defaultDate;
+}
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    CGFloat height = self.tableView.rowHeight;
+    //NSLog(@"The height is %f", height);
+    //modification
+    if (indexPath.section == 3) {
+    
+        if (indexPath.row == kDatePickerIndex){
+        
+            height = self.datePickerIsShowing ? kDatePickerCellHeight : 0.0f;
+        
+        }
+        return height;
+    }
+    else {
+        if (indexPath.section == 0) {
+            return height;
+        }
+        else if (indexPath.section == 1){
+            if (indexPath.row == kDatePickerIndex){
+                
+                height = self.startingLocationPickerIsShowing ? kDatePickerCellHeight : 0.0f;
+            
+            /*if (indexPath.row == 0){
+                
+                height = 216;
+                return height;*/
+                
+            }
+        }else if (indexPath.section == 2){
+            if (indexPath.row == kDatePickerIndex){
+                
+                height = self.destinationLocationPickerIsShowing ? kDatePickerCellHeight : 0.0f;
+                
+                /*if (indexPath.row == 0){
+                 
+                 height = 216;
+                 return height;*/
+                
+            }
+        }
+        return height;
+    }
+    
+    
+}
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    //modification
+    if (indexPath.section == 3) {
+        
+        if (indexPath.row == 0){
+            
+            if (self.datePickerIsShowing){
+                
+                [self hideDatePickerCell];
+                
+            }else {
+                
+                [self showDatePickerCell];
+            }
+        }}
+    else if (indexPath.section == 1){
+        if (indexPath.row == 0){
+            if (self.startingLocationPickerIsShowing){
+                    
+                [self hideStartingLocationPickerCell];
+                    
+            }else {
+                    
+                [self showStartingLocationPickerCell];
+                }
+        }
+            
+    }
+    else if (indexPath.section == 2){
+        if (indexPath.row == 0){
+            if (self.destinationLocationPickerIsShowing){
+                
+                [self hideDestinationLocationPickerCell];
+                
+            }else {
+                
+                [self showDestinationLocationPickerCell];
+            }
+        }
+
+    }
+
+    
+    
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void)showDatePickerCell {
+    
+    self.datePickerIsShowing = YES;
+    
+    [self.tableView beginUpdates];
+    
+    [self.tableView endUpdates];
+    
+    self.alertTimeDatePicker.hidden = NO;
+    self.alertTimeDatePicker.alpha = 0.0f;
+    
+    [UIView animateWithDuration:0.25 animations:^{
+        
+        self.alertTimeDatePicker.alpha = 1.0f;
+        
+    }];
+}
+
+- (void)hideDatePickerCell {
+    
+    self.datePickerIsShowing = NO;
+    
+    [self.tableView beginUpdates];
+    [self.tableView endUpdates];
+    
+    [UIView animateWithDuration:0.25
+                     animations:^{
+                         self.alertTimeDatePicker.alpha = 0.0f;
+                     }
+                     completion:^(BOOL finished){
+                         self.alertTimeDatePicker.hidden = YES;
+                     }];
+}
+
+- (void)showStartingLocationPickerCell {
+    
+    self.startingLocationPickerIsShowing = YES;
+    
+    [self.tableView beginUpdates];
+    
+    [self.tableView endUpdates];
+    
+    self.existingStartingLocationsPicker.hidden = NO;
+    self.existingStartingLocationsPicker.alpha = 0.0f;
+    
+    [UIView animateWithDuration:0.25 animations:^{
+        
+        self.existingStartingLocationsPicker.alpha = 1.0f;
+        
+    }];
+}
+
+- (void)hideStartingLocationPickerCell {
+    
+    self.startingLocationPickerIsShowing = NO;
+    
+    [self.tableView beginUpdates];
+    [self.tableView endUpdates];
+    
+    [UIView animateWithDuration:0.25
+                     animations:^{
+                         self.existingStartingLocationsPicker.alpha = 0.0f;
+                     }
+                     completion:^(BOOL finished){
+                         self.existingStartingLocationsPicker.hidden = YES;
+                     }];
+}
+
+- (void)showDestinationLocationPickerCell {
+    
+    self.DestinationLocationPickerIsShowing = YES;
+    
+    [self.tableView beginUpdates];
+    
+    [self.tableView endUpdates];
+    
+    self.existingDestinationLocationsPicker.hidden = NO;
+    self.existingDestinationLocationsPicker.alpha = 0.0f;
+    
+    [UIView animateWithDuration:0.25 animations:^{
+        
+        self.existingDestinationLocationsPicker.alpha = 1.0f;
+        
+    }];
+}
+
+- (void)hideDestinationLocationPickerCell {
+    
+    self.DestinationLocationPickerIsShowing = NO;
+    
+    [self.tableView beginUpdates];
+    [self.tableView endUpdates];
+    
+    [UIView animateWithDuration:0.25
+                     animations:^{
+                         self.existingDestinationLocationsPicker.alpha = 0.0f;
+                     }
+                     completion:^(BOOL finished){
+                         self.existingDestinationLocationsPicker.hidden = YES;
+                     }];
+}
 
 
 - (NSManagedObjectContext *)managedObjectContext
@@ -252,8 +481,13 @@
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
-    
-    NSLog(@"The selected row is %d", row);
+    if (pickerView == self.existingStartingLocationsPicker){
+        _startingLocationLabel.text = [[self.locationsArray objectAtIndex:[_existingStartingLocationsPicker selectedRowInComponent:0]] valueForKey:@"name"];
+    }
+    else if (pickerView == self.existingDestinationLocationsPicker){
+        NSLog(@"The destination location row is %d", row);
+        _destinationLocationLabel.text = [[self.locationsArray objectAtIndex:[_existingDestinationLocationsPicker selectedRowInComponent:0]] valueForKey:@"name"];
+    }
     
 }
 
