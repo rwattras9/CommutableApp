@@ -46,29 +46,10 @@
 
 /*- (void) loadInitialData {
     
-    
-    //Placeholder data
-    CommuteItem *commute1 = [[CommuteItem alloc] init];
-    commute1.commuteName = @"Morning Commute";
-    [self.commuteArray addObject:commute1];
-    CommuteItem *commute2 = [[CommuteItem alloc] init];
-    commute2.commuteName = @"Evening Commute";
-    [self.commuteArray addObject:commute2];
-    CommuteItem *commute3 = [[CommuteItem alloc] init];
-    commute3.commuteName = @"Saturday Commute";
-    [self.commuteArray addObject:commute3];
- 
-    
 }*/
 
 - (IBAction)unwindToCommutesTable:(UIStoryboardSegue *)segue
-{/*
-    CommuteCreatorTableViewController *source = [segue sourceViewController];
-    CommuteItem *commute = source.commuteItem;
-    if (commute != nil) {
-        [self.commuteArray addObject:commute];
-        [self.tableView reloadData];
-    }*/
+{
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -83,14 +64,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    //old method
-    //initalize array of commutes
-    //self.commuteArray = [[NSMutableArray alloc] init];
-    
-    //old method
-    //[self loadInitialData];
-    
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -131,15 +104,6 @@
     
     NSManagedObject *commute = [self.commuteArray objectAtIndex:indexPath.row];
     [cell.textLabel setText:[NSString stringWithFormat:@"%@", [commute valueForKey:@"name"]]];
-    
-    //old method
-    /*CommuteItem *commuteItem = [self.commuteArray objectAtIndex:indexPath.row];
-    cell.textLabel.text = commuteItem.commuteName;*/
-    
-    //old from other tutorial. Probably can delete.
-    //long row = [indexPath row];
-    
-    //cell.commuteName.text = _commuteArray[row];
     
     return cell;
 }

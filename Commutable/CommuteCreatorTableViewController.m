@@ -24,8 +24,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *alertTimeLabel;
 @property (strong, nonatomic) IBOutlet UIDatePicker *alertTimeDatePicker;
 @property (strong, nonatomic) IBOutlet UITableViewCell *alertTimeCell;
-//@property (strong, nonatomic) IBOutlet UIPickerView *startingLocationPicker;
-//@property (strong, nonatomic) IBOutlet UIPickerView *destinationLocationPicker;
 @property (strong, nonatomic) IBOutlet UITableViewCell *startingLocationCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *destinationLocationCell;
 @property (strong, nonatomic) IBOutlet UILabel *startingLocationLabel;
@@ -485,7 +483,7 @@
         _startingLocationLabel.text = [[self.locationsArray objectAtIndex:[_existingStartingLocationsPicker selectedRowInComponent:0]] valueForKey:@"name"];
     }
     else if (pickerView == self.existingDestinationLocationsPicker){
-        NSLog(@"The destination location row is %d", row);
+        NSLog(@"The destination location row is %ld", (long)row);
         _destinationLocationLabel.text = [[self.locationsArray objectAtIndex:[_existingDestinationLocationsPicker selectedRowInComponent:0]] valueForKey:@"name"];
     }
     
