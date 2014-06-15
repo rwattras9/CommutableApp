@@ -133,7 +133,7 @@
                 //NSInteger *rowOfCell = [cellPath row];
                 //do stuff with 'cell'
                 NSLog(@"The cell is %@", cell);
-                NSLog(@"The cell accessory type is %ld", cell.accessoryType);
+                NSLog(@"The cell accessory type is %d", cell.accessoryType);
                 //if (cell.accessoryType == UITableViewCellAccessoryCheckmark)
                 if (cell.accessoryType != UITableViewCellAccessoryNone)
                 {   NSLog(@"the statement is true");
