@@ -515,6 +515,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Repeat" id="dze-kI-LXA"/>
+                    <connections>
+                        <outlet property="recurranceTableView" destination="HT8-t3-e5N" id="L7a-qp-bfi"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jzu-Hg-lW4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
