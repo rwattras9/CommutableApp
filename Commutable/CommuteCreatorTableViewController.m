@@ -9,6 +9,7 @@
 #import "CommuteCreatorTableViewController.h"
 #import "LocationItem.h"
 #import "LocationCreatorViewController.h"
+#import "RepeatScheduleTableViewController.h"
 
 #define kDatePickerIndex 1
 #define kDatePickerCellHeight 216
@@ -28,7 +29,7 @@
 @property (strong, nonatomic) IBOutlet UITableViewCell *destinationLocationCell;
 @property (strong, nonatomic) IBOutlet UILabel *startingLocationLabel;
 @property (strong, nonatomic) IBOutlet UILabel *destinationLocationLabel;
-
+@property (strong, nonatomic) NSMutableArray *recurrenceScheduleArray;
 
 
 @property (assign) BOOL datePickerIsShowing;
@@ -300,6 +301,18 @@
 //old method to pass data to List of Locations
 - (IBAction) unwindToCommuteCreatorTable:(UIStoryboardSegue *)segue
 {
+    
+}
+
+- (IBAction)unwindFromRecurrenceToCommuteCreatorTable:(UIStoryboardSegue *)segue {
+    RepeatScheduleTableViewController *source = [segue sourceViewController];
+    self.recurrenceScheduleArray = source.recurranceDays;
+    if (_recurrenceScheduleArray != nil) {
+        //TO DO: update recurrence label
+        
+        //TO DO: Add recurrence schedule array to Commute Properties somehow or something
+    }
+    
 }
 
 - (void) loadInitialData {

@@ -10,9 +10,11 @@
 
 @interface RepeatScheduleTableViewController ()
 
-@property NSMutableArray *recurranceDays;
+
 @property NSInteger selectedRow;
 @property (strong, nonatomic) IBOutlet UITableView *recurranceTableView;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *doneButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
 
 @end
 
@@ -99,20 +101,39 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    //iterate through the cells. If a cell in UITableView has a checkmark, add row number to recurrance days array
-    /*for (int section = 0; section < [_recurranceTableView numberOfSections]; section++) {
-        for (int row = 0; row < [_recurranceTableView numberOfRowsInSection:section]; row++) {
-            NSIndexPath* cellPath = [NSIndexPath indexPathForRow:row inSection:section];
-            NSLog(@"The cellPath is %@", cellPath);
-            UITableViewCell* cell = [_recurranceTableView cellForRowAtIndexPath:cellPath];
-            //do stuff with 'cell'
-            NSLog(@"The cell is %@", cell);
-            
-            if (cell.accessoryType == UITableViewCellAccessoryCheckmark){
-                [_recurranceDays addObject:cellPath];
+    //recurrenceEditor
+    //backBarButtonItem
+    //check to see if it was the Done or Cancel button that was tapped
+    if (sender == self.cancelButton) return;
+    
+    if (sender == self.doneButton) {
+        //iterate through the cells. If a cell in UITableView has a checkmark, add row number to recurrance days array
+        if (self.isMovingFromParentViewController) {
+            // Do your stuff here
+            NSMutableArray *cellsWithCheckMarks = [[NSMutableArray alloc] init];
+            for (int section = 0; section < [_recurranceTableView numberOfSections]; section++) {
+                for (int row = 0; row < [_recurranceTableView numberOfRowsInSection:section]; row++) {
+                    NSIndexPath* cellPath = [NSIndexPath indexPathForRow:row inSection:section];
+                    //NSLog(@"The cellPath is %@", cellPath);
+                    UITableViewCell* cell = [_recurranceTableView cellForRowAtIndexPath:cellPath];
+                    //NSInteger *rowOfCell = [cellPath row];
+                    //do stuff with 'cell'
+                    NSLog(@"The cell is %@", cell);
+                    //NSLog(@"The cell accessory type is %ld", cell.accessoryType);
+                    //if (cell.accessoryType == UITableViewCellAccessoryCheckmark)
+                    if (cell.accessoryType != UITableViewCellAccessoryNone)
+                    {   NSLog(@"the statement is true");
+                        [cellsWithCheckMarks addObject:cellPath];
+                        
+                    }
+                }_recurranceDays = cellsWithCheckMarks;
+                NSLog(@"The recurranceDays are %@", _recurranceDays);
             }
         }
-    }*/
+    }
+    
+  
+
     
     
     // Get the new view controller using [segue destinationViewController].
@@ -121,7 +142,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    
+    /*
     if (self.isMovingFromParentViewController) {
         // Do your stuff here
         NSMutableArray *cellsWithCheckMarks = [[NSMutableArray alloc] init];
@@ -133,7 +154,7 @@
                 //NSInteger *rowOfCell = [cellPath row];
                 //do stuff with 'cell'
                 NSLog(@"The cell is %@", cell);
-                NSLog(@"The cell accessory type is %d", cell.accessoryType);
+                //NSLog(@"The cell accessory type is %ld", cell.accessoryType);
                 //if (cell.accessoryType == UITableViewCellAccessoryCheckmark)
                 if (cell.accessoryType != UITableViewCellAccessoryNone)
                 {   NSLog(@"the statement is true");
@@ -143,7 +164,7 @@
             }_recurranceDays = cellsWithCheckMarks;
             NSLog(@"The recurranceDays are %@", _recurranceDays);
         }
-    }
+    }*/
     
     
 }

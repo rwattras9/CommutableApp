@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface RepeatScheduleTableViewController : UITableViewController
+@property NSMutableArray *recurranceDays;
 
 @end

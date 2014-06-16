@@ -70,10 +70,10 @@
             </objects>
             <point key="canvasLocation" x="1071" y="560"/>
         </scene>
-        <!--Commute Creator Table View Controller - Commute Creator-->
+        <!--Commute Creator Table View Controller - Commutes Creator-->
         <scene sceneID="sXr-Tr-pVa">
             <objects>
-                <tableViewController id="TMf-ia-h7y" customClass="CommuteCreatorTableViewController" sceneMemberID="viewController">
+                <tableViewController title="Commutes Creator" id="TMf-ia-h7y" customClass="CommuteCreatorTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="OTu-Mq-oH4">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -346,7 +346,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="2DB-Or-tuP" kind="push" id="Rsf-aw-3TT"/>
+                                            <segue destination="2DB-Or-tuP" kind="push" identifier="recurrenceEditor" id="Rsf-aw-3TT"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Rbk-B6-9a6">
@@ -401,6 +401,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="destinationLocationLabel" destination="Xwc-Aq-1Xe" id="uaI-D6-bRE"/>
                         <outlet property="existingDestinationLocationsPicker" destination="ax6-Xo-wUt" id="OKG-8O-Zeq"/>
                         <outlet property="existingStartingLocationsPicker" destination="u1I-Km-HHc" id="VxW-r0-4Fw"/>
+                        <outlet property="recurrenceLabel" destination="9dR-Wv-0sC" id="77I-eI-Aw2"/>
                         <outlet property="startingLocationCell" destination="CGX-rB-6CT" id="WCE-ot-GJG"/>
                         <outlet property="startingLocationLabel" destination="DDR-j8-7D2" id="zUa-nB-57H"/>
                     </connections>
@@ -410,10 +411,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="1905" y="560"/>
         </scene>
-        <!--Repeat Schedule Table View Controller - Repeat-->
+        <!--Repeat Schedule Table View Controller - Repeat Schedule-->
         <scene sceneID="uiR-aU-FJt">
             <objects>
-                <tableViewController id="2DB-Or-tuP" customClass="RepeatScheduleTableViewController" sceneMemberID="viewController">
+                <tableViewController title="Repeat Schedule" id="2DB-Or-tuP" customClass="RepeatScheduleTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="HT8-t3-e5N">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -542,12 +543,26 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             <outlet property="delegate" destination="2DB-Or-tuP" id="BTd-pQ-2aW"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Repeat" id="dze-kI-LXA"/>
+                    <navigationItem key="navigationItem" title="Repeat" id="dze-kI-LXA">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="dgj-h3-Nya">
+                            <connections>
+                                <segue destination="Mad-I9-Z93" kind="unwind" unwindAction="unwindFromRecurrenceToCommuteCreatorTable:" id="mMr-iJ-Dbc"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="Io0-qj-zqa">
+                            <connections>
+                                <segue destination="Mad-I9-Z93" kind="unwind" unwindAction="unwindFromRecurrenceToCommuteCreatorTable:" id="gaj-Yk-IT3"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="cancelButton" destination="dgj-h3-Nya" id="eSw-7P-2Nf"/>
+                        <outlet property="doneButton" destination="Io0-qj-zqa" id="tM7-Aa-eSN"/>
                         <outlet property="recurranceTableView" destination="HT8-t3-e5N" id="L7a-qp-bfi"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jzu-Hg-lW4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Mad-I9-Z93" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2297" y="858"/>
         </scene>
@@ -716,7 +731,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="9PJ-aG-Amd"/>
         <segue reference="Oo6-cd-3gJ"/>
+        <segue reference="f63-ks-QhQ"/>
     </inferredMetricsTieBreakers>
 </document>
