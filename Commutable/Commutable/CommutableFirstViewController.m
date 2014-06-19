@@ -111,6 +111,10 @@
     }
 }
 
+
+
+// method that reads the route info from the JSON output of the directions API query, then draws the polyline info on the map
+// we should be able to just add more dictionary calls here to grab the rest of the data methinks!
 -(void)addDirections:(NSDictionary *)json
 {
     NSDictionary *routes = json[@"routes"][0];
@@ -121,6 +125,9 @@
     polyline.strokeWidth = 10;
     polyline.map = mapView;
 }
+
+
+
 
 - (void)didReceiveMemoryWarning
 {
