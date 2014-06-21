@@ -18,6 +18,8 @@
 		2C2F1009193D563200D24F4D /* RepeatScheduleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F1008193D563200D24F4D /* RepeatScheduleTableViewController.m */; };
 		2C5B0000193A916700A229EA /* Commutes Tab Car Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C5BFFFF193A916700A229EA /* Commutes Tab Car Icon.png */; };
 		2C5B0002193A929D00A229EA /* Commutes Tab Car Icon 50px.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C5B0001193A929D00A229EA /* Commutes Tab Car Icon 50px.png */; };
+		2C6E3B8F19564797005FCB02 /* Car and Menu Icon 50px.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C6E3B8D19564797005FCB02 /* Car and Menu Icon 50px.png */; };
+		2C6E3B9019564797005FCB02 /* Car and Menu Icon 100px.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C6E3B8E19564797005FCB02 /* Car and Menu Icon 100px.png */; };
 		2CA120D61929637C004825D4 /* Commutable.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2CA120D41929637C004825D4 /* Commutable.xcdatamodeld */; };
 		2CD2000018FB3559005F1338 /* CommuteCreatorTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD2FFFF18FB3559005F1338 /* CommuteCreatorTableViewController.m */; };
 		2CD2000318FB3B0D005F1338 /* LocationCreatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD2000218FB3B0D005F1338 /* LocationCreatorViewController.m */; };
@@ -80,6 +82,8 @@
 		2C2F1008193D563200D24F4D /* RepeatScheduleTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepeatScheduleTableViewController.m; sourceTree = "<group>"; };
 		2C5B0001193A929D00A229EA /* Commutes Tab Car Icon 50px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Commutes Tab Car Icon 50px.png"; sourceTree = "<group>"; };
 		2C5BFFFF193A916700A229EA /* Commutes Tab Car Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Commutes Tab Car Icon.png"; sourceTree = "<group>"; };
+		2C6E3B8D19564797005FCB02 /* Car and Menu Icon 50px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Car and Menu Icon 50px.png"; sourceTree = "<group>"; };
+		2C6E3B8E19564797005FCB02 /* Car and Menu Icon 100px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Car and Menu Icon 100px.png"; sourceTree = "<group>"; };
 		2CA120D51929637C004825D4 /* Commutable.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Commutable.xcdatamodel; sourceTree = "<group>"; };
 		2CD2000118FB3B0D005F1338 /* LocationCreatorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationCreatorViewController.h; sourceTree = "<group>"; };
 		2CD2000218FB3B0D005F1338 /* LocationCreatorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationCreatorViewController.m; sourceTree = "<group>"; };
@@ -245,6 +249,8 @@
 		2CE53EED18F98C43005BCEC9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2C6E3B8D19564797005FCB02 /* Car and Menu Icon 50px.png */,
+				2C6E3B8E19564797005FCB02 /* Car and Menu Icon 100px.png */,
 				2C5B0001193A929D00A229EA /* Commutes Tab Car Icon 50px.png */,
 				2C5BFFFF193A916700A229EA /* Commutes Tab Car Icon.png */,
 				2C19EE4A193A810A00745780 /* Commutable Logo 58px.png */,
@@ -366,10 +372,12 @@
 				2C5B0002193A929D00A229EA /* Commutes Tab Car Icon 50px.png in Resources */,
 				790DA2231920C4D10011C2DE /* map.html in Resources */,
 				2C19EE4E193A810A00745780 /* Commutable Logo 80px.png in Resources */,
+				2C6E3B8F19564797005FCB02 /* Car and Menu Icon 50px.png in Resources */,
 				2C0BC58D18FA0BAD00CF12F7 /* Car Icon v2 Gradient without Windows 80x80.png in Resources */,
 				2CE53EF118F98C43005BCEC9 /* InfoPlist.strings in Resources */,
 				2C5B0000193A916700A229EA /* Commutes Tab Car Icon.png in Resources */,
 				2CE53EFA18F98C43005BCEC9 /* Main.storyboard in Resources */,
+				2C6E3B9019564797005FCB02 /* Car and Menu Icon 100px.png in Resources */,
 				79B107EC19528617006E6F1E /* GoogleMaps.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

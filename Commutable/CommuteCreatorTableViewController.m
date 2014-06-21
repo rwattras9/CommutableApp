@@ -81,11 +81,11 @@
     //NSLog(@"The height is %f", height);
     //modification
     if (indexPath.section == 3) {
-    
+        
         if (indexPath.row == kDatePickerIndex){
-        
+            
             height = self.datePickerIsShowing ? kDatePickerCellHeight : 0.0f;
-        
+            
         }
         return height;
     }
@@ -97,11 +97,11 @@
             if (indexPath.row == kDatePickerIndex){
                 
                 height = self.startingLocationPickerIsShowing ? kDatePickerCellHeight : 0.0f;
-            
-            /*if (indexPath.row == 0){
                 
-                height = 216;
-                return height;*/
+                /*if (indexPath.row == 0){
+                 
+                 height = 216;
+                 return height;*/
                 
             }
         }else if (indexPath.section == 2){
@@ -141,15 +141,15 @@
     else if (indexPath.section == 1){
         if (indexPath.row == 0){
             if (self.startingLocationPickerIsShowing){
-                    
+                
                 [self hideStartingLocationPickerCell];
-                    
+                
             }else {
-                    
+                
                 [self showStartingLocationPickerCell];
-                }
+            }
         }
-            
+        
     }
     else if (indexPath.section == 2){
         if (indexPath.row == 0){
@@ -162,9 +162,9 @@
                 [self showDestinationLocationPickerCell];
             }
         }
-
+        
     }
-
+    
     
     
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -309,14 +309,16 @@
     self.recurrenceScheduleArray = source.recurranceDays;
     if (_recurrenceScheduleArray != nil) {
         //TO DO: update recurrence label
-        
+        //for (NSInteger *intDayOfWeek in _recurrenceScheduleArray) {
+        //NSLog(@"The commute items are", intDayOfWeek);
+        //}
         //TO DO: Add recurrence schedule array to Commute Properties somehow or something
     }
     
 }
 
 - (void) loadInitialData {
-
+    
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -325,13 +327,13 @@
     if (sender == self.commuteCreatorCancelButton) return;
     
     //if sender is cancel, return (don't save, update, do anything
-        //done
+    //done
     //if sender is done button, update or create
-        //done
+    //done
     //if sender is edit button, pass location information
-        //done
+    //done
     //if sender is add button, load location creator
-        //done
+    //done
     
     
     //if sender is  starting location edit button, prepare to edit a location by passing location information
@@ -351,88 +353,88 @@
     }
     
     if (sender == self.commuteCreatorDoneButton) {
-    //The single condition is a placeholder until I get full error handling in.
-    if (self.commuteNameTextField.text.length > 0) {
-        
-        NSManagedObjectContext *context = [self managedObjectContext];
-        //update a Commute if the commute exists
-        if (self.commute){
-            //update name
-            [self.commute setValue:self.commuteNameTextField.text forKey:@"name"];
-            //update starting address
-            [self.commute setValue:[[self.locationsArray objectAtIndex:[_existingStartingLocationsPicker selectedRowInComponent:0]] valueForKey:@"address"] forKey:@"startingAddress"];
-            //update starting zip
-            [self.commute setValue:self.commuteItem.commuteStartingZipCode = [[self.locationsArray objectAtIndex:[_existingStartingLocationsPicker selectedRowInComponent:0]] valueForKey:@"zipCode"] forKey:@"startingZip"];
-            //update destination address
-            [self.commute setValue:[[self.locationsArray objectAtIndex:[_existingDestinationLocationsPicker selectedRowInComponent:0]] valueForKey:@"address"] forKey:@"destinationAddress"];
-            //update destination zip
-            [self.commute setValue:self.commuteItem.commuteDestinationZipCode = [[self.locationsArray objectAtIndex:[_existingDestinationLocationsPicker selectedRowInComponent:0]] valueForKey:@"zipCode"] forKey:@"destinationZip"];
-            //To do: Update Schedule
-            [self.commute setValue:self.alertTime forKey:@"alertTime"];
+        //The single condition is a placeholder until I get full error handling in.
+        if (self.commuteNameTextField.text.length > 0) {
             
-            //create Local Notification for this commute. This should probably be in core data
-            UILocalNotification *commuteNotification = [[UILocalNotification alloc] init];
+            NSManagedObjectContext *context = [self managedObjectContext];
+            //update a Commute if the commute exists
+            if (self.commute){
+                //update name
+                [self.commute setValue:self.commuteNameTextField.text forKey:@"name"];
+                //update starting address
+                [self.commute setValue:[[self.locationsArray objectAtIndex:[_existingStartingLocationsPicker selectedRowInComponent:0]] valueForKey:@"address"] forKey:@"startingAddress"];
+                //update starting zip
+                [self.commute setValue:self.commuteItem.commuteStartingZipCode = [[self.locationsArray objectAtIndex:[_existingStartingLocationsPicker selectedRowInComponent:0]] valueForKey:@"zipCode"] forKey:@"startingZip"];
+                //update destination address
+                [self.commute setValue:[[self.locationsArray objectAtIndex:[_existingDestinationLocationsPicker selectedRowInComponent:0]] valueForKey:@"address"] forKey:@"destinationAddress"];
+                //update destination zip
+                [self.commute setValue:self.commuteItem.commuteDestinationZipCode = [[self.locationsArray objectAtIndex:[_existingDestinationLocationsPicker selectedRowInComponent:0]] valueForKey:@"zipCode"] forKey:@"destinationZip"];
+                //To do: Update Schedule
+                [self.commute setValue:self.alertTime forKey:@"alertTime"];
+                
+                //create Local Notification for this commute. This should probably be in core data
+                UILocalNotification *commuteNotification = [[UILocalNotification alloc] init];
+                
+                commuteNotification.fireDate = [commute valueForKey:@"alertTime"];
+                
+                //TO DO: Change variable one depending on time of day.
+                commuteNotification.alertBody = [NSString stringWithFormat:@"Good variable1, the best route to work is varible2"];
+                commuteNotification.soundName = UILocalNotificationDefaultSoundName;
+                [[UIApplication sharedApplication] scheduleLocalNotification:commuteNotification];
+                
+            } else {
+                
+                //create a new Commute
+                
+                // Create a new managed object
+                NSManagedObject *newCommute = [NSEntityDescription insertNewObjectForEntityForName:@"Commute" inManagedObjectContext:context];
+                
+                //Set Commute Name
+                [newCommute setValue:self.self.commuteNameTextField.text forKey:@"name"];
+                
+                //Set Starting Address
+                [newCommute setValue:[[self.locationsArray objectAtIndex:[_existingStartingLocationsPicker selectedRowInComponent:0]] valueForKey:@"address"] forKey:@"startingAddress"];
+                NSLog(@"The value of commuteStartingAddress is %@", [newCommute valueForKey:@"startingAddress"]);
+                
+                //Set Starting Zip
+                [newCommute setValue:self.commuteItem.commuteStartingZipCode = [[self.locationsArray objectAtIndex:[_existingStartingLocationsPicker selectedRowInComponent:0]] valueForKey:@"zipCode"] forKey:@"startingZip"];
+                
+                //Set Destination Address
+                [newCommute setValue:[[self.locationsArray objectAtIndex:[_existingDestinationLocationsPicker selectedRowInComponent:0]] valueForKey:@"address"] forKey:@"destinationAddress"];
+                NSLog(@"The value of commuteDestinationAddress is %@", [newCommute valueForKey:@"destinationAddress"]);
+                
+                //Set Destination Zip
+                [newCommute setValue:self.commuteItem.commuteStartingZipCode = [[self.locationsArray objectAtIndex:[_existingStartingLocationsPicker selectedRowInComponent:0]] valueForKey:@"zipCode"] forKey:@"destinationZip"];
+                
+                //Set Alert Time
+                [newCommute setValue:self.alertTime forKey:@"alertTime"];
+                NSLog(@"The value of alertTime is %@", [newCommute valueForKey:@"alertTime"]);
+                
+                //create Local Notification for this commute. This should probably be in Core Data.
+                UILocalNotification *commuteNotification = [[UILocalNotification alloc] init];
+                
+                commuteNotification.fireDate = [newCommute valueForKey:@"alertTime"];
+                
+                //TO DO: Change variable one depending on time of day.
+                commuteNotification.alertBody = [NSString stringWithFormat:@"Good variable1, the best route to work is varible2"];
+                commuteNotification.soundName = UILocalNotificationDefaultSoundName;
+                [[UIApplication sharedApplication] scheduleLocalNotification:commuteNotification];
+                
+                
+            }
             
-            commuteNotification.fireDate = [commute valueForKey:@"alertTime"];
-            
-            //TO DO: Change variable one depending on time of day.
-            commuteNotification.alertBody = [NSString stringWithFormat:@"Good variable1, the best route to work is varible2"];
-            commuteNotification.soundName = UILocalNotificationDefaultSoundName;
-            [[UIApplication sharedApplication] scheduleLocalNotification:commuteNotification];
-            
-        } else {
-            
-            //create a new Commute
-            
-            // Create a new managed object
-            NSManagedObject *newCommute = [NSEntityDescription insertNewObjectForEntityForName:@"Commute" inManagedObjectContext:context];
-            
-            //Set Commute Name
-            [newCommute setValue:self.self.commuteNameTextField.text forKey:@"name"];
-            
-            //Set Starting Address
-            [newCommute setValue:[[self.locationsArray objectAtIndex:[_existingStartingLocationsPicker selectedRowInComponent:0]] valueForKey:@"address"] forKey:@"startingAddress"];
-            NSLog(@"The value of commuteStartingAddress is %@", [newCommute valueForKey:@"startingAddress"]);
-            
-            //Set Starting Zip
-            [newCommute setValue:self.commuteItem.commuteStartingZipCode = [[self.locationsArray objectAtIndex:[_existingStartingLocationsPicker selectedRowInComponent:0]] valueForKey:@"zipCode"] forKey:@"startingZip"];
-            
-            //Set Destination Address
-            [newCommute setValue:[[self.locationsArray objectAtIndex:[_existingDestinationLocationsPicker selectedRowInComponent:0]] valueForKey:@"address"] forKey:@"destinationAddress"];
-            NSLog(@"The value of commuteDestinationAddress is %@", [newCommute valueForKey:@"destinationAddress"]);
-            
-            //Set Destination Zip
-            [newCommute setValue:self.commuteItem.commuteStartingZipCode = [[self.locationsArray objectAtIndex:[_existingStartingLocationsPicker selectedRowInComponent:0]] valueForKey:@"zipCode"] forKey:@"destinationZip"];
-            
-            //Set Alert Time
-            [newCommute setValue:self.alertTime forKey:@"alertTime"];
-            NSLog(@"The value of alertTime is %@", [newCommute valueForKey:@"alertTime"]);
-            
-            //create Local Notification for this commute. This should probably be in Core Data.
-            UILocalNotification *commuteNotification = [[UILocalNotification alloc] init];
-            
-            commuteNotification.fireDate = [newCommute valueForKey:@"alertTime"];
-            
-            //TO DO: Change variable one depending on time of day.
-            commuteNotification.alertBody = [NSString stringWithFormat:@"Good variable1, the best route to work is varible2"];
-            commuteNotification.soundName = UILocalNotificationDefaultSoundName;
-            [[UIApplication sharedApplication] scheduleLocalNotification:commuteNotification];
             
             
-        }
-        
-
-        
-        NSError *error = nil;
-        // Save the object to persistent store
-        if (![context save:&error]) {
-            NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
-        }
-        
-    }}
+            NSError *error = nil;
+            // Save the object to persistent store
+            if (![context save:&error]) {
+                NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
+            }
+            
+        }}
     
 }
-    
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
