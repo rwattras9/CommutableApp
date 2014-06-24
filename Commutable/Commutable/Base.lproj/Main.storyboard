@@ -15,13 +15,23 @@
                     <view key="view" contentMode="scaleToFill" id="2VE-Yg-loa">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V1F-qM-HH5" customClass="GMSMapView">
+                                <rect key="frame" x="43" y="61" width="235" height="271"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Traffic Report" image="first" id="u1e-5L-l1D"/>
+                    <connections>
+                        <outlet property="mapView" destination="V1F-qM-HH5" id="Yxt-Bt-Rdu"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qh2-T1-AhA" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="653" y="-125"/>
+            <point key="canvasLocation" x="622" y="-166"/>
         </scene>
         <!--Commutes Table View Controller - Commutes-->
         <scene sceneID="cBe-Hy-fao">

@@ -20,7 +20,6 @@
 }
 @synthesize mapView;
 
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -31,6 +30,8 @@
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:43.0667
                                                             longitude:-89.4000
                                                                  zoom:1];
+    
+    
     
     mapView = [GMSMapView mapWithFrame:CGRectMake(23, 27, 275, 350) camera:camera];
     mapView.myLocationEnabled = YES;
@@ -46,6 +47,7 @@
                  context:NULL];
     
     [self.view addSubview:mapView];
+    
     
     CLLocationCoordinate2D coordinate1;
     coordinate1.latitude = 43.0667;
