@@ -17,7 +17,7 @@
 // method that retrieves directions by running the query as a URL calling the Google Maps Directions API
 - (void)retrieveDirections:(SEL)sel withDelegate:(id)delegate;
 
-// 
+// method that fetches the info from the API call and saves it to a JSON dictionary
 - (void)fetchedData:(NSData *)data withSelector:(SEL)selector
        withDelegate:(id)delegate;
 

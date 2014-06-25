@@ -26,32 +26,20 @@ static NSString *kMDDirectionsURL = @"http://maps.googleapis.com/maps/api/direct
               withSelector:(SEL)selector
               withDelegate:(id)delegate
 {
-    NSArray *waypoints = query[@"waypoints"]; // grab the waypoint coords from the query argument (called from CommutableFirstViewController.m
-    NSString *origin = waypoints[0]; // determine the route origin
-    NSInteger waypointCount = [waypoints count]; // number of waypoints
-    NSInteger destinationPos = waypointCount - 1; // destination position is the last waypoint
-    NSString *destination = waypoints[destinationPos]; // determine destination
+    //NSArray *waypoints = query[@"waypoints"]; // grab the waypoint coords from the query argument (called from CommutableFirstViewController.m
+    NSString *origin = query[@"origin"]; // get the route origin from the parameters
+    NSString *destination = query[@"destination"]; // grab the destination from the parameters
     NSString *sensor = query[@"sensor"]; // get sensor info from the query. sensor is used to tell Google Maps you're using a 'sensor' to locate the user. fine to be false.
     NSMutableString *url =
     [NSMutableString stringWithFormat:@"%@&origin=%@&destination=%@&sensor=%@",
-            kMDDirectionsURL, origin, destination, sensor]; // start building the url with the origin, destination, and sesor info extracted from the query
-    
-    // if there's more than just an origin and a destination...
-    if(waypointCount > 2) {
-        [url appendString:@"&waypoints=optimize:true"]; // append the instruction to optimize the waypoints to the url
-        NSInteger wpCount = waypointCount-2; // get the number of waypoints between the origina and destination
-        
-        // for each waypoint during the route...
-        for(int i=1;i<wpCount;i++){
-            [url appendString: @"|"]; // add | as a delimiter
-            [url appendString:[waypoints objectAtIndex:i]]; // append the url with the waypoint
-        }
-    }
+            kMDDirectionsURL, origin, destination, sensor]; // start building the url with the origin, destination, and sensor info extracted from the query
     
 
     url = [[url
            stringByAddingPercentEscapesUsingEncoding: NSASCIIStringEncoding] mutableCopy]; // turn the query into a viable URL with %20 escapes for spaces, etc
+    
     _directionsURL = [NSURL URLWithString:url]; // turn the finshed URL query into the global variable of type NSURL
+    
     
     // call the retrieveDirections method with the selector and delegate arguments
     // selector is of type SEL that points to the addDirections method during the call. It must be somthing like it points to what gets called when data is returned..?
@@ -79,16 +67,21 @@ static NSString *kMDDirectionsURL = @"http://maps.googleapis.com/maps/api/direct
        withSelector:(SEL)selector
        withDelegate:(id)delegate
 {
-  
+   
   NSError* error;
   NSDictionary *json = [NSJSONSerialization
                         JSONObjectWithData:data
                                    options:kNilOptions
                                      error:&error]; // read the JSON return into a dictionary
-  
-    // don't really understand this one quite yet.. something to finally call the method the selector is pointing to (addDirections)..? That seems right actually.. haha
+    
+    // call the method the selector is pointing to (addDirections) and pass in the JSON return dictionary as a parameter
   [delegate performSelector:selector
                  withObject:json];
+    
+    //IMP imp = [delegate methodForSelector:selector];
+    //void (*func)(id, SEL) = (void *)imp;
+    //func(delegate, selector);
+    
 }
 
 @end

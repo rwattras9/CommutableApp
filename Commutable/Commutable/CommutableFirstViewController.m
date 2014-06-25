@@ -49,15 +49,7 @@
     [self.view addSubview:mapView];
     
     
-    CLLocationCoordinate2D coordinate1;
-    coordinate1.latitude = 43.0667;
-    coordinate1.longitude = -89.4000;
-    CLLocationCoordinate2D coordinate2;
-    coordinate2.latitude = 40.4417;
-    coordinate2.longitude = -80.00;
-    [self drawCoordinates:coordinate1 :coordinate2];
-    
-    
+    [self beginQuery];
     
 }
 
@@ -81,51 +73,75 @@
 }
 
 
-//-(void)mapView:(GMSMapView *)mapView didTapAtCoordinate:(CLLocationCoordinate2D)coordinate
--(void)drawCoordinates:(CLLocationCoordinate2D)coordinate1
-                      :(CLLocationCoordinate2D)coordinate2
+- (void) beginQuery
 {
-    //NSLog(@"you tapped at %f, %f", coordinate.longitude, coordinate.latitude);
-    
-    //CLLocationCoordinate2D tapPosition = CLLocationCoordinate2DMake(coordinate.latitude, coordinate.longitude);
-    
-    GMSMarker *startMarker = [GMSMarker markerWithPosition:coordinate1];
-    GMSMarker *endMarker = [GMSMarker markerWithPosition:coordinate2];
-    startMarker.map = mapView;
-    endMarker.map = mapView;
-    //tapMarker.map = self.mapView;
-    [self.waypoints addObject:startMarker];
-    [self.waypoints addObject:endMarker];
-    
-    NSString *position1String = [NSString stringWithFormat:@"%f,%f", coordinate1.latitude,coordinate1.longitude];
-    NSString *position2String = [NSString stringWithFormat:@"%f,%f", coordinate2.latitude,coordinate2.longitude];
-    [self.waypointStrings addObject:position1String];
-    [self.waypointStrings addObject:position2String];
-    
-    if (self.waypoints.count > 1) {
-        NSDictionary *query = @{ @"sensor" : @"false",
-                                 @"waypoints" : self.waypointStrings };
-        MDDirectionService *mds = [[MDDirectionService alloc] init];
-        SEL selector = @selector(addDirections:);
-        [mds setDirectionsQuery:query
-                   withSelector:selector
-                   withDelegate:self];
-    }
+    NSDictionary *query = @{ @"sensor" : @"false",
+                             @"origin" : @"Madison",
+                             @"destination" : @"Pittsburgh"};
+    MDDirectionService *mds = [[MDDirectionService alloc] init];
+    SEL selector = @selector(addDirections:);
+    [mds setDirectionsQuery:query
+               withSelector:selector
+               withDelegate:self];
 }
-
 
 
 // method that reads the route info from the JSON output of the directions API query, then draws the polyline info on the map
 // we should be able to just add more dictionary calls here to grab the rest of the data methinks!
 -(void)addDirections:(NSDictionary *)json
 {
+    
     NSDictionary *routes = json[@"routes"][0];
+    
+    NSDictionary *legs = routes[@"legs"][0];
+    
+    // get the distance in text form
+    //NSDictionary *distance = legs[@"distance"];
+    //NSString *distanceText = distance[@"text"];
+    
+    // get the duration in text form
+    //NSDictionary *duration = legs[@"duration"];
+    //NSString *durationText = duration[@"text"];
+    
+    // get and save the starting coords
+    NSDictionary *start_location = legs[@"start_location"];
+    NSString *start_lat = start_location[@"lat"];
+    double startLatDouble = [start_lat doubleValue];
+    NSString *start_lng = start_location[@"lng"];
+    double startLngDouble = [start_lng doubleValue];
+    CLLocationCoordinate2D origin;
+    origin.latitude = startLatDouble;
+    origin.longitude = startLngDouble;
+    
+    
+    // get and save the ending coords
+    NSDictionary *end_location = legs[@"end_location"];
+    NSString *end_lat = end_location[@"lat"];
+    double endLatDouble = [end_lat doubleValue];
+    NSString *end_lng = end_location[@"lng"];
+    double endLngDouble = [end_lng doubleValue];
+    CLLocationCoordinate2D destination;
+    destination.latitude = endLatDouble;
+    destination.longitude = endLngDouble;
+    
+    // add markers to the map for the origin and destination
+    GMSMarker *startMarker = [GMSMarker markerWithPosition:origin];
+    GMSMarker *endMarker = [GMSMarker markerWithPosition:destination];
+    startMarker.map = mapView;
+    endMarker.map = mapView;
+    
+    // draw the direction line
     NSDictionary *route = routes[@"overview_polyline"];
     NSString *overview_route = route[@"points"];
     GMSPath *path = [GMSPath pathFromEncodedPath:overview_route];
     GMSPolyline *polyline = [GMSPolyline polylineWithPath:path];
     polyline.strokeWidth = 10;
     polyline.map = mapView;
+    
+    // focus camera on route (still working on this..). It's being overruled by the method that's focusing on your location I believe
+    GMSCoordinateBounds *bounds = [[GMSCoordinateBounds alloc] initWithPath:path];
+    GMSCameraUpdate *update = [GMSCameraUpdate fitBounds:bounds];
+    [mapView moveCamera:update];
 }
 
 
