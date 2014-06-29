@@ -21,7 +21,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Placeholder  Text" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="240" translatesAutoresizingMaskIntoConstraints="NO" id="AYO-Wj-2Yk">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="4" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" preferredMaxLayoutWidth="240" translatesAutoresizingMaskIntoConstraints="NO" id="AYO-Wj-2Yk">
                                 <rect key="frame" x="40" y="396" width="240" height="97"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration">
@@ -37,6 +37,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Traffic Report" image="first" id="u1e-5L-l1D"/>
                     <connections>
+                        <outlet property="directionsText" destination="AYO-Wj-2Yk" id="VDl-Pq-TFi"/>
                         <outlet property="mapView" destination="V1F-qM-HH5" id="Yxt-Bt-Rdu"/>
                     </connections>
                 </viewController>

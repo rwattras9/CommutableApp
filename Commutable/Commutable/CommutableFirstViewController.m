@@ -19,6 +19,7 @@
     
 }
 @synthesize mapView;
+@synthesize directionsText;
 
 - (void)viewDidLoad
 {
@@ -41,15 +42,17 @@
     mapView.settings.myLocationButton = YES;
     mapView.trafficEnabled = YES;
     
-    [mapView addObserver:self
-              forKeyPath:@"myLocation"
-                 options:NSKeyValueObservingOptionNew
-                 context:NULL];
-    
     [self.view addSubview:mapView];
     
     
     [self beginQuery];
+    
+    /*
+    [mapView addObserver:self
+              forKeyPath:@"myLocation"
+                 options:NSKeyValueObservingOptionNew
+                 context:NULL];
+     */
     
 }
 
@@ -76,8 +79,8 @@
 - (void) beginQuery
 {
     NSDictionary *query = @{ @"sensor" : @"false",
-                             @"origin" : @"Madison",
-                             @"destination" : @"Pittsburgh"};
+                             @"origin" : @"303 N Hamilton St 53703",
+                             @"destination" : @"5301 tokay blvd 53701"};
     MDDirectionService *mds = [[MDDirectionService alloc] init];
     SEL selector = @selector(addDirections:);
     [mds setDirectionsQuery:query
@@ -96,12 +99,12 @@
     NSDictionary *legs = routes[@"legs"][0];
     
     // get the distance in text form
-    //NSDictionary *distance = legs[@"distance"];
-    //NSString *distanceText = distance[@"text"];
+    NSDictionary *distance = legs[@"distance"];
+    NSString *distanceText = distance[@"text"];
     
     // get the duration in text form
-    //NSDictionary *duration = legs[@"duration"];
-    //NSString *durationText = duration[@"text"];
+    NSDictionary *duration = legs[@"duration"];
+    NSString *durationText = duration[@"text"];
     
     // get and save the starting coords
     NSDictionary *start_location = legs[@"start_location"];
@@ -135,13 +138,16 @@
     NSString *overview_route = route[@"points"];
     GMSPath *path = [GMSPath pathFromEncodedPath:overview_route];
     GMSPolyline *polyline = [GMSPolyline polylineWithPath:path];
-    polyline.strokeWidth = 10;
+    polyline.strokeWidth = 8;
     polyline.map = mapView;
     
     // focus camera on route (still working on this..). It's being overruled by the method that's focusing on your location I believe
     GMSCoordinateBounds *bounds = [[GMSCoordinateBounds alloc] initWithPath:path];
     GMSCameraUpdate *update = [GMSCameraUpdate fitBounds:bounds];
     [mapView moveCamera:update];
+    
+    NSString *dirText = [NSString stringWithFormat:@"Take %@. Distance = %@, Duration = %@", routes[@"summary"], distanceText, durationText];
+    self.directionsText.text = dirText;
 }
 
 

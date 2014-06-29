@@ -14,4 +14,6 @@
 //@property (weak, nonatomic) IBOutlet GMSMapView *mapView;
 @property (strong, nonatomic) IBOutlet GMSMapView *mapView;
 
+@property (weak, nonatomic) IBOutlet UILabel *directionsText;
+
 @end
