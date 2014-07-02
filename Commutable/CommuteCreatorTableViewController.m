@@ -31,21 +31,31 @@
 @property (strong, nonatomic) IBOutlet UILabel *destinationLocationLabel;
 @property (strong, nonatomic) NSMutableArray *recurrenceScheduleArray;
 
+@property (nonatomic) BOOL *sendAlert;
+@property (strong, nonatomic) IBOutlet UISwitch *sendAlertSwitch;
 
 @property (assign) BOOL datePickerIsShowing;
 @property (assign) BOOL startingLocationPickerIsShowing;
 @property (assign) BOOL destinationLocationPickerIsShowing;
 
 
+
 @end
 
 @implementation CommuteCreatorTableViewController
 @synthesize commute;
+- (IBAction)sendAlert:(id)sender {
+    
+    
+}
 
 - (IBAction)dismissKeyboard:(id)sender {
     
     [sender resignFirstResponder];
 }
+
+
+
 
 //Get the time selected from the UIDatePicker
 
@@ -373,14 +383,18 @@
                 [self.commute setValue:self.alertTime forKey:@"alertTime"];
                 
                 //create Local Notification for this commute. This should probably be in core data
-                UILocalNotification *commuteNotification = [[UILocalNotification alloc] init];
+                //only if Send Alert Switch is on
+                if (_sendAlertSwitch.on == YES) {
                 
-                commuteNotification.fireDate = [commute valueForKey:@"alertTime"];
+                    UILocalNotification *commuteNotification = [[UILocalNotification alloc] init];
                 
-                //TO DO: Change variable one depending on time of day.
-                commuteNotification.alertBody = [NSString stringWithFormat:@"Good variable1, the best route to work is varible2"];
-                commuteNotification.soundName = UILocalNotificationDefaultSoundName;
-                [[UIApplication sharedApplication] scheduleLocalNotification:commuteNotification];
+                    commuteNotification.fireDate = [commute valueForKey:@"alertTime"];
+                
+                    //TO DO: Change variable one depending on time of day.
+                    commuteNotification.alertBody = [NSString stringWithFormat:@"Good variable1, the best route to work is varible2"];
+                    commuteNotification.soundName = UILocalNotificationDefaultSoundName;
+                    [[UIApplication sharedApplication] scheduleLocalNotification:commuteNotification];
+                    }
                 
             } else {
                 
