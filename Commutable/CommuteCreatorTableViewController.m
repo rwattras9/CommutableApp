@@ -31,7 +31,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *destinationLocationLabel;
 @property (strong, nonatomic) NSMutableArray *recurrenceScheduleArray;
 
-@property (nonatomic) BOOL *sendAlert;
+@property (nonatomic) BOOL sendAlert;
 @property (strong, nonatomic) IBOutlet UISwitch *sendAlertSwitch;
 
 @property (assign) BOOL datePickerIsShowing;
@@ -385,6 +385,8 @@
                 //create Local Notification for this commute. This should probably be in core data
                 //only if Send Alert Switch is on
                 if (_sendAlertSwitch.on == YES) {
+                    
+                    [self.commute setValue:@YES forKey:@"sendAlert"];
                 
                     UILocalNotification *commuteNotification = [[UILocalNotification alloc] init];
                 
@@ -395,6 +397,9 @@
                     commuteNotification.soundName = UILocalNotificationDefaultSoundName;
                     [[UIApplication sharedApplication] scheduleLocalNotification:commuteNotification];
                     }
+                else {
+                    [self.commute setValue:@YES forKey:@"sendAlert"];
+                }
                 
             } else {
                 
@@ -424,16 +429,25 @@
                 [newCommute setValue:self.alertTime forKey:@"alertTime"];
                 NSLog(@"The value of alertTime is %@", [newCommute valueForKey:@"alertTime"]);
                 
-                //create Local Notification for this commute. This should probably be in Core Data.
-                UILocalNotification *commuteNotification = [[UILocalNotification alloc] init];
+                //If the sendAlert switch is on, create a local notification and store switch status in Core Data
+                if (_sendAlertSwitch.on == YES){
+                    //self.commuteItem.sendAlert = YES;
+                    [newCommute setValue:@YES forKey:@"sendAlert"];
                 
-                commuteNotification.fireDate = [newCommute valueForKey:@"alertTime"];
+                    //create Local Notification for this commute. This should probably be in Core Data.
+                    UILocalNotification *commuteNotification = [[UILocalNotification alloc] init];
                 
-                //TO DO: Change variable one depending on time of day.
-                commuteNotification.alertBody = [NSString stringWithFormat:@"Good variable1, the best route to work is varible2"];
-                commuteNotification.soundName = UILocalNotificationDefaultSoundName;
-                [[UIApplication sharedApplication] scheduleLocalNotification:commuteNotification];
+                    commuteNotification.fireDate = [newCommute valueForKey:@"alertTime"];
                 
+                    //TO DO: Change variable one depending on time of day.
+                    commuteNotification.alertBody = [NSString stringWithFormat:@"Good variable1, the best route to work is varible2"];
+                    commuteNotification.soundName = UILocalNotificationDefaultSoundName;
+                    [[UIApplication sharedApplication] scheduleLocalNotification:commuteNotification];
+                }
+                //Otherwise, set switch status to off in Core Data
+                else {
+                    [newCommute setValue:@NO forKey:@"sendAlert"];
+                }
                 
             }
             
@@ -470,6 +484,17 @@
         [self.commuteNameTextField setText:[self.commute valueForKey:@"name"]];
         //To do: set the location
         
+        //Set sendAlertSwitch to correct status
+        self.sendAlert = [[self.commute valueForKey:@"sendAlert"] boolValue];
+        
+        if (self.sendAlert == NO) {
+            _sendAlertSwitch.on = NO;
+        }
+        
+        else {
+        
+        _sendAlertSwitch.on = YES;
+        }
     }
     
     
