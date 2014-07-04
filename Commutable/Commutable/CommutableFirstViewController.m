@@ -8,6 +8,7 @@
 
 #import "CommutableFirstViewController.h"
 #import "MDDirectionService.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface CommutableFirstViewController () <GMSMapViewDelegate>
 @property (strong, nonatomic) NSMutableArray *waypoints;
@@ -20,6 +21,15 @@
 }
 @synthesize mapView;
 @synthesize directionsText;
+
+- (void)loadView
+{
+    [super loadView];
+    
+    // create the label view with rounded edges
+    self.directionsText.layer.cornerRadius = 4;
+    
+}
 
 - (void)viewDidLoad
 {
@@ -41,6 +51,9 @@
     mapView.settings.compassButton = YES;
     mapView.settings.myLocationButton = YES;
     mapView.trafficEnabled = YES;
+    
+    // might not need this, just experimenting with shaping the map
+    mapView.layer.cornerRadius = 4;
     
     [self.view addSubview:mapView];
     

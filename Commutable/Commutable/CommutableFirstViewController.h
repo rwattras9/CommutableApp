@@ -16,4 +16,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *directionsText;
 
+@property (weak, nonatomic) IBOutlet UIButton *right_arrow;
+@property (weak, nonatomic) IBOutlet UIButton *left_arrow;
+
 @end
