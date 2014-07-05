@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="8YX-ce-x5E">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="8YX-ce-x5E">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -117,7 +117,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
-                            <tableViewSection headerTitle="Commute Name" id="nFC-Lj-dcV">
+                            <tableViewSection headerTitle="Name Your Commute" id="nFC-Lj-dcV">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Mbj-JC-vcK">
                                         <rect key="frame" x="0.0" y="119" width="320" height="44"/>
@@ -140,7 +140,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Starting Location" id="yn8-St-o0B">
+                            <tableViewSection headerTitle="Set the Starting Point" id="yn8-St-o0B">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="CGX-rB-6CT">
                                         <rect key="frame" x="0.0" y="211" width="320" height="44"/>
@@ -216,7 +216,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Destination Location" id="Mhs-M7-tze">
+                            <tableViewSection headerTitle="Set the Destination" id="Mhs-M7-tze">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="mqw-6B-oPh">
                                         <rect key="frame" x="0.0" y="563" width="320" height="44"/>
@@ -225,7 +225,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Destination Location" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xwc-Aq-1Xe">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Destination" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xwc-Aq-1Xe">
                                                     <rect key="frame" x="20" y="11" width="160" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -291,7 +291,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Alert Time" id="295-GU-LD3">
+                            <tableViewSection headerTitle="When would you like your report?" id="295-GU-LD3">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="IKK-7u-2mM">
                                         <rect key="frame" x="0.0" y="915" width="320" height="44"/>
@@ -387,7 +387,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                             <segue destination="2DB-Or-tuP" kind="push" identifier="recurrenceEditor" id="Rsf-aw-3TT"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Rbk-B6-9a6">
+                                    <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Rbk-B6-9a6">
                                         <rect key="frame" x="0.0" y="1219" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Rbk-B6-9a6" id="ZLv-OZ-0Cb">
@@ -440,12 +440,16 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="commuteNameTextField" destination="eY2-ex-0i3" id="gFC-Mo-sY5"/>
                         <outlet property="destinationLocationCell" destination="mqw-6B-oPh" id="1KC-7U-4U2"/>
                         <outlet property="destinationLocationLabel" destination="Xwc-Aq-1Xe" id="uaI-D6-bRE"/>
+                        <outlet property="destinationTapToChooseLabel" destination="3TK-eb-lpf" id="ChX-8m-pKJ"/>
+                        <outlet property="editDestinationLocationButton" destination="sex-zR-Pzr" id="PQl-1i-3YX"/>
+                        <outlet property="editStartingLocationButton" destination="sx9-iH-DLc" id="sPx-C4-4VK"/>
                         <outlet property="existingDestinationLocationsPicker" destination="ax6-Xo-wUt" id="OKG-8O-Zeq"/>
                         <outlet property="existingStartingLocationsPicker" destination="u1I-Km-HHc" id="VxW-r0-4Fw"/>
                         <outlet property="recurrenceLabel" destination="9dR-Wv-0sC" id="77I-eI-Aw2"/>
                         <outlet property="sendAlertSwitch" destination="hIE-vF-qhz" id="yTy-66-bCz"/>
                         <outlet property="startingLocationCell" destination="CGX-rB-6CT" id="WCE-ot-GJG"/>
                         <outlet property="startingLocationLabel" destination="DDR-j8-7D2" id="zUa-nB-57H"/>
+                        <outlet property="startingTapToChooseLabel" destination="clc-L0-uA9" id="Rz4-AK-IgI"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ruE-9Q-uFq" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -37,6 +37,12 @@
 @property (assign) BOOL datePickerIsShowing;
 @property (assign) BOOL startingLocationPickerIsShowing;
 @property (assign) BOOL destinationLocationPickerIsShowing;
+@property (strong, nonatomic) IBOutlet UIButton *editStartingLocationButton;
+@property (strong, nonatomic) IBOutlet UIButton *editDestinationLocationButton;
+@property (strong, nonatomic) IBOutlet UILabel *startingTapToChooseLabel;
+@property (strong, nonatomic) IBOutlet UILabel *destinationTapToChooseLabel;
+
+
 
 
 
@@ -302,6 +308,16 @@
     NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Location"];
     self.locationsArray = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
+    
+    //if the locationsArray is empty (no locations exist), hide the Edit Location button, set text to Please Add a Location
+    if (!self.locationsArray || !self.locationsArray.count){
+        self.editStartingLocationButton.hidden = YES;
+        self.editDestinationLocationButton.hidden = YES;
+        self.startingTapToChooseLabel.hidden = YES;
+        self.destinationTapToChooseLabel.hidden = YES;
+        self.startingLocationLabel.text = @"Add a Location";
+        self.destinationLocationLabel.text = @"Add a Location";
+    }
     
     [self.existingStartingLocationsPicker reloadAllComponents];
     [self.existingDestinationLocationsPicker reloadAllComponents];
