@@ -398,7 +398,7 @@
                     [[UIApplication sharedApplication] scheduleLocalNotification:commuteNotification];
                     }
                 else {
-                    [self.commute setValue:@YES forKey:@"sendAlert"];
+                    [self.commute setValue:@NO forKey:@"sendAlert"];
                 }
                 
             } else {
