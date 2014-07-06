@@ -127,7 +127,7 @@
             }_recurranceDays = cellsWithCheckMarks;
             NSLog(@"The recurranceDays are %@", _recurranceDays);
         }
-        //}
+        
     }
     
     

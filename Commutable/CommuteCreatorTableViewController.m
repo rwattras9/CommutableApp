@@ -334,10 +334,34 @@
     RepeatScheduleTableViewController *source = [segue sourceViewController];
     self.recurrenceScheduleArray = source.recurranceDays;
     if (_recurrenceScheduleArray != nil) {
+        
         //TO DO: update recurrence label
-        //for (NSInteger *intDayOfWeek in _recurrenceScheduleArray) {
-        //NSLog(@"The commute items are", intDayOfWeek);
-        //}
+        for (id dayOfTheWeek in _recurrenceScheduleArray) {
+        NSLog(@"The day is %@", dayOfTheWeek);
+            /*if (dayOfTheWeek == 0){
+                //Sunday
+            }
+            else if (dayOfTheWeek == 1) {
+                //Monday
+            }
+            else if (dayOfTheWeek == 2) {
+                //Tuesday
+            }
+            
+            else if (dayOfTheWeek == 3) {
+                //Wednesday
+            }
+            else if (dayOfTheWeek == 4) {
+                //Thursday
+            }
+            else if (dayOfTheWeek == 5) {
+                //Friday
+            }
+            else if (dayOfTheWeek == 6) {
+                //Saturday
+            }*/
+            
+        }
         //TO DO: Add recurrence schedule array to Commute Properties somehow or something
     }
     
