@@ -28,11 +28,13 @@ static NSString *kMDDirectionsURL = @"http://maps.googleapis.com/maps/api/direct
 {
     //NSArray *waypoints = query[@"waypoints"]; // grab the waypoint coords from the query argument (called from CommutableFirstViewController.m
     NSString *origin = query[@"origin"]; // get the route origin from the parameters
+    NSString *originZip = query[@"originZip"];
     NSString *destination = query[@"destination"]; // grab the destination from the parameters
+    NSString *destZip = query[@"destZip"];
     NSString *sensor = query[@"sensor"]; // get sensor info from the query. sensor is used to tell Google Maps you're using a 'sensor' to locate the user. fine to be false.
     NSMutableString *url =
-    [NSMutableString stringWithFormat:@"%@&origin=%@&destination=%@&sensor=%@",
-            kMDDirectionsURL, origin, destination, sensor]; // start building the url with the origin, destination, and sensor info extracted from the query
+    [NSMutableString stringWithFormat:@"%@&origin=%@, %@&destination=%@, %@&sensor=%@",
+            kMDDirectionsURL, origin, originZip, destination, destZip, sensor]; // start building the url with the origin, destination, and sensor info extracted from the query
     
 
     url = [[url

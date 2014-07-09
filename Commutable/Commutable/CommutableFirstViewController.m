@@ -27,13 +27,22 @@
     [super loadView];
     
     // create the label view with rounded edges
-    self.directionsText.layer.cornerRadius = 4;
+    //self.directionsText.layer.cornerRadius = 4;
+    NSLog(@"test");
     
+}
+
+- (void) viewDidAppear:(BOOL)animated
+{
+    NSLog(@"test3");
+    [self fetch];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    NSLog(@"test2");
 	
     self.waypoints = [NSMutableArray array];
     self.waypointStrings = [NSMutableArray array];
@@ -44,7 +53,7 @@
     
     
     
-    mapView = [GMSMapView mapWithFrame:CGRectMake(23, 27, 275, 350) camera:camera];
+    mapView = [GMSMapView mapWithFrame:CGRectMake(0, 27, 320, 370) camera:camera];
     mapView.myLocationEnabled = YES;
     mapView.settings.scrollGestures = YES;
     mapView.settings.zoomGestures = YES;
@@ -53,20 +62,44 @@
     mapView.trafficEnabled = YES;
     
     // might not need this, just experimenting with shaping the map
-    mapView.layer.cornerRadius = 4;
+    //mapView.layer.cornerRadius = 4;
     
     [self.view addSubview:mapView];
     
     
-    [self beginQuery];
     
-    /*
-    [mapView addObserver:self
-              forKeyPath:@"myLocation"
-                 options:NSKeyValueObservingOptionNew
-                 context:NULL];
-     */
+    [self fetch];
     
+    
+    
+}
+
+-(void)fetch
+{
+    // Fetch the devices from persistent data store
+    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Commute"];
+    self.commuteArray = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
+    
+    if (self.commuteArray.count == 0) {
+        [mapView addObserver:self
+                  forKeyPath:@"myLocation"
+                     options:NSKeyValueObservingOptionNew
+                     context:NULL];
+        
+        self.directionsText.text = @"Showing current location\nSet a route!";
+    }
+    else if (self.commuteArray.count > 0){
+        
+        NSManagedObject *commute = [self.commuteArray objectAtIndex:0];
+        
+        NSString *origin = [commute valueForKey:@"startingAddress"];
+        NSString *originZip = [commute valueForKey:@"startingZip"];
+        NSString *destination = [commute valueForKey:@"destinationAddress"];
+        NSString *destZip = [commute valueForKey:@"destinationZip"];
+        
+        [self setOrigin:origin setOriginZip:originZip setDestination:destination setDestZip:destZip];
+    }
 }
 
 - (NSManagedObjectContext *)managedObjectContext
@@ -99,11 +132,13 @@
 }
 
 
-- (void) beginQuery
+- (void) setOrigin:(NSString*)origin setOriginZip:(NSString*)originZip setDestination:(NSString*)destination setDestZip:(NSString*)destZip
 {
     NSDictionary *query = @{ @"sensor" : @"false",
-                             @"origin" : @"303 N Hamilton St 53703",
-                             @"destination" : @"5301 tokay blvd 53701"};
+                             @"origin" : origin,
+                             @"originZip" : originZip,
+                             @"destination" : destination,
+                             @"destZip" : destZip};
     MDDirectionService *mds = [[MDDirectionService alloc] init];
     SEL selector = @selector(addDirections:);
     [mds setDirectionsQuery:query
