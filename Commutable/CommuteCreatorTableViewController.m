@@ -41,6 +41,8 @@
 @property (strong, nonatomic) IBOutlet UIButton *editDestinationLocationButton;
 @property (strong, nonatomic) IBOutlet UILabel *startingTapToChooseLabel;
 @property (strong, nonatomic) IBOutlet UILabel *destinationTapToChooseLabel;
+@property (assign) BOOL startingLocationPickerWasUsed;
+@property (assign) BOOL destinationLocationPickerWasUsed;
 
 
 
@@ -409,16 +411,34 @@
             NSManagedObjectContext *context = [self managedObjectContext];
             //update a Commute if the commute exists
             if (self.commute){
+                
                 //update name
                 [self.commute setValue:self.commuteNameTextField.text forKey:@"name"];
-                //update starting address
-                [self.commute setValue:[[self.locationsArray objectAtIndex:[_existingStartingLocationsPicker selectedRowInComponent:0]] valueForKey:@"address"] forKey:@"startingAddress"];
-                //update starting zip
-                [self.commute setValue:self.commuteItem.commuteStartingZipCode = [[self.locationsArray objectAtIndex:[_existingStartingLocationsPicker selectedRowInComponent:0]] valueForKey:@"zipCode"] forKey:@"startingZip"];
-                //update destination address
-                [self.commute setValue:[[self.locationsArray objectAtIndex:[_existingDestinationLocationsPicker selectedRowInComponent:0]] valueForKey:@"address"] forKey:@"destinationAddress"];
-                //update destination zip
-                [self.commute setValue:self.commuteItem.commuteDestinationZipCode = [[self.locationsArray objectAtIndex:[_existingDestinationLocationsPicker selectedRowInComponent:0]] valueForKey:@"zipCode"] forKey:@"destinationZip"];
+                
+                //if the starting location has been updated, then update in Core Data.
+                if (self.startingLocationPickerWasUsed == YES){
+                    //update starting location name
+                    [self.commute setValue:self.startingLocationLabel.text forKey:@"startingLocationName"];
+                    
+                    //update starting address
+                    [self.commute setValue:[[self.locationsArray objectAtIndex:[_existingStartingLocationsPicker selectedRowInComponent:0]] valueForKey:@"address"] forKey:@"startingAddress"];
+                    //update starting zip
+                    [self.commute setValue:self.commuteItem.commuteStartingZipCode = [[self.locationsArray objectAtIndex:[_existingStartingLocationsPicker selectedRowInComponent:0]] valueForKey:@"zipCode"] forKey:@"startingZip"];
+                    
+                }
+                
+                //if the destination location has been updated, then update in Core Data.
+                if (self.destinationLocationPickerWasUsed == YES) {
+                    //update the destination location name
+                    [self.commute setValue:self.destinationLocationLabel.text forKey:@"destinationLocationName"];
+                    
+                    //update destination address
+                    [self.commute setValue:[[self.locationsArray objectAtIndex:[_existingDestinationLocationsPicker selectedRowInComponent:0]] valueForKey:@"address"] forKey:@"destinationAddress"];
+                    //update destination zip
+                    [self.commute setValue:self.commuteItem.commuteDestinationZipCode = [[self.locationsArray objectAtIndex:[_existingDestinationLocationsPicker selectedRowInComponent:0]] valueForKey:@"zipCode"] forKey:@"destinationZip"];
+                    
+                }
+                
                 //To do: Update Schedule
                 [self.commute setValue:self.alertTime forKey:@"alertTime"];
                 
@@ -451,12 +471,18 @@
                 //Set Commute Name
                 [newCommute setValue:self.self.commuteNameTextField.text forKey:@"name"];
                 
+                //Set the Starting Location Name
+                [newCommute setValue:[[self.locationsArray objectAtIndex:[_existingStartingLocationsPicker selectedRowInComponent:0]] valueForKey:@"name"] forKey:@"startingLocationName"];
+                
                 //Set Starting Address
                 [newCommute setValue:[[self.locationsArray objectAtIndex:[_existingStartingLocationsPicker selectedRowInComponent:0]] valueForKey:@"address"] forKey:@"startingAddress"];
                 NSLog(@"The value of commuteStartingAddress is %@", [newCommute valueForKey:@"startingAddress"]);
                 
                 //Set Starting Zip
                 [newCommute setValue:self.commuteItem.commuteStartingZipCode = [[self.locationsArray objectAtIndex:[_existingStartingLocationsPicker selectedRowInComponent:0]] valueForKey:@"zipCode"] forKey:@"startingZip"];
+                
+                //Set Destination Location Name
+                [newCommute setValue:[[self.locationsArray objectAtIndex:[_existingDestinationLocationsPicker selectedRowInComponent:0]] valueForKey:@"name"] forKey:@"destinationLocationName"];
                 
                 //Set Destination Address
                 [newCommute setValue:[[self.locationsArray objectAtIndex:[_existingDestinationLocationsPicker selectedRowInComponent:0]] valueForKey:@"address"] forKey:@"destinationAddress"];
@@ -518,11 +544,16 @@
     // Do any additional setup after loading the view.
     self.locationsArray = [[NSMutableArray alloc] init];
     
+    self.startingLocationPickerWasUsed = NO;
+    self.destinationLocationPickerWasUsed = NO;
+    
     //populate fields with commute properties from the prepareForSegue in CommutesTableViewController
     if (self.commute){
         //populate commuteNameTextField with value of selected commute from Commutes Table
         [self.commuteNameTextField setText:[self.commute valueForKey:@"name"]];
-        //To do: set the location
+        //Set the locations
+        [self.startingLocationLabel setText:[self.commute valueForKey:@"startingLocationName"]];
+        [self.destinationLocationLabel setText:[self.commute valueForKey:@"destinationLocationName"]];
         
         //Set sendAlertSwitch to correct status
         self.sendAlert = [[self.commute valueForKey:@"sendAlert"] boolValue];
@@ -535,6 +566,7 @@
         
         _sendAlertSwitch.on = YES;
         }
+        
     }
     
     
@@ -575,10 +607,14 @@
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
     if (pickerView == self.existingStartingLocationsPicker){
         _startingLocationLabel.text = [[self.locationsArray objectAtIndex:[_existingStartingLocationsPicker selectedRowInComponent:0]] valueForKey:@"name"];
+        //a value was selected
+        self.startingLocationPickerWasUsed = YES;
     }
     else if (pickerView == self.existingDestinationLocationsPicker){
         NSLog(@"The destination location row is %ld", (long)row);
         _destinationLocationLabel.text = [[self.locationsArray objectAtIndex:[_existingDestinationLocationsPicker selectedRowInComponent:0]] valueForKey:@"name"];
+        //a value was selected
+        self.destinationLocationPickerWasUsed = YES;
     }
     
 }

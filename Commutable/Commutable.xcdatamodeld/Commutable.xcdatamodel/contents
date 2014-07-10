@@ -3,10 +3,12 @@
     <entity name="Commute" syncable="YES">
         <attribute name="alertTime" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="destinationAddress" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="destinationLocationName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="destinationZip" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sendAlert" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="startingAddress" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="startingLocationName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="startingZip" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Location" syncable="YES">
@@ -15,7 +17,7 @@
         <attribute name="zipCode" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Commute" positionX="-63" positionY="-18" width="128" height="150"/>
+        <element name="Commute" positionX="-63" positionY="-18" width="128" height="180"/>
         <element name="Location" positionX="196" positionY="-0" width="128" height="90"/>
     </elements>
 </model>
