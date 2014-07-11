@@ -51,8 +51,6 @@
                                                             longitude:-89.4000
                                                                  zoom:1];
     
-    
-    
     mapView = [GMSMapView mapWithFrame:CGRectMake(0, 27, 320, 370) camera:camera];
     mapView.myLocationEnabled = YES;
     mapView.settings.scrollGestures = YES;
@@ -71,8 +69,12 @@
     [self fetch];
     
     
+    [self addSwipe];
     
 }
+
+
+
 
 -(void)fetch
 {
@@ -102,6 +104,44 @@
     }
 }
 
+
+
+
+
+- (void)addSwipe
+{
+    // Add swipeGestures
+    [self.directionsText setUserInteractionEnabled:YES];
+    
+    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(oneFingerSwipeLeft:)];
+    swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
+    swipeLeft.numberOfTouchesRequired = 1;
+    [self.directionsText addGestureRecognizer:swipeLeft];
+    
+    UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(oneFingerSwipeRight:)];
+    swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
+    swipeRight.numberOfTouchesRequired = 1;
+    [self.directionsText addGestureRecognizer:swipeRight];
+    
+}
+
+
+
+
+- (void)oneFingerSwipeLeft:(UITapGestureRecognizer *)recognizer {
+    // Insert your own code to handle swipe left
+    NSLog(@"I swiped left");
+}
+
+- (void)oneFingerSwipeRight:(UITapGestureRecognizer *)recognizer {
+    // Insert your own code to handle swipe right
+    NSLog(@"I swiped right");
+}
+
+
+
+
+
 - (NSManagedObjectContext *)managedObjectContext
 {
     NSManagedObjectContext *context = nil;
@@ -111,6 +151,11 @@
     }
     return context;
 }
+
+
+
+
+
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
                       ofObject:(id)object
@@ -125,11 +170,21 @@
     }
 }
 
+
+
+
+
 - (void)dealloc {
     [mapView removeObserver:self
                  forKeyPath:@"myLocation"
                     context:NULL];
 }
+
+
+
+
+
+
 
 
 - (void) setOrigin:(NSString*)origin setOriginZip:(NSString*)originZip setDestination:(NSString*)destination setDestZip:(NSString*)destZip
@@ -145,6 +200,11 @@
                withSelector:selector
                withDelegate:self];
 }
+
+
+
+
+
 
 
 // method that reads the route info from the JSON output of the directions API query, then draws the polyline info on the map
@@ -207,6 +267,7 @@
     NSString *dirText = [NSString stringWithFormat:@"Take %@. Distance = %@, Duration = %@", routes[@"summary"], distanceText, durationText];
     self.directionsText.text = dirText;
 }
+
 
 
 
