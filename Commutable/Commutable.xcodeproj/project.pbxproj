@@ -40,9 +40,6 @@
 		2CE53F2018F991AF005BCEC9 /* CommutesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CE53F1F18F991AF005BCEC9 /* CommutesTableViewController.m */; };
 		2CE53F2318F9921D005BCEC9 /* CommutesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CE53F2218F9921D005BCEC9 /* CommutesTableViewCell.m */; };
 		2CF4DA8A19169A3C003762D3 /* LocationItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CF4DA8919169A3C003762D3 /* LocationItem.m */; };
-		790DA2231920C4D10011C2DE /* map.html in Resources */ = {isa = PBXBuildFile; fileRef = 790DA2221920C4D10011C2DE /* map.html */; };
-		797301E4196744820061B7F0 /* left_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 797301E2196744820061B7F0 /* left_arrow.png */; };
-		797301E5196744820061B7F0 /* right_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 797301E3196744820061B7F0 /* right_arrow.png */; };
 		797883021943E0C9006AD6FD /* MDDirectionService.m in Sources */ = {isa = PBXBuildFile; fileRef = 797883011943E0C8006AD6FD /* MDDirectionService.m */; };
 		79AB6D051910997C0013E1D6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79AB6D041910997C0013E1D6 /* AVFoundation.framework */; };
 		79AB6D07191099830013E1D6 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79AB6D06191099830013E1D6 /* CoreData.framework */; };
@@ -116,9 +113,6 @@
 		2CE53F2218F9921D005BCEC9 /* CommutesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommutesTableViewCell.m; sourceTree = "<group>"; };
 		2CF4DA8819169A3C003762D3 /* LocationItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationItem.h; sourceTree = "<group>"; };
 		2CF4DA8919169A3C003762D3 /* LocationItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationItem.m; sourceTree = "<group>"; };
-		790DA2221920C4D10011C2DE /* map.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = map.html; sourceTree = "<group>"; };
-		797301E2196744820061B7F0 /* left_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = left_arrow.png; sourceTree = "<group>"; };
-		797301E3196744820061B7F0 /* right_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = right_arrow.png; sourceTree = "<group>"; };
 		797883001943E0C8006AD6FD /* MDDirectionService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDDirectionService.h; sourceTree = "<group>"; };
 		797883011943E0C8006AD6FD /* MDDirectionService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDDirectionService.m; sourceTree = "<group>"; };
 		79AB6D041910997C0013E1D6 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -245,7 +239,6 @@
 				2C2F1008193D563200D24F4D /* RepeatScheduleTableViewController.m */,
 				2CE53F0118F98C43005BCEC9 /* Images.xcassets */,
 				2CE53EED18F98C43005BCEC9 /* Supporting Files */,
-				790DA2221920C4D10011C2DE /* map.html */,
 			);
 			path = Commutable;
 			sourceTree = "<group>";
@@ -253,8 +246,6 @@
 		2CE53EED18F98C43005BCEC9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				797301E2196744820061B7F0 /* left_arrow.png */,
-				797301E3196744820061B7F0 /* right_arrow.png */,
 				2C6E3B8D19564797005FCB02 /* Car and Menu Icon 50px.png */,
 				2C6E3B8E19564797005FCB02 /* Car and Menu Icon 100px.png */,
 				2C5B0001193A929D00A229EA /* Commutes Tab Car Icon 50px.png */,
@@ -369,16 +360,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				797301E4196744820061B7F0 /* left_arrow.png in Resources */,
 				2C19EE4D193A810A00745780 /* Commutable Logo 58px.png in Resources */,
-				797301E5196744820061B7F0 /* right_arrow.png in Resources */,
 				2C19EE4F193A810A00745780 /* Commutable Logo 120px.png in Resources */,
 				2CE53F0218F98C43005BCEC9 /* Images.xcassets in Resources */,
 				2C0BC58F18FA0BB600CF12F7 /* Car Icon v2 Gradient without Windows 120x120.png in Resources */,
 				2C0BC58918FA0AE700CF12F7 /* Car Icon v2 Gradient Transparent Windows.png in Resources */,
 				2C0BC58B18FA0B9A00CF12F7 /* Car Icon v2 Gradient without Windows 58x58.png in Resources */,
 				2C5B0002193A929D00A229EA /* Commutes Tab Car Icon 50px.png in Resources */,
-				790DA2231920C4D10011C2DE /* map.html in Resources */,
 				2C19EE4E193A810A00745780 /* Commutable Logo 80px.png in Resources */,
 				2C6E3B8F19564797005FCB02 /* Car and Menu Icon 50px.png in Resources */,
 				2C0BC58D18FA0BAD00CF12F7 /* Car Icon v2 Gradient without Windows 80x80.png in Resources */,

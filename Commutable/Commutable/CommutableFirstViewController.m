@@ -22,22 +22,16 @@
 @synthesize mapView;
 @synthesize directionsText;
 
-- (void)loadView
-{
-    [super loadView];
-    
-    // create the label view with rounded edges
-    //self.directionsText.layer.cornerRadius = 4;
-    NSLog(@"test");
-    
-}
 
+// called after the view appears (after it loads, or after the tab is clicked)
 - (void) viewDidAppear:(BOOL)animated
 {
     NSLog(@"test3");
     [self fetch];
 }
 
+
+// called when the view loads
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -59,12 +53,8 @@
     mapView.settings.myLocationButton = YES;
     mapView.trafficEnabled = YES;
     
-    // might not need this, just experimenting with shaping the map
-    //mapView.layer.cornerRadius = 4;
-    
     [self.view addSubview:mapView];
-    
-    
+
     
     [self fetch];
     
@@ -75,10 +65,10 @@
 
 
 
-
+// check the commute info in the data store, and update the directions text appropriately
 -(void)fetch
 {
-    // Fetch the devices from persistent data store
+    // Fetch the commute info from persistent data store
     NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Commute"];
     self.commuteArray = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
@@ -107,7 +97,7 @@
 
 
 
-
+// directions text uilabel accepts left and right swiping motions
 - (void)addSwipe
 {
     // Add swipeGestures
@@ -125,9 +115,6 @@
     
 }
 
-
-
-
 - (void)oneFingerSwipeLeft:(UITapGestureRecognizer *)recognizer {
     // Insert your own code to handle swipe left
     NSLog(@"I swiped left");
@@ -141,7 +128,7 @@
 
 
 
-
+// creates context for accessing data store
 - (NSManagedObjectContext *)managedObjectContext
 {
     NSManagedObjectContext *context = nil;
@@ -156,7 +143,7 @@
 
 
 
-
+// something to do with setting the camera to the user's location..?
 - (void)observeValueForKeyPath:(NSString *)keyPath
                       ofObject:(id)object
                         change:(NSDictionary *)change
@@ -186,7 +173,7 @@
 
 
 
-
+// method for creating the query from the data store info
 - (void) setOrigin:(NSString*)origin setOriginZip:(NSString*)originZip setDestination:(NSString*)destination setDestZip:(NSString*)destZip
 {
     NSDictionary *query = @{ @"sensor" : @"false",
