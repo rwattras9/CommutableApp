@@ -313,8 +313,9 @@
     
     //if the locationsArray is empty (no locations exist), hide the Edit Location button, set text to Please Add a Location
     if (!self.locationsArray || !self.locationsArray.count){
-        self.editStartingLocationButton.hidden = YES;
-        self.editDestinationLocationButton.hidden = YES;
+        //moved the below to ViewDidLoad
+        //self.editStartingLocationButton.hidden = YES;
+        //self.editDestinationLocationButton.hidden = YES;
         self.startingTapToChooseLabel.hidden = YES;
         self.destinationTapToChooseLabel.hidden = YES;
         self.startingLocationLabel.text = @"Add a Location";
@@ -547,6 +548,9 @@
     self.startingLocationPickerWasUsed = NO;
     self.destinationLocationPickerWasUsed = NO;
     
+    self.editStartingLocationButton.hidden = YES;
+    self.editDestinationLocationButton.hidden = YES;
+    
     //populate fields with commute properties from the prepareForSegue in CommutesTableViewController
     if (self.commute){
         //populate commuteNameTextField with value of selected commute from Commutes Table
@@ -609,12 +613,16 @@
         _startingLocationLabel.text = [[self.locationsArray objectAtIndex:[_existingStartingLocationsPicker selectedRowInComponent:0]] valueForKey:@"name"];
         //a value was selected
         self.startingLocationPickerWasUsed = YES;
+        //if an item is selected, show the edit button
+        self.editStartingLocationButton.hidden = NO;
     }
     else if (pickerView == self.existingDestinationLocationsPicker){
         NSLog(@"The destination location row is %ld", (long)row);
         _destinationLocationLabel.text = [[self.locationsArray objectAtIndex:[_existingDestinationLocationsPicker selectedRowInComponent:0]] valueForKey:@"name"];
         //a value was selected
         self.destinationLocationPickerWasUsed = YES;
+        //if an item is selected, show the edit button
+        self.editStartingLocationButton.hidden = NO;
     }
     
 }
