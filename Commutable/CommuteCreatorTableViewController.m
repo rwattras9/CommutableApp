@@ -62,8 +62,25 @@
     [sender resignFirstResponder];
 }
 
+/*Need to subclass UITableView to make this work
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    
+    UITouch *touch = [[event allTouches] anyObject];
+    NSLog(@"The keyboard should be going away now");
+    if ([_commuteNameTextField isFirstResponder] && [touch view] != _commuteNameTextField ) {
+        
+        [_commuteNameTextField resignFirstResponder];
+    }
+    [super touchesBegan:touches withEvent:event];
+}*/
 
+//Only works for tap gestures.
+- (void)handleTap:(UITapGestureRecognizer *)recognizer
+{
+    // your code goes here...
+    [_commuteNameTextField resignFirstResponder];
 
+}
 
 //Get the time selected from the UIDatePicker
 
@@ -573,6 +590,8 @@
         
     }
     
+    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+    [self.view addGestureRecognizer:tap];
     
     //[self loadInitialData];
     
@@ -622,7 +641,7 @@
         //a value was selected
         self.destinationLocationPickerWasUsed = YES;
         //if an item is selected, show the edit button
-        self.editStartingLocationButton.hidden = NO;
+        self.editDestinationLocationButton.hidden = NO;
     }
     
 }
