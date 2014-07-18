@@ -14,7 +14,8 @@
 //@property (weak, nonatomic) IBOutlet GMSMapView *mapView;
 @property (strong, nonatomic) IBOutlet GMSMapView *mapView;
 
-@property (weak, nonatomic) IBOutlet UILabel *directionsText;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 
 @property (nonatomic, strong) NSMutableArray *commuteArray;
 

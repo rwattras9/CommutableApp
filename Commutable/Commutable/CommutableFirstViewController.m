@@ -17,10 +17,13 @@
 
 @implementation CommutableFirstViewController{
     BOOL firstLocationUpdate_;
+    NSMutableArray *textArray;
+    int *dirCount;
     
 }
 @synthesize mapView;
-@synthesize directionsText;
+@synthesize scrollView;
+@synthesize pageControl;
 
 
 // called after the view appears (after it loads, or after the tab is clicked)
@@ -59,7 +62,6 @@
     [self fetch];
     
     
-    [self addSwipe];
     
 }
 
@@ -73,56 +75,65 @@
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Commute"];
     self.commuteArray = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
     
+    dirCount = 0;
+    
+    self.pageControl.numberOfPages = self.commuteArray.count;
+    
     if (self.commuteArray.count == 0) {
         [mapView addObserver:self
                   forKeyPath:@"myLocation"
                      options:NSKeyValueObservingOptionNew
                      context:NULL];
         
-        self.directionsText.text = @"Showing current location\nSet a route!";
+        // show some text like "Showing current location"?
     }
     else if (self.commuteArray.count > 0){
         
-        NSManagedObject *commute = [self.commuteArray objectAtIndex:0];
+        for (int i=0; i < self.commuteArray.count; i++){
+            //dirCount = &i;
+            
+            CGRect frame;
+            frame.origin.x = self.scrollView.frame.size.width * i;
+            frame.origin.y = self.scrollView.frame.origin.y;
+            frame.size = self.scrollView.frame.size;
+            
+            UILabel *label = [[UILabel alloc] initWithFrame:frame];
+            //[textArray addObject:label];
+            /*
+            NSManagedObject *commute = [self.commuteArray objectAtIndex:i];
+            
+            NSString *origin = [commute valueForKey:@"startingAddress"];
+            NSString *originZip = [commute valueForKey:@"startingZip"];
+            NSString *destination = [commute valueForKey:@"destinationAddress"];
+            NSString *destZip = [commute valueForKey:@"destinationZip"];
+            
+            [self setOrigin:origin setOriginZip:originZip setDestination:destination setDestZip:destZip];
+            */
+            
+            //label.text = [NSString stringWithFormat:@"test%d", i];
+            
+            self.scrollView.contentSize = CGSizeMake(self.scrollView.contentSize.width, label.frame.size.height);
+            
+            [label setText:@"testing"];
+            
+            [self.scrollView addSubview:label];
+        }
         
-        NSString *origin = [commute valueForKey:@"startingAddress"];
-        NSString *originZip = [commute valueForKey:@"startingZip"];
-        NSString *destination = [commute valueForKey:@"destinationAddress"];
-        NSString *destZip = [commute valueForKey:@"destinationZip"];
         
-        [self setOrigin:origin setOriginZip:originZip setDestination:destination setDestZip:destZip];
+        self.scrollView.contentSize = CGSizeMake(scrollView.frame.size.width * [self.commuteArray count], scrollView.frame.size.height);
+        
     }
 }
 
 
 
-
-// directions text uilabel accepts left and right swiping motions
-- (void)addSwipe
+// page control/scrolling funcitonality
+- (void)scrollViewDidScroll:(UIScrollView *)sender
 {
-    // Add swipeGestures
-    [self.directionsText setUserInteractionEnabled:YES];
-    
-    UISwipeGestureRecognizer *swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(oneFingerSwipeLeft:)];
-    swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
-    swipeLeft.numberOfTouchesRequired = 1;
-    [self.directionsText addGestureRecognizer:swipeLeft];
-    
-    UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(oneFingerSwipeRight:)];
-    swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
-    swipeRight.numberOfTouchesRequired = 1;
-    [self.directionsText addGestureRecognizer:swipeRight];
-    
-}
-
-- (void)oneFingerSwipeLeft:(UITapGestureRecognizer *)recognizer {
-    // Insert your own code to handle swipe left
-    NSLog(@"I swiped left");
-}
-
-- (void)oneFingerSwipeRight:(UITapGestureRecognizer *)recognizer {
-    // Insert your own code to handle swipe right
-    NSLog(@"I swiped right");
+    // Update the page when more than 50% of the previous/next page is visible
+    CGFloat pageWidth = self.scrollView.frame.size.width;
+    int page = floor((self.scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
+    self.pageControl.currentPage = page;
 }
 
 
@@ -252,7 +263,9 @@
     [mapView moveCamera:update];
     
     NSString *dirText = [NSString stringWithFormat:@"Take %@. Distance = %@, Duration = %@", routes[@"summary"], distanceText, durationText];
-    self.directionsText.text = dirText;
+    //UILabel *tempLabel = [textArray objectAtIndex:(int)dirCount];
+    //tempLabel.text = dirText;
+    //self.directionsText.text = dirText;
 }
 
 
