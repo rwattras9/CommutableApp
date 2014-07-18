@@ -74,13 +74,13 @@
     [super touchesBegan:touches withEvent:event];
 }*/
 
-//Only works for tap gestures.
-- (void)handleTap:(UITapGestureRecognizer *)recognizer
+//Only works for tap gestures. Except it doesn't, because it makes all other taps fail
+/*- (void)handleTap:(UITapGestureRecognizer *)recognizer
 {
     // your code goes here...
     [_commuteNameTextField resignFirstResponder];
 
-}
+}*/
 
 //Get the time selected from the UIDatePicker
 
@@ -355,34 +355,39 @@
     self.recurrenceScheduleArray = source.recurranceDays;
     if (_recurrenceScheduleArray != nil) {
         
+        NSMutableArray *weekdayArray = [[NSMutableArray alloc] init];
         //TO DO: update recurrence label
         for (id dayOfTheWeek in _recurrenceScheduleArray) {
         NSLog(@"The day is %@", dayOfTheWeek);
-            /*if (dayOfTheWeek == 0){
-                //Sunday
+            if (dayOfTheWeek == 0){
+                [weekdayArray addObject:@"Sun"];
             }
-            else if (dayOfTheWeek == 1) {
-                //Monday
+            else if ([dayOfTheWeek integerValue] == 1) {
+                [weekdayArray addObject:@"Mon"];
             }
-            else if (dayOfTheWeek == 2) {
-                //Tuesday
+            else if ([dayOfTheWeek integerValue] == 2) {
+                [weekdayArray addObject:@"Tues"];
             }
             
-            else if (dayOfTheWeek == 3) {
-                //Wednesday
+            else if ([dayOfTheWeek integerValue] == 3) {
+                [weekdayArray addObject:@"Wed"];
             }
-            else if (dayOfTheWeek == 4) {
-                //Thursday
+            else if ([dayOfTheWeek integerValue] == 4) {
+                [weekdayArray addObject:@"Thurs"];
             }
-            else if (dayOfTheWeek == 5) {
-                //Friday
+            else if ([dayOfTheWeek integerValue] == 5) {
+                [weekdayArray addObject:@"Fri"];
             }
-            else if (dayOfTheWeek == 6) {
-                //Saturday
-            }*/
+            else if ([dayOfTheWeek integerValue] == 6) {
+                [weekdayArray addObject:@"Sat"];
+            }
             
         }
         //TO DO: Add recurrence schedule array to Commute Properties somehow or something
+        NSLog(@"The weekdays are %@", weekdayArray);
+        NSString *weekdayString = [[weekdayArray valueForKey:@"description"] componentsJoinedByString:@" "];
+        
+        self.recurrenceLabel.text = weekdayString;
     }
     
 }
@@ -433,13 +438,18 @@
                 //update name
                 [self.commute setValue:self.commuteNameTextField.text forKey:@"name"];
                 
+                //update recurrence schedule
+                [self.commute setValue:self.recurrenceScheduleArray forKey:@"recurrenceDays"];
+                
                 //if the starting location has been updated, then update in Core Data.
                 if (self.startingLocationPickerWasUsed == YES){
+                    
                     //update starting location name
                     [self.commute setValue:self.startingLocationLabel.text forKey:@"startingLocationName"];
                     
                     //update starting address
                     [self.commute setValue:[[self.locationsArray objectAtIndex:[_existingStartingLocationsPicker selectedRowInComponent:0]] valueForKey:@"address"] forKey:@"startingAddress"];
+                    
                     //update starting zip
                     [self.commute setValue:self.commuteItem.commuteStartingZipCode = [[self.locationsArray objectAtIndex:[_existingStartingLocationsPicker selectedRowInComponent:0]] valueForKey:@"zipCode"] forKey:@"startingZip"];
                     
@@ -457,7 +467,6 @@
                     
                 }
                 
-                //To do: Update Schedule
                 [self.commute setValue:self.alertTime forKey:@"alertTime"];
                 
                 //create Local Notification for this commute. This should probably be in core data
@@ -512,6 +521,9 @@
                 //Set Alert Time
                 [newCommute setValue:self.alertTime forKey:@"alertTime"];
                 NSLog(@"The value of alertTime is %@", [newCommute valueForKey:@"alertTime"]);
+                
+                //Set recurrence days
+                [newCommute setValue:self.recurrenceScheduleArray forKey:@"recurrenceDays"];
                 
                 //If the sendAlert switch is on, create a local notification and store switch status in Core Data
                 if (_sendAlertSwitch.on == YES){
@@ -587,11 +599,12 @@
         
         _sendAlertSwitch.on = YES;
         }
+        self.recurrenceScheduleArray = [self.commute valueForKey:@"recurrenceDays"];
         
     }
     
-    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    [self.view addGestureRecognizer:tap];
+    /*UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+    [self.view addGestureRecognizer:tap];*/
     
     //[self loadInitialData];
     

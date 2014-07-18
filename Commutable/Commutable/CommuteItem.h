@@ -17,6 +17,7 @@
 @property NSString *commuteDestinationAddress;
 @property NSString *commuteDestinationZipCode;
 @property NSDate *alertTime;
+@property NSMutableArray *recurrenceDays;
 @property BOOL sendAlert;
 //Need to add a property for the alert schedule.
 
