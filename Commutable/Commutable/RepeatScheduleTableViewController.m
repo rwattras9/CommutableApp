@@ -33,6 +33,15 @@
 {
     [super viewDidLoad];
     
+    //upon loading, iterate through the recurrenceDays array and place checkmarks in the appropriate cells
+    /*if (self.recurranceDays){
+        for (id dayOfTheWeek in _recurranceDays) {
+            //Add or remove a checkmark
+            UITableViewCell *selectedCell = [UITableView cellForRowAtIndexPath:dayOfTheWeek];
+            selectedCell.accessoryType = UITableViewCellAccessoryCheckmark;
+        }
+    }*/
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     

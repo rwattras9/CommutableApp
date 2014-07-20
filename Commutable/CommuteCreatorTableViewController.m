@@ -44,7 +44,7 @@
 @property (assign) BOOL startingLocationPickerWasUsed;
 @property (assign) BOOL destinationLocationPickerWasUsed;
 
-
+- (NSString *)convertToWeekDayNames:(NSMutableArray*)recurrenceScheduleArray;
 
 
 
@@ -350,12 +350,60 @@
     
 }
 
+//Method to convert array of numbers into a string of weekdays for label
+- (NSString *)convertToWeekDayNames:(NSMutableArray*)recurrenceScheduleArray {
+    
+    //By default, the commute will never reccur, and the label should say that
+    NSString *weekdayString = @"Never";
+    
+    NSMutableArray *weekdayArray = [[NSMutableArray alloc] init];
+    
+    for (id dayOfTheWeek in _recurrenceScheduleArray) {
+        NSLog(@"The day is %@", dayOfTheWeek);
+        if (dayOfTheWeek == 0){
+            [weekdayArray addObject:@"Sun"];
+        }
+        else if ([dayOfTheWeek integerValue] == 1) {
+            [weekdayArray addObject:@"Mon"];
+        }
+        else if ([dayOfTheWeek integerValue] == 2) {
+            [weekdayArray addObject:@"Tues"];
+        }
+        
+        else if ([dayOfTheWeek integerValue] == 3) {
+            [weekdayArray addObject:@"Wed"];
+        }
+        else if ([dayOfTheWeek integerValue] == 4) {
+            [weekdayArray addObject:@"Thurs"];
+        }
+        else if ([dayOfTheWeek integerValue] == 5) {
+            [weekdayArray addObject:@"Fri"];
+        }
+        else if ([dayOfTheWeek integerValue] == 6) {
+            [weekdayArray addObject:@"Sat"];
+        }
+ 
+        NSLog(@"The weekdays are %@", weekdayArray);
+        
+        
+        //if array is empty, set weekdayString to "Never"
+        if (!weekdayArray || !weekdayArray.count){
+            weekdayString = @"Never";}
+        else {
+            weekdayString = [[weekdayArray valueForKey:@"description"] componentsJoinedByString:@" "];
+            
+        }
+        
+    }
+    return weekdayString;
+}
+
 - (IBAction)unwindFromRecurrenceToCommuteCreatorTable:(UIStoryboardSegue *)segue {
     RepeatScheduleTableViewController *source = [segue sourceViewController];
     self.recurrenceScheduleArray = source.recurranceDays;
     if (_recurrenceScheduleArray != nil) {
         
-        NSMutableArray *weekdayArray = [[NSMutableArray alloc] init];
+        /*NSMutableArray *weekdayArray = [[NSMutableArray alloc] init];
         //TO DO: update recurrence label
         for (id dayOfTheWeek in _recurrenceScheduleArray) {
         NSLog(@"The day is %@", dayOfTheWeek);
@@ -386,7 +434,8 @@
         //TO DO: Add recurrence schedule array to Commute Properties somehow or something
         NSLog(@"The weekdays are %@", weekdayArray);
         NSString *weekdayString = [[weekdayArray valueForKey:@"description"] componentsJoinedByString:@" "];
-        
+        */
+        NSString *weekdayString = [self convertToWeekDayNames:self.recurrenceScheduleArray];
         self.recurrenceLabel.text = weekdayString;
     }
     
@@ -409,6 +458,15 @@
     //done
     //if sender is add button, load location creator
     //done
+    //if sender is recurrence schedule cell, pass recurrence array
+    //NOT DONE
+    
+    
+    //if the segue is recurrenceEditor, pass the recurrence schedule to the recurrence schedule view controller
+    if ([[segue identifier] isEqualToString:@"recurrenceEditor"]) {
+        RepeatScheduleTableViewController *destViewController = segue.destinationViewController;
+        destViewController.recurranceDays = self.recurrenceScheduleArray;
+    }
     
     
     //if sender is  starting location edit button, prepare to edit a location by passing location information
@@ -599,8 +657,14 @@
         
         _sendAlertSwitch.on = YES;
         }
+        
+        //set the recurrence schedule
         self.recurrenceScheduleArray = [self.commute valueForKey:@"recurrenceDays"];
         
+        if (_recurrenceScheduleArray != nil) {
+            NSString *weekdayString = [self convertToWeekDayNames:self.recurrenceScheduleArray];
+            self.recurrenceLabel.text = weekdayString;
+        }
     }
     
     /*UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
