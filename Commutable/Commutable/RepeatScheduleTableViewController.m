@@ -34,13 +34,37 @@
     [super viewDidLoad];
     
     //upon loading, iterate through the recurrenceDays array and place checkmarks in the appropriate cells
-    /*if (self.recurranceDays){
-        for (id dayOfTheWeek in _recurranceDays) {
+    if (self.recurranceDays){
+        NSLog(@"recurrenceDays is True");
+        for (int section = 0; section < [_recurranceTableView numberOfSections]; section++) {
+            for (int row = 0; row < [_recurranceTableView numberOfRowsInSection:section]; row++) {
+                for (id dayOfTheWeek in _recurranceDays) {
+                    NSIndexPath* cellPath = [NSIndexPath indexPathForRow:row inSection:section];
+                    //NSLog(@"The value of cellPath is %@", cellPath);
+                    NSLog(@"The value of dayoftheweek is %@", dayOfTheWeek);
+                    NSInteger checkmarkedRow = cellPath.row;
+                    NSLog(@"The value of checkMarkedRow is %ld", (long)checkmarkedRow);
+                    if (checkmarkedRow == [dayOfTheWeek integerValue]) {
+                        NSLog(@"cellPath equals dayOftheWeek");
+                        
+                        UITableViewCell* cell = [_recurranceTableView cellForRowAtIndexPath:cellPath];
+                        //NSInteger checkmarkedRow = cellPath.row;
+                        //do stuff with 'cell'
+                        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+                    }
+                }
+            }
+        }
+        
+        
+        
+        /*for (id dayOfTheWeek in _recurranceDays) {
+            [NSIndexPath indexPathForRow:dayOfTheWeek inSection:0];
             //Add or remove a checkmark
             UITableViewCell *selectedCell = [UITableView cellForRowAtIndexPath:dayOfTheWeek];
-            selectedCell.accessoryType = UITableViewCellAccessoryCheckmark;
-        }
-    }*/
+            selectedCell.accessoryType = UITableViewCellAccessoryCheckmark;*/
+        
+    }
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -129,7 +153,7 @@
                 //NSLog(@"The cell accessory type is %ld", cell.accessoryType);
                 //if (cell.accessoryType == UITableViewCellAccessoryCheckmark)
                 if (cell.accessoryType != UITableViewCellAccessoryNone)
-                {   NSLog(@"the statement is true");
+                {
                     [cellsWithCheckMarks addObject:[NSNumber numberWithInt:checkmarkedRow]];
                     
                 }
