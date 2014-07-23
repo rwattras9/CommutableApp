@@ -13,24 +13,41 @@
 @interface CommutableFirstViewController () <GMSMapViewDelegate>
 @property (strong, nonatomic) NSMutableArray *waypoints;
 @property (strong, nonatomic) NSMutableArray *waypointStrings;
+@property (strong, nonatomic) NSMutableArray *commuteNameArray;
+@property (strong, nonatomic) NSMutableArray *labelArray;
+@property (strong, nonatomic) NSMutableArray *textArray;
+@property (strong, nonatomic) NSMutableArray *originArray;
+@property (strong, nonatomic) NSMutableArray *destinationArray;
+@property (strong, nonatomic) NSMutableArray *originZipArray;
+@property (strong, nonatomic) NSMutableArray *destinationZipArray;
 @end
 
 @implementation CommutableFirstViewController{
     BOOL firstLocationUpdate_;
-    NSMutableArray *textArray;
-    int *dirCount;
-    
 }
 @synthesize mapView;
 @synthesize scrollView;
 @synthesize pageControl;
 
 
+
+// called before the view finishes loading
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    NSLog(@"test4");
+    [self fetchData];
+    
+}
+
+
+
 // called after the view appears (after it loads, or after the tab is clicked)
 - (void) viewDidAppear:(BOOL)animated
 {
     NSLog(@"test3");
-    [self fetch];
+    //[self fetchData];
 }
 
 
@@ -40,7 +57,7 @@
     [super viewDidLoad];
     
     NSLog(@"test2");
-	
+    
     self.waypoints = [NSMutableArray array];
     self.waypointStrings = [NSMutableArray array];
     
@@ -59,7 +76,7 @@
     [self.view addSubview:mapView];
 
     
-    [self fetch];
+    //[self fetch];
     
     
     
@@ -68,14 +85,19 @@
 
 
 // check the commute info in the data store, and update the directions text appropriately
--(void)fetch
+-(void)fetchData
 {
+    self.commuteNameArray = [NSMutableArray array];
+    self.originArray = [NSMutableArray array];
+    self.destinationArray = [NSMutableArray array];
+    self.originZipArray = [NSMutableArray array];
+    self.destinationZipArray = [NSMutableArray array];
+    
     // Fetch the commute info from persistent data store
     NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Commute"];
     self.commuteArray = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
     
-    dirCount = 0;
     
     self.pageControl.numberOfPages = self.commuteArray.count;
     
@@ -85,49 +107,67 @@
                      options:NSKeyValueObservingOptionNew
                      context:NULL];
         
+        NSLog(@"no commutes yet");
+        
         // show some text like "Showing current location"?
     }
     else if (self.commuteArray.count > 0){
         
         for (int i=0; i < self.commuteArray.count; i++){
-            //dirCount = &i;
             
-            CGRect frame;
-            frame.origin.x = self.scrollView.frame.size.width * i;
-            frame.origin.y = self.scrollView.frame.origin.y;
-            frame.size = self.scrollView.frame.size;
-            
-            UILabel *label = [[UILabel alloc] initWithFrame:frame];
-            //[textArray addObject:label];
-            /*
             NSManagedObject *commute = [self.commuteArray objectAtIndex:i];
             
-            NSString *origin = [commute valueForKey:@"startingAddress"];
-            NSString *originZip = [commute valueForKey:@"startingZip"];
-            NSString *destination = [commute valueForKey:@"destinationAddress"];
-            NSString *destZip = [commute valueForKey:@"destinationZip"];
-            
-            [self setOrigin:origin setOriginZip:originZip setDestination:destination setDestZip:destZip];
-            */
-            
-            //label.text = [NSString stringWithFormat:@"test%d", i];
-            
-            self.scrollView.contentSize = CGSizeMake(self.scrollView.contentSize.width, label.frame.size.height);
-            
-            [label setText:@"testing"];
-            
-            [self.scrollView addSubview:label];
+            [self.commuteNameArray addObject:[commute valueForKey:@"name"]];
+            [self.originArray addObject:[commute valueForKey:@"startingAddress"]];
+            [self.originZipArray addObject:[commute valueForKey:@"startingZip"]];
+            [self.destinationArray addObject:[commute valueForKey:@"destinationAddress"]];
+            [self.destinationZipArray addObject:[commute valueForKey:@"destinationZip"]];
         }
         
-        
-        self.scrollView.contentSize = CGSizeMake(scrollView.frame.size.width * [self.commuteArray count], scrollView.frame.size.height);
-        
+        [self createUILabels];
     }
 }
 
 
 
+
+// create the uilabels to go within the scroll view
+- (void)createUILabels
+{
+    self.scrollView.delegate = self;
+    
+    self.labelArray = [NSMutableArray array];
+    
+    for (int i=0; i < self.commuteArray.count; i++){
+            
+        CGRect frame;
+        frame.origin.x = self.scrollView.frame.size.width * i;
+        frame.origin.y = 0;
+        frame.size = self.scrollView.frame.size;
+            
+        UILabel *label = [[UILabel alloc] initWithFrame:frame];
+        label.backgroundColor = [UIColor clearColor];
+        label.textColor = [UIColor whiteColor];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.userInteractionEnabled = YES;
+        //label.text = [NSString stringWithFormat:@"test%d", i];
+        label.text = [self.commuteNameArray objectAtIndex:i];
+        
+        [self.labelArray addObject:label];
+        
+        [self.scrollView addSubview:label];
+    }
+    
+    self.scrollView.contentSize = CGSizeMake(scrollView.frame.size.width * [self.commuteArray count], scrollView.frame.size.height);
+    
+}
+
+
+
+
+
 // page control/scrolling funcitonality
+#pragma mark - UIScrollView Delegate
 - (void)scrollViewDidScroll:(UIScrollView *)sender
 {
     // Update the page when more than 50% of the previous/next page is visible

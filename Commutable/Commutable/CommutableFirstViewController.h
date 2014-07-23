@@ -9,9 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <GoogleMaps/GoogleMaps.h>
 
-@interface CommutableFirstViewController : UIViewController
+@interface CommutableFirstViewController : UIViewController <UIScrollViewDelegate>
 
-//@property (weak, nonatomic) IBOutlet GMSMapView *mapView;
 @property (strong, nonatomic) IBOutlet GMSMapView *mapView;
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
