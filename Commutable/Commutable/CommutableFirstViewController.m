@@ -24,6 +24,7 @@
 
 @implementation CommutableFirstViewController{
     BOOL firstLocationUpdate_;
+    int currentPage;
 }
 @synthesize mapView;
 @synthesize scrollView;
@@ -31,7 +32,7 @@
 
 
 
-// called before the view finishes loading
+// called before the view finishes loading, both on start and after tab is in focus
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -42,13 +43,14 @@
 }
 
 
-
+/*
 // called after the view appears (after it loads, or after the tab is clicked)
 - (void) viewDidAppear:(BOOL)animated
 {
     NSLog(@"test3");
     //[self fetchData];
 }
+ */
 
 
 // called when the view loads
@@ -65,7 +67,10 @@
                                                             longitude:-89.4000
                                                                  zoom:1];
     
-    mapView = [GMSMapView mapWithFrame:CGRectMake(0, 27, 320, 370) camera:camera];
+    //
+    // need to fix issue with map drawing twice.. *****************************
+    //
+    mapView = [GMSMapView mapWithFrame:CGRectMake(0, 0, 320, 397) camera:camera];
     mapView.myLocationEnabled = YES;
     mapView.settings.scrollGestures = YES;
     mapView.settings.zoomGestures = YES;
@@ -74,17 +79,12 @@
     mapView.trafficEnabled = YES;
     
     [self.view addSubview:mapView];
-
-    
-    //[self fetch];
-    
-    
     
 }
 
 
 
-// check the commute info in the data store, and update the directions text appropriately
+// get the commute info from the data store
 -(void)fetchData
 {
     self.commuteNameArray = [NSMutableArray array];
@@ -150,8 +150,7 @@
         label.textColor = [UIColor whiteColor];
         label.textAlignment = NSTextAlignmentCenter;
         label.userInteractionEnabled = YES;
-        //label.text = [NSString stringWithFormat:@"test%d", i];
-        label.text = [self.commuteNameArray objectAtIndex:i];
+        label.text =[NSString stringWithFormat:@"Commute Name: %@", [self.commuteNameArray objectAtIndex:i]];
         
         [self.labelArray addObject:label];
         
@@ -159,6 +158,12 @@
     }
     
     self.scrollView.contentSize = CGSizeMake(scrollView.frame.size.width * [self.commuteArray count], scrollView.frame.size.height);
+    
+    // when the scroll view is done loading, send the query for the first commute
+    [self setOrigin:[self.originArray objectAtIndex:0]
+       setOriginZip:[self.originZipArray objectAtIndex:0]
+     setDestination:[self.destinationArray objectAtIndex:0]
+         setDestZip:[self.destinationZipArray objectAtIndex:0]];
     
 }
 
@@ -172,8 +177,19 @@
 {
     // Update the page when more than 50% of the previous/next page is visible
     CGFloat pageWidth = self.scrollView.frame.size.width;
-    int page = floor((self.scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
+    CGFloat offset = self.scrollView.contentOffset.x;
+    int page = floor((offset - pageWidth / 2) / pageWidth) + 1;
     self.pageControl.currentPage = page;
+    
+    if ((int)floor(offset) % (int)floor(pageWidth) == 0)
+    {
+        // when the page is finished being selected, send the query
+        [self setOrigin:[self.originArray objectAtIndex:page]
+           setOriginZip:[self.originZipArray objectAtIndex:page]
+         setDestination:[self.destinationArray objectAtIndex:page]
+             setDestZip:[self.destinationZipArray objectAtIndex:page]];
+    }
+    
 }
 
 
