@@ -98,7 +98,7 @@
         <!--Commute Creator Table View Controller - Commutes Creator-->
         <scene sceneID="sXr-Tr-pVa">
             <objects>
-                <tableViewController title="Commutes Creator" id="TMf-ia-h7y" customClass="CommuteCreatorTableViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="Commute Creator" title="Commutes Creator" id="TMf-ia-h7y" customClass="CommuteCreatorTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="OTu-Mq-oH4">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -106,24 +106,25 @@
                         <sections>
                             <tableViewSection headerTitle="Name Your Commute" id="nFC-Lj-dcV">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Mbj-JC-vcK">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Mbj-JC-vcK">
                                         <rect key="frame" x="0.0" y="119" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Mbj-JC-vcK" id="etZ-Zj-6FP">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eY2-ex-0i3">
-                                                    <rect key="frame" x="20" y="7" width="280" height="30"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jgQ-e1-Cfe">
+                                                    <rect key="frame" x="20" y="11" width="247" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="done"/>
-                                                    <connections>
-                                                        <action selector="dismissKeyboard:" destination="TMf-ia-h7y" eventType="editingDidEndOnExit" id="ueI-dZ-COv"/>
-                                                    </connections>
-                                                </textField>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="TQI-zy-Snq" kind="push" identifier="editCommuteName" id="7Yd-Qi-lMn"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -424,7 +425,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="alertTimeLabel" destination="4tB-es-jWT" id="gp2-Ts-iFU"/>
                         <outlet property="commuteCreatorCancelButton" destination="Qvd-fd-qEB" id="nh7-iz-lYB"/>
                         <outlet property="commuteCreatorDoneButton" destination="Kfd-wo-5Vz" id="coJ-pm-apI"/>
-                        <outlet property="commuteNameTextField" destination="eY2-ex-0i3" id="gFC-Mo-sY5"/>
+                        <outlet property="commuteNameLabel" destination="jgQ-e1-Cfe" id="IDl-to-hLf"/>
                         <outlet property="destinationLocationCell" destination="mqw-6B-oPh" id="1KC-7U-4U2"/>
                         <outlet property="destinationLocationLabel" destination="Xwc-Aq-1Xe" id="uaI-D6-bRE"/>
                         <outlet property="destinationTapToChooseLabel" destination="3TK-eb-lpf" id="ChX-8m-pKJ"/>
@@ -597,7 +598,42 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jzu-Hg-lW4" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Mad-I9-Z93" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2297" y="858"/>
+            <point key="canvasLocation" x="2436" y="1125"/>
+        </scene>
+        <!--Commute Name View Controller - Commute Name-->
+        <scene sceneID="eEK-YL-UNs">
+            <objects>
+                <viewController storyboardIdentifier="Commute Name" id="TQI-zy-Snq" customClass="CommuteNameViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="MZS-9b-JVh"/>
+                        <viewControllerLayoutGuide type="bottom" id="S3j-ly-Sya"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hOZ-FX-ISF">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="C9k-9E-v91">
+                                <rect key="frame" x="28" y="115" width="265" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="done"/>
+                                <connections>
+                                    <segue destination="XaX-2v-8g8" kind="unwind" unwindAction="unwindFromCommuteNameToCommuteCreatorTable:" id="bjw-Pe-TIf"/>
+                                </connections>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Commute Name" id="oSV-Om-KB2"/>
+                    <connections>
+                        <outlet property="commuteNameTextField" destination="C9k-9E-v91" id="vgt-cH-nFX"/>
+                        <segue destination="XaX-2v-8g8" kind="unwind" identifier="unwindToCommuteCreator" unwindAction="unwindFromCommuteNameToCommuteCreatorTable:" id="pQT-Q7-zNM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xON-ek-HSz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="XaX-2v-8g8" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="2427" y="-302"/>
         </scene>
         <!--Location Creator View Controller - Create A New Location-->
         <scene sceneID="gmJ-Kn-X7o">
@@ -695,7 +731,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YJB-aV-HdM" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Rwd-ra-nTm" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2297" y="180"/>
+            <point key="canvasLocation" x="2436" y="368"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Vex-rW-GRa">
@@ -764,7 +800,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Oo6-cd-3gJ"/>
-        <segue reference="f63-ks-QhQ"/>
+        <segue reference="FQw-Ff-hh9"/>
+        <segue reference="9PJ-aG-Amd"/>
     </inferredMetricsTieBreakers>
 </document>

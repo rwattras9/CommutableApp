@@ -14,6 +14,7 @@
 @property (strong, nonatomic) IBOutlet UIPickerView *existingStartingLocationsPicker;
 @property (strong, nonatomic) IBOutlet UIPickerView *existingDestinationLocationsPicker;
 @property (strong, nonatomic) IBOutlet UILabel *recurrenceLabel;
+@property (strong, nonatomic) IBOutlet UILabel *commuteNameLabel;
 
 @property CommuteItem *commuteItem;
 @property (strong) NSManagedObject *commute;
@@ -22,5 +23,7 @@
 - (IBAction)unwindToCommuteCreatorTable:(UIStoryboardSegue *)segue;
 
 - (IBAction)unwindFromRecurrenceToCommuteCreatorTable:(UIStoryboardSegue *)segue;
+
+- (IBAction)unwindFromCommuteNameToCommuteCreatorTable:(UIStoryboardSegue *)segue;
 
 @end

@@ -10,6 +10,7 @@
 #import "LocationItem.h"
 #import "LocationCreatorViewController.h"
 #import "RepeatScheduleTableViewController.h"
+#import "CommuteNameViewController.h"
 
 #define kDatePickerIndex 1
 #define kDatePickerCellHeight 216
@@ -440,6 +441,13 @@
     }
     
 }
+- (IBAction)unwindFromCommuteNameToCommuteCreatorTable:(UIStoryboardSegue *)segue {
+    CommuteNameViewController *source = [segue sourceViewController];
+    // if value isn't nil...
+    //if (source.commuteNameTextField.text !=)
+    self.commuteNameLabel.text = source.commuteNameTextField.text;
+}
+
 
 - (void) loadInitialData {
     
@@ -459,8 +467,17 @@
     //if sender is add button, load location creator
     //done
     //if sender is recurrence schedule cell, pass recurrence array
-    //NOT DONE
+    //done
     
+    //if the segue is EditCommuteName, pass the commute name to the CommuteNameViewController
+    if ([[segue identifier] isEqualToString:@"editCommuteName"]){
+        CommuteNameViewController *destViewController =segue.destinationViewController;
+        //NSString *commuteName = [[NSString alloc] init];
+        //commuteName = self.commuteNameLabel.text;
+        destViewController.commuteName = self.commuteNameLabel.text;
+        NSLog(@"the source text field is %@", self.commuteNameLabel.text);
+        NSLog(@"text field is %@", destViewController.commuteName);
+    }
     
     //if the segue is recurrenceEditor, pass the recurrence schedule to the recurrence schedule view controller
     if ([[segue identifier] isEqualToString:@"recurrenceEditor"]) {
@@ -487,14 +504,15 @@
     
     if (sender == self.commuteCreatorDoneButton) {
         //The single condition is a placeholder until I get full error handling in.
-        if (self.commuteNameTextField.text.length > 0) {
+        //THIS CONDITION NEEDS TO BE FIXED
+        if (self.commuteNameLabel.text.length > 0) {
             
             NSManagedObjectContext *context = [self managedObjectContext];
             //update a Commute if the commute exists
             if (self.commute){
                 
                 //update name
-                [self.commute setValue:self.commuteNameTextField.text forKey:@"name"];
+                [self.commute setValue:self.commuteNameLabel.text forKey:@"name"];
                 
                 //update recurrence schedule
                 [self.commute setValue:self.recurrenceScheduleArray forKey:@"recurrenceDays"];
@@ -554,7 +572,7 @@
                 NSManagedObject *newCommute = [NSEntityDescription insertNewObjectForEntityForName:@"Commute" inManagedObjectContext:context];
                 
                 //Set Commute Name
-                [newCommute setValue:self.self.commuteNameTextField.text forKey:@"name"];
+                [newCommute setValue:self.self.commuteNameLabel.text forKey:@"name"];
                 
                 //Set the Starting Location Name
                 [newCommute setValue:[[self.locationsArray objectAtIndex:[_existingStartingLocationsPicker selectedRowInComponent:0]] valueForKey:@"name"] forKey:@"startingLocationName"];
@@ -641,7 +659,7 @@
     //populate fields with commute properties from the prepareForSegue in CommutesTableViewController
     if (self.commute){
         //populate commuteNameTextField with value of selected commute from Commutes Table
-        [self.commuteNameTextField setText:[self.commute valueForKey:@"name"]];
+        [self.commuteNameLabel setText:[self.commute valueForKey:@"name"]];
         //Set the locations
         [self.startingLocationLabel setText:[self.commute valueForKey:@"startingLocationName"]];
         [self.destinationLocationLabel setText:[self.commute valueForKey:@"destinationLocationName"]];

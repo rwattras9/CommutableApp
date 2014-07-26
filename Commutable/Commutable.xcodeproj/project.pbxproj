@@ -21,6 +21,8 @@
 		2C6E3B8F19564797005FCB02 /* Car and Menu Icon 50px.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C6E3B8D19564797005FCB02 /* Car and Menu Icon 50px.png */; };
 		2C6E3B9019564797005FCB02 /* Car and Menu Icon 100px.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C6E3B8E19564797005FCB02 /* Car and Menu Icon 100px.png */; };
 		2CA120D61929637C004825D4 /* Commutable.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2CA120D41929637C004825D4 /* Commutable.xcdatamodeld */; };
+		2CAEC215198407A000569703 /* CommuteAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAEC214198407A000569703 /* CommuteAlert.m */; };
+		2CAEC21819840A8500569703 /* CommuteNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAEC21719840A8500569703 /* CommuteNameViewController.m */; };
 		2CD2000018FB3559005F1338 /* CommuteCreatorTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD2FFFF18FB3559005F1338 /* CommuteCreatorTableViewController.m */; };
 		2CD2000318FB3B0D005F1338 /* LocationCreatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD2000218FB3B0D005F1338 /* LocationCreatorViewController.m */; };
 		2CE53EE718F98C43005BCEC9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CE53EE618F98C43005BCEC9 /* Foundation.framework */; };
@@ -84,6 +86,10 @@
 		2C6E3B8D19564797005FCB02 /* Car and Menu Icon 50px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Car and Menu Icon 50px.png"; sourceTree = "<group>"; };
 		2C6E3B8E19564797005FCB02 /* Car and Menu Icon 100px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Car and Menu Icon 100px.png"; sourceTree = "<group>"; };
 		2CA120D51929637C004825D4 /* Commutable.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Commutable.xcdatamodel; sourceTree = "<group>"; };
+		2CAEC213198407A000569703 /* CommuteAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommuteAlert.h; sourceTree = "<group>"; };
+		2CAEC214198407A000569703 /* CommuteAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommuteAlert.m; sourceTree = "<group>"; };
+		2CAEC21619840A8500569703 /* CommuteNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommuteNameViewController.h; sourceTree = "<group>"; };
+		2CAEC21719840A8500569703 /* CommuteNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommuteNameViewController.m; sourceTree = "<group>"; };
 		2CD2000118FB3B0D005F1338 /* LocationCreatorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationCreatorViewController.h; sourceTree = "<group>"; };
 		2CD2000218FB3B0D005F1338 /* LocationCreatorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationCreatorViewController.m; sourceTree = "<group>"; };
 		2CD2FFFE18FB3559005F1338 /* CommuteCreatorTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommuteCreatorTableViewController.h; path = ../CommuteCreatorTableViewController.h; sourceTree = "<group>"; };
@@ -231,12 +237,16 @@
 				2C0AB595191EA5D200B1CCF0 /* CommuteItem.m */,
 				2CD2FFFE18FB3559005F1338 /* CommuteCreatorTableViewController.h */,
 				2CD2FFFF18FB3559005F1338 /* CommuteCreatorTableViewController.m */,
+				2CAEC21619840A8500569703 /* CommuteNameViewController.h */,
+				2CAEC21719840A8500569703 /* CommuteNameViewController.m */,
 				2CD2000118FB3B0D005F1338 /* LocationCreatorViewController.h */,
 				2CD2000218FB3B0D005F1338 /* LocationCreatorViewController.m */,
 				2CF4DA8819169A3C003762D3 /* LocationItem.h */,
 				2CF4DA8919169A3C003762D3 /* LocationItem.m */,
 				2C2F1007193D563200D24F4D /* RepeatScheduleTableViewController.h */,
 				2C2F1008193D563200D24F4D /* RepeatScheduleTableViewController.m */,
+				2CAEC213198407A000569703 /* CommuteAlert.h */,
+				2CAEC214198407A000569703 /* CommuteAlert.m */,
 				2CE53F0118F98C43005BCEC9 /* Images.xcassets */,
 				2CE53EED18F98C43005BCEC9 /* Supporting Files */,
 			);
@@ -401,7 +411,9 @@
 				2C2F1009193D563200D24F4D /* RepeatScheduleTableViewController.m in Sources */,
 				2CE53EFD18F98C43005BCEC9 /* CommutableFirstViewController.m in Sources */,
 				2CE53F2018F991AF005BCEC9 /* CommutesTableViewController.m in Sources */,
+				2CAEC21819840A8500569703 /* CommuteNameViewController.m in Sources */,
 				2C0AB596191EA5D200B1CCF0 /* CommuteItem.m in Sources */,
+				2CAEC215198407A000569703 /* CommuteAlert.m in Sources */,
 				2CD2000018FB3559005F1338 /* CommuteCreatorTableViewController.m in Sources */,
 				2CE53EF318F98C43005BCEC9 /* main.m in Sources */,
 				2CE53EF718F98C43005BCEC9 /* CommutableAppDelegate.m in Sources */,
