@@ -183,6 +183,9 @@
     
     if ((int)floor(offset) % (int)floor(pageWidth) == 0)
     {
+        // clear the routes currently drawn on the map
+        [self.mapView clear];
+        
         // when the page is finished being selected, send the query
         [self setOrigin:[self.originArray objectAtIndex:page]
            setOriginZip:[self.originZipArray objectAtIndex:page]
