@@ -554,9 +554,24 @@
                     UILocalNotification *commuteNotification = [[UILocalNotification alloc] init];
                 
                     commuteNotification.fireDate = [commute valueForKey:@"alertTime"];
-                
-                    //TO DO: Change variable one depending on time of day.
-                    commuteNotification.alertBody = [NSString stringWithFormat:@"Good variable1, the best route to work is varible2"];
+                    
+                    //calculate time of day
+                    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSHourCalendarUnit fromDate:[NSDate date]];
+                    NSInteger hour = [components hour];
+                    
+                    NSString *timeOfDay = [[NSString alloc] init];
+                    if(hour >= 0 && hour < 12) {
+                        timeOfDay = @"morning";
+                    }
+                    else if(hour >= 12 && hour < 17) {
+                        timeOfDay = @"afternoon";
+                    }
+                    else if(hour >= 17){
+                        timeOfDay = @"evening";
+                    }
+                    
+                    //Change variable one depending on time of day.
+                    commuteNotification.alertBody = [NSString stringWithFormat:@"Good %@, your commute information is ready!", timeOfDay];
                     commuteNotification.soundName = UILocalNotificationDefaultSoundName;
                     [[UIApplication sharedApplication] scheduleLocalNotification:commuteNotification];
                     }
@@ -611,8 +626,23 @@
                 
                     commuteNotification.fireDate = [newCommute valueForKey:@"alertTime"];
                 
-                    //TO DO: Change variable one depending on time of day.
-                    commuteNotification.alertBody = [NSString stringWithFormat:@"Good variable1, the best route to work is varible2"];
+                    //calculate time of day
+                    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSHourCalendarUnit fromDate:[NSDate date]];
+                    NSInteger hour = [components hour];
+                    
+                    NSString *timeOfDay = [[NSString alloc] init];
+                    if(hour >= 0 && hour < 12) {
+                        timeOfDay = @"morning";
+                    }
+                    else if(hour >= 12 && hour < 17) {
+                        timeOfDay = @"afternoon";
+                    }
+                    else if(hour >= 17){
+                        timeOfDay = @"evening";
+                    }
+                    
+                    //Change variable one depending on time of day.
+                    commuteNotification.alertBody = [NSString stringWithFormat:@"Good %@, your commute information is ready!", timeOfDay];
                     commuteNotification.soundName = UILocalNotificationDefaultSoundName;
                     [[UIApplication sharedApplication] scheduleLocalNotification:commuteNotification];
                 }
