@@ -361,7 +361,7 @@
     
     for (id dayOfTheWeek in _recurrenceScheduleArray) {
         NSLog(@"The day is %@", dayOfTheWeek);
-        if (dayOfTheWeek == 0){
+        if ([dayOfTheWeek integerValue] == 0){
             [weekdayArray addObject:@"Sun"];
         }
         else if ([dayOfTheWeek integerValue] == 1) {
@@ -549,32 +549,97 @@
                 //only if Send Alert Switch is on
                 if (_sendAlertSwitch.on == YES) {
                     
+                    //- (void)cancelAllLocalNotifications;
+                    
                     [self.commute setValue:@YES forKey:@"sendAlert"];
-                
-                    UILocalNotification *commuteNotification = [[UILocalNotification alloc] init];
-                
-                    commuteNotification.fireDate = [commute valueForKey:@"alertTime"];
                     
-                    //calculate time of day
-                    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSHourCalendarUnit fromDate:[NSDate date]];
-                    NSInteger hour = [components hour];
-                    
-                    NSString *timeOfDay = [[NSString alloc] init];
-                    if(hour >= 0 && hour < 12) {
-                        timeOfDay = @"morning";
-                    }
-                    else if(hour >= 12 && hour < 17) {
-                        timeOfDay = @"afternoon";
-                    }
-                    else if(hour >= 17){
-                        timeOfDay = @"evening";
+                    NSMutableArray *repeatIntervalDays = [[NSMutableArray alloc] init];
+                    //convert items in recurrenceScheduleArray to ints, add 1
+                    for (id dayOfTheWeek in _recurrenceScheduleArray) {
+                        int intValue = (int)[dayOfTheWeek integerValue];
+                        intValue = intValue + 1;
+                        NSNumber *repeatDay = [NSNumber numberWithInt:intValue];
+                        [repeatIntervalDays addObject:repeatDay];
                     }
                     
-                    //Change variable one depending on time of day.
-                    commuteNotification.alertBody = [NSString stringWithFormat:@"Good %@, your commute information is ready!", timeOfDay];
-                    commuteNotification.soundName = UILocalNotificationDefaultSoundName;
-                    [[UIApplication sharedApplication] scheduleLocalNotification:commuteNotification];
+                    NSDate *fireTime = [commute valueForKey:@"alertTime"];
+                    NSLog(@"The fireTime is %@", fireTime);
+                    
+                    //interate through the repeatIntervalDays and schedule a local notification for each
+                    for (id dayOfTheWeek in repeatIntervalDays) {
+                        UILocalNotification *commuteNotification = [[UILocalNotification alloc] init];
+                        NSCalendar *gregCalendar = [[NSCalendar alloc]initWithCalendarIdentifier:NSGregorianCalendar];
+                        NSDateComponents *dateComponent = [gregCalendar components:NSYearCalendarUnit  | NSWeekCalendarUnit fromDate:[NSDate date]];
+                        
+                        NSCalendar *calendar = [NSCalendar currentCalendar];
+                        NSDateComponents *fireTimeComponents = [calendar components:(NSHourCalendarUnit | NSMinuteCalendarUnit) fromDate:fireTime];
+                        NSInteger hour = [fireTimeComponents hour];
+                        NSInteger minute = [fireTimeComponents minute];
+                        
+                        int weekDay = (int)dayOfTheWeek;
+                        
+                        [dateComponent setWeekday:weekDay];
+                        [dateComponent setHour:hour];
+                        [dateComponent setMinute:minute];
+                        
+                        NSDate *fireDate = [gregCalendar dateFromComponents:dateComponent];
+                        
+                        commuteNotification.fireDate = fireDate;
+                        
+                        //notification should repeat weekly
+                        commuteNotification.repeatInterval = NSWeekCalendarUnit;
+                        
+                        //calculate time of day
+                        NSString *timeOfDay = [[NSString alloc] init];
+                        if(hour >= 0 && hour < 12) {
+                            timeOfDay = @"morning";
+                        }
+                        else if(hour >= 12 && hour < 17) {
+                            timeOfDay = @"afternoon";
+                        }
+                        else if(hour >= 17){
+                            timeOfDay = @"evening";
+                        }
+                        
+                        //Change variable one depending on time of day.
+                        commuteNotification.alertBody = [NSString stringWithFormat:@"Good %@, your commute information is ready!", timeOfDay];
+                        commuteNotification.soundName = UILocalNotificationDefaultSoundName;
+                        [[UIApplication sharedApplication] scheduleLocalNotification:commuteNotification];
+                        
                     }
+                    
+                    
+                    
+                    //UILocalNotification *commuteNotification = [[UILocalNotification alloc] init];
+                    
+                    
+                    
+                    
+                    
+                    //commuteNotification.fireDate = [commute valueForKey:@"alertTime"];
+                    
+                    /*
+                     
+                     //notification should repeat weekly
+                     commuteNotification.repeatInterval = NSWeekCalendarUnit;
+                     
+                     //calculate time of day
+                     NSString *timeOfDay = [[NSString alloc] init];
+                     if(hour >= 0 && hour < 12) {
+                     timeOfDay = @"morning";
+                     }
+                     else if(hour >= 12 && hour < 17) {
+                     timeOfDay = @"afternoon";
+                     }
+                     else if(hour >= 17){
+                     timeOfDay = @"evening";
+                     }
+                     
+                     //Change variable one depending on time of day.
+                     commuteNotification.alertBody = [NSString stringWithFormat:@"Good %@, your commute information is ready!", timeOfDay];
+                     commuteNotification.soundName = UILocalNotificationDefaultSoundName;
+                     [[UIApplication sharedApplication] scheduleLocalNotification:commuteNotification];*/
+                }
                 else {
                     [self.commute setValue:@NO forKey:@"sendAlert"];
                 }
@@ -618,18 +683,82 @@
                 
                 //If the sendAlert switch is on, create a local notification and store switch status in Core Data
                 if (_sendAlertSwitch.on == YES){
-                    //self.commuteItem.sendAlert = YES;
-                    [newCommute setValue:@YES forKey:@"sendAlert"];
-                
-                    //create Local Notification for this commute. This should probably be in Core Data.
-                    UILocalNotification *commuteNotification = [[UILocalNotification alloc] init];
-                
-                    commuteNotification.fireDate = [newCommute valueForKey:@"alertTime"];
-                
-                    //calculate time of day
-                    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSHourCalendarUnit fromDate:[NSDate date]];
-                    NSInteger hour = [components hour];
                     
+                    //- (void)cancelAllLocalNotifications;
+                    
+                    [self.commute setValue:@YES forKey:@"sendAlert"];
+                    
+                    NSMutableArray *repeatIntervalDays = [[NSMutableArray alloc] init];
+                    //convert items in recurrenceScheduleArray to ints, add 1
+                    for (id dayOfTheWeek in _recurrenceScheduleArray) {
+                        int intValue = (int)[dayOfTheWeek integerValue];
+                        intValue = intValue + 1;
+                        NSNumber *repeatDay = [NSNumber numberWithInt:intValue];
+                        [repeatIntervalDays addObject:repeatDay];
+                    }
+                    
+                    NSDate *fireTime = [commute valueForKey:@"alertTime"];
+                    NSLog(@"The fireTime is %@", fireTime);
+                    
+                    //interate through the repeatIntervalDays and schedule a local notification for each
+                    for (id dayOfTheWeek in repeatIntervalDays) {
+                        UILocalNotification *commuteNotification = [[UILocalNotification alloc] init];
+                        NSCalendar *gregCalendar = [[NSCalendar alloc]initWithCalendarIdentifier:NSGregorianCalendar];
+                        NSDateComponents *dateComponent = [gregCalendar components:NSYearCalendarUnit  | NSWeekCalendarUnit fromDate:[NSDate date]];
+                    
+                        NSCalendar *calendar = [NSCalendar currentCalendar];
+                        NSDateComponents *fireTimeComponents = [calendar components:(NSHourCalendarUnit | NSMinuteCalendarUnit) fromDate:fireTime];
+                        NSInteger hour = [fireTimeComponents hour];
+                        NSInteger minute = [fireTimeComponents minute];
+                     
+                        int weekDay = (int)dayOfTheWeek;
+                     
+                        [dateComponent setWeekday:weekDay];
+                        [dateComponent setHour:hour];
+                        [dateComponent setMinute:minute];
+                     
+                        NSDate *fireDate = [gregCalendar dateFromComponents:dateComponent];
+                    
+                        commuteNotification.fireDate = fireDate;
+                    
+                        //notification should repeat weekly
+                        commuteNotification.repeatInterval = NSWeekCalendarUnit;
+                        
+                        //calculate time of day
+                        NSString *timeOfDay = [[NSString alloc] init];
+                        if(hour >= 0 && hour < 12) {
+                            timeOfDay = @"morning";
+                        }
+                        else if(hour >= 12 && hour < 17) {
+                            timeOfDay = @"afternoon";
+                        }
+                        else if(hour >= 17){
+                            timeOfDay = @"evening";
+                        }
+                        
+                        //Change variable one depending on time of day.
+                        commuteNotification.alertBody = [NSString stringWithFormat:@"Good %@, your commute information is ready!", timeOfDay];
+                        commuteNotification.soundName = UILocalNotificationDefaultSoundName;
+                        [[UIApplication sharedApplication] scheduleLocalNotification:commuteNotification];
+                    
+                    }
+                    
+                    
+                    
+                    //UILocalNotification *commuteNotification = [[UILocalNotification alloc] init];
+                    
+                    
+                    
+                    
+                    
+                    //commuteNotification.fireDate = [commute valueForKey:@"alertTime"];
+                    
+                    /*
+                    
+                    //notification should repeat weekly
+                    commuteNotification.repeatInterval = NSWeekCalendarUnit;
+                    
+                    //calculate time of day
                     NSString *timeOfDay = [[NSString alloc] init];
                     if(hour >= 0 && hour < 12) {
                         timeOfDay = @"morning";
@@ -644,7 +773,7 @@
                     //Change variable one depending on time of day.
                     commuteNotification.alertBody = [NSString stringWithFormat:@"Good %@, your commute information is ready!", timeOfDay];
                     commuteNotification.soundName = UILocalNotificationDefaultSoundName;
-                    [[UIApplication sharedApplication] scheduleLocalNotification:commuteNotification];
+                    [[UIApplication sharedApplication] scheduleLocalNotification:commuteNotification];*/
                 }
                 //Otherwise, set switch status to off in Core Data
                 else {
