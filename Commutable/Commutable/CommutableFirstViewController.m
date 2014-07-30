@@ -67,9 +67,6 @@
                                                             longitude:-89.4000
                                                                  zoom:1];
     
-    //
-    // need to fix issue with map drawing twice.. *****************************
-    //
     mapView = [GMSMapView mapWithFrame:CGRectMake(0, 0, 320, 397) camera:camera];
     mapView.myLocationEnabled = YES;
     mapView.settings.scrollGestures = YES;
@@ -144,13 +141,20 @@
         frame.origin.x = self.scrollView.frame.size.width * i;
         frame.origin.y = 0;
         frame.size = self.scrollView.frame.size;
-            
+        
+        // create UILabel and customize label text
         UILabel *label = [[UILabel alloc] initWithFrame:frame];
         label.backgroundColor = [UIColor clearColor];
         label.textColor = [UIColor whiteColor];
         label.textAlignment = NSTextAlignmentCenter;
+        label.lineBreakMode = YES;
+        label.numberOfLines = 4;
+        label.adjustsFontSizeToFitWidth = YES;
+        label.minimumScaleFactor = 0;
         label.userInteractionEnabled = YES;
-        label.text =[NSString stringWithFormat:@"Commute Name: %@", [self.commuteNameArray objectAtIndex:i]];
+        
+        // Don't think I need this to set the text since text is set later
+        //label.text =[NSString stringWithFormat:@"Commute Name: %@", [self.commuteNameArray objectAtIndex:i]];
         
         [self.labelArray addObject:label];
         
@@ -178,8 +182,9 @@
     // Update the page when more than 50% of the previous/next page is visible
     CGFloat pageWidth = self.scrollView.frame.size.width;
     CGFloat offset = self.scrollView.contentOffset.x;
-    int page = floor((offset - pageWidth / 2) / pageWidth) + 1;
-    self.pageControl.currentPage = page;
+    //int page = floor((offset - pageWidth / 2) / pageWidth) + 1;
+    currentPage = floor((offset - pageWidth / 2) / pageWidth) + 1;
+    self.pageControl.currentPage = currentPage;
     
     if ((int)floor(offset) % (int)floor(pageWidth) == 0)
     {
@@ -187,10 +192,10 @@
         [self.mapView clear];
         
         // when the page is finished being selected, send the query
-        [self setOrigin:[self.originArray objectAtIndex:page]
-           setOriginZip:[self.originZipArray objectAtIndex:page]
-         setDestination:[self.destinationArray objectAtIndex:page]
-             setDestZip:[self.destinationZipArray objectAtIndex:page]];
+        [self setOrigin:[self.originArray objectAtIndex:currentPage]
+           setOriginZip:[self.originZipArray objectAtIndex:currentPage]
+         setDestination:[self.destinationArray objectAtIndex:currentPage]
+             setDestZip:[self.destinationZipArray objectAtIndex:currentPage]];
     }
     
 }
@@ -321,10 +326,11 @@
     GMSCameraUpdate *update = [GMSCameraUpdate fitBounds:bounds];
     [mapView moveCamera:update];
     
-    NSString *dirText = [NSString stringWithFormat:@"Take %@. Distance = %@, Duration = %@", routes[@"summary"], distanceText, durationText];
-    //UILabel *tempLabel = [textArray objectAtIndex:(int)dirCount];
-    //tempLabel.text = dirText;
-    //self.directionsText.text = dirText;
+    
+    // update the text of the current UIlabel page showing
+    NSString *dirText = [NSString stringWithFormat:@"Route Name: %@\nDirections: Take %@.\nDistance = %@, Duration = %@", [self.commuteNameArray objectAtIndex:currentPage],routes[@"summary"], distanceText, durationText];
+    [[self.labelArray objectAtIndex:currentPage] setText:dirText];
+    
 }
 
 
