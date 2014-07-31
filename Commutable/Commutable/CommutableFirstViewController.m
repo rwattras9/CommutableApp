@@ -11,6 +11,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 @interface CommutableFirstViewController () <GMSMapViewDelegate>
+@property (nonatomic, retain) CLLocationManager *locationManager;
 @property (strong, nonatomic) NSMutableArray *waypoints;
 @property (strong, nonatomic) NSMutableArray *waypointStrings;
 @property (strong, nonatomic) NSMutableArray *commuteNameArray;
@@ -35,10 +36,34 @@
 // called before the view finishes loading, both on start and after tab is in focus
 - (void) viewWillAppear:(BOOL)animated
 {
+    /*
+    for (UIView *view in self.view.subviews) {
+        [view removeFromSuperview];
+    }
+     */
+    
     [super viewWillAppear:animated];
     
     NSLog(@"test4");
     [self fetchData];
+    
+    self.waypoints = [NSMutableArray array];
+    self.waypointStrings = [NSMutableArray array];
+    
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:43.0667
+                                                            longitude:-89.4000
+                                                                 zoom:1];
+    
+    
+    mapView = [GMSMapView mapWithFrame:CGRectMake(0, 0, 320, 397) camera:camera];
+    mapView.myLocationEnabled = YES;
+    mapView.settings.scrollGestures = YES;
+    mapView.settings.zoomGestures = YES;
+    mapView.settings.compassButton = YES;
+    mapView.settings.myLocationButton = YES;
+    mapView.trafficEnabled = YES;
+    
+    [self.view addSubview:mapView];
     
 }
 
@@ -53,31 +78,18 @@
  */
 
 
+/*
 // called when the view loads
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    NSLog(@"test2");
     
-    self.waypoints = [NSMutableArray array];
-    self.waypointStrings = [NSMutableArray array];
-    
-    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:43.0667
-                                                            longitude:-89.4000
-                                                                 zoom:1];
-    
-    mapView = [GMSMapView mapWithFrame:CGRectMake(0, 0, 320, 397) camera:camera];
-    mapView.myLocationEnabled = YES;
-    mapView.settings.scrollGestures = YES;
-    mapView.settings.zoomGestures = YES;
-    mapView.settings.compassButton = YES;
-    mapView.settings.myLocationButton = YES;
-    mapView.trafficEnabled = YES;
-    
-    [self.view addSubview:mapView];
+ 
     
 }
+*/
+
 
 
 
@@ -99,6 +111,20 @@
     self.pageControl.numberOfPages = self.commuteArray.count;
     
     if (self.commuteArray.count == 0) {
+        
+        // create UILabel and customize label text
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 397, 320, 123)];
+        label.backgroundColor = [UIColor clearColor];
+        label.textColor = [UIColor whiteColor];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.lineBreakMode = YES;
+        label.numberOfLines = 2;
+        label.adjustsFontSizeToFitWidth = YES;
+        label.minimumScaleFactor = 0;
+        label.text = @"No commutes set!\nSet a commute in the commute tab.";
+        
+        [self.view addSubview:label];
+        
         [mapView addObserver:self
                   forKeyPath:@"myLocation"
                      options:NSKeyValueObservingOptionNew
@@ -106,7 +132,8 @@
         
         NSLog(@"no commutes yet");
         
-        // show some text like "Showing current location"?
+        // Show current location if there's no commutes set
+        //[self showCurrentLocation];
     }
     else if (self.commuteArray.count > 0){
         
@@ -152,9 +179,6 @@
         label.adjustsFontSizeToFitWidth = YES;
         label.minimumScaleFactor = 0;
         label.userInteractionEnabled = YES;
-        
-        // Don't think I need this to set the text since text is set later
-        //label.text =[NSString stringWithFormat:@"Commute Name: %@", [self.commuteNameArray objectAtIndex:i]];
         
         [self.labelArray addObject:label];
         
@@ -203,6 +227,7 @@
 
 
 
+
 // creates context for accessing data store
 - (NSManagedObjectContext *)managedObjectContext
 {
@@ -213,6 +238,27 @@
     }
     return context;
 }
+
+
+
+
+
+/*
+// Get current location
+- (void)showCurrentLocation {
+    mapView.myLocationEnabled = YES;
+    [self.locationManager startUpdatingLocation];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:newLocation.coordinate.latitude
+                                                            longitude:newLocation.coordinate.longitude
+                                                                 zoom:17.0];
+    [mapView animateToCameraPosition:camera];
+}
+
+*/
+
 
 
 
