@@ -21,10 +21,12 @@
 @property (strong, nonatomic) NSMutableArray *destinationArray;
 @property (strong, nonatomic) NSMutableArray *originZipArray;
 @property (strong, nonatomic) NSMutableArray *destinationZipArray;
+@property (strong, nonatomic) UILabel *noCommuteLabel;
 @end
 
 @implementation CommutableFirstViewController{
     BOOL firstLocationUpdate_;
+    bool needToClearLabel;
     int currentPage;
 }
 @synthesize mapView;
@@ -47,23 +49,7 @@
     NSLog(@"test4");
     [self fetchData];
     
-    self.waypoints = [NSMutableArray array];
-    self.waypointStrings = [NSMutableArray array];
     
-    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:43.0667
-                                                            longitude:-89.4000
-                                                                 zoom:1];
-    
-    
-    mapView = [GMSMapView mapWithFrame:CGRectMake(0, 0, 320, 397) camera:camera];
-    mapView.myLocationEnabled = YES;
-    mapView.settings.scrollGestures = YES;
-    mapView.settings.zoomGestures = YES;
-    mapView.settings.compassButton = YES;
-    mapView.settings.myLocationButton = YES;
-    mapView.trafficEnabled = YES;
-    
-    [self.view addSubview:mapView];
     
 }
 
@@ -78,17 +64,32 @@
  */
 
 
-/*
+
 // called when the view loads
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    
+ self.waypoints = [NSMutableArray array];
+ self.waypointStrings = [NSMutableArray array];
  
-    
+ GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:43.0667
+ longitude:-89.4000
+ zoom:1];
+ 
+ 
+ mapView = [GMSMapView mapWithFrame:CGRectMake(0, 0, 320, 397) camera:camera];
+ mapView.myLocationEnabled = YES;
+ mapView.settings.scrollGestures = YES;
+ mapView.settings.zoomGestures = YES;
+ mapView.settings.compassButton = YES;
+ mapView.settings.myLocationButton = YES;
+ mapView.trafficEnabled = YES;
+ 
+ [self.view addSubview:mapView];
+ 
 }
-*/
+
 
 
 
@@ -112,18 +113,26 @@
     
     if (self.commuteArray.count == 0) {
         
-        // create UILabel and customize label text
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 397, 320, 123)];
-        label.backgroundColor = [UIColor clearColor];
-        label.textColor = [UIColor whiteColor];
-        label.textAlignment = NSTextAlignmentCenter;
-        label.lineBreakMode = YES;
-        label.numberOfLines = 2;
-        label.adjustsFontSizeToFitWidth = YES;
-        label.minimumScaleFactor = 0;
-        label.text = @"No commutes set!\nSet a commute in the commute tab.";
+        if (needToClearLabel)
+        {
+            [self.noCommuteLabel removeFromSuperview];
+            //[self.textArray removeAllObjects];
+        }
         
-        [self.view addSubview:label];
+        // create UILabel and customize label text
+        self.noCommuteLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 397, 320, 123)];
+        //self.noCommuteLabel.backgroundColor = [UIColor clearColor];
+        self.noCommuteLabel.textColor = [UIColor whiteColor];
+        self.noCommuteLabel.textAlignment = NSTextAlignmentCenter;
+        self.noCommuteLabel.lineBreakMode = YES;
+        self.noCommuteLabel.numberOfLines = 2;
+        self.noCommuteLabel.adjustsFontSizeToFitWidth = YES;
+        self.noCommuteLabel.minimumScaleFactor = 0;
+        self.noCommuteLabel.text = @"No commutes set!\nSet a commute in the commute tab.";
+        
+        [self.view addSubview:self.noCommuteLabel];
+        
+        needToClearLabel = true;
         
         [mapView addObserver:self
                   forKeyPath:@"myLocation"
@@ -171,7 +180,7 @@
         
         // create UILabel and customize label text
         UILabel *label = [[UILabel alloc] initWithFrame:frame];
-        label.backgroundColor = [UIColor clearColor];
+        //label.backgroundColor = [UIColor clearColor];
         label.textColor = [UIColor whiteColor];
         label.textAlignment = NSTextAlignmentCenter;
         label.lineBreakMode = YES;
@@ -182,7 +191,15 @@
         
         [self.labelArray addObject:label];
         
+        if (needToClearLabel)
+        {
+            [self.noCommuteLabel removeFromSuperview];
+        }
+        
         [self.scrollView addSubview:label];
+        
+        needToClearLabel = false;
+        
     }
     
     self.scrollView.contentSize = CGSizeMake(scrollView.frame.size.width * [self.commuteArray count], scrollView.frame.size.height);
