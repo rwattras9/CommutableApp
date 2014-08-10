@@ -14,7 +14,7 @@
 
 @interface CommutesTableViewController ()
 
-
+- (void)cancelLocalNotification:(NSString*)notificationID;
 
 @end
 
@@ -43,6 +43,23 @@
     [self.tableView reloadData];
 }
 
+- (void)cancelLocalNotification:(NSString*)notificationID {
+    //loop through all scheduled notifications and cancel the one we're looking for
+    UILocalNotification *cancelThisNotification = nil;
+    BOOL hasNotification = NO;
+    
+    for (UILocalNotification *someNotification in [[UIApplication sharedApplication] scheduledLocalNotifications]) {
+        if([[someNotification.userInfo objectForKey:notificationID] isEqualToString:notificationID]) {
+            cancelThisNotification = someNotification;
+            hasNotification = YES;
+            break;
+        }
+    }
+    if (hasNotification == YES) {
+        NSLog(@"%@ ",cancelThisNotification);
+        [[UIApplication sharedApplication] cancelLocalNotification:cancelThisNotification];
+    }
+}
 
 /*- (void) loadInitialData {
     
@@ -124,6 +141,9 @@
     NSManagedObjectContext *context = [self managedObjectContext];
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+        //Use this method to cancel Specific Notification with that Notification Id
+        [self cancelLocalNotification:[[self.commuteArray objectAtIndex:indexPath.row] valueForKey:@"name"]];
+        
         // Delete the row from the data source
         [context deleteObject:[self.commuteArray objectAtIndex:indexPath.row]];
         
@@ -136,6 +156,7 @@
         //remove the device from table view
         [self.commuteArray removeObjectAtIndex:indexPath.row];
         [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];}
+    
         /*
      else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
