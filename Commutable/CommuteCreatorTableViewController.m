@@ -46,7 +46,7 @@
 @property (assign) BOOL destinationLocationPickerWasUsed;
 
 - (NSString *)convertToWeekDayNames:(NSMutableArray*)recurrenceScheduleArray;
-
+- (void)cancelLocalNotification:(NSString*)notificationID;
 
 
 @end
@@ -398,6 +398,23 @@
     }
     return weekdayString;
 }
+- (void)cancelLocalNotification:(NSString*)notificationID {
+    //loop through all scheduled notifications and cancel the one we're looking for
+    UILocalNotification *cancelThisNotification = nil;
+    BOOL hasNotification = NO;
+    
+    for (UILocalNotification *someNotification in [[UIApplication sharedApplication] scheduledLocalNotifications]) {
+        if([[someNotification.userInfo objectForKey:notificationID] isEqualToString:notificationID]) {
+            cancelThisNotification = someNotification;
+            hasNotification = YES;
+            break;
+        }
+    }
+    if (hasNotification == YES) {
+        NSLog(@"%@ ",cancelThisNotification);
+        [[UIApplication sharedApplication] cancelLocalNotification:cancelThisNotification];
+    }
+}
 
 - (IBAction)unwindFromRecurrenceToCommuteCreatorTable:(UIStoryboardSegue *)segue {
     RepeatScheduleTableViewController *source = [segue sourceViewController];
@@ -549,7 +566,8 @@
                 //only if Send Alert Switch is on
                 if (_sendAlertSwitch.on == YES) {
                     
-                    //- (void)cancelAllLocalNotifications;
+                    //cancel previous notifications
+                    [self cancelLocalNotification:[self.commute valueForKey:@"name"]];
                     
                     [self.commute setValue:@YES forKey:@"sendAlert"];
                     
@@ -606,31 +624,18 @@
                         commuteNotification.soundName = UILocalNotificationDefaultSoundName;
                         [[UIApplication sharedApplication] scheduleLocalNotification:commuteNotification];
                         
-                        /*NSDictionary *infoDict = [NSDictionary dictionaryWithObject:notificationID forKey:notificationID];
-                        commuteNotification.userInfo = infoDict;*/
+                        //store the name of the commute along with the local notification so that deleting and rescheduling will be easier later
+                        NSDictionary *infoDict = [NSDictionary dictionaryWithObject:[self.commute valueForKey:@"name"] forKey:@"notificationID"];
+                        
+                        commuteNotification.userInfo = infoDict;
                     }
                     
                 }
                 else {
                     [self.commute setValue:@NO forKey:@"sendAlert"];
                     //Use this method to cancel Specific Notification with that Notification Id
-                    /*- (void)cancelLocalNotification:(NSString*)notificationID {
-                        //loop through all scheduled notifications and cancel the one we're looking for
-                        UILocalNotification *cancelThisNotification = nil;
-                        BOOL hasNotification = NO;
-                        
-                        for (UILocalNotification *someNotification in [[UIApplication sharedApplication] scheduledLocalNotifications]) {
-                            if([[someNotification.userInfo objectForKey:notificationID] isEqualToString:notificationID]) {
-                                cancelThisNotification = someNotification;
-                                hasNotification = YES;
-                                break;
-                            }
-                        }
-                        if (hasNotification == YES) {
-                            NSLog(@"%@ ",cancelThisNotification);
-                            [[UIApplication sharedApplication] cancelLocalNotification:cancelThisNotification];        
-                        }
-                    }*/
+                [self cancelLocalNotification:[self.commute valueForKey:@"name"]];
+                    
                 }
                 
             } else {
@@ -673,7 +678,8 @@
                 //If the sendAlert switch is on, create a local notification and store switch status in Core Data
                 if (_sendAlertSwitch.on == YES){
                     
-                    //- (void)cancelAllLocalNotifications;
+                    //cancel all previous notifications. Just kidding. This isn't necessary.
+                    //[self cancelLocalNotification:[newCommute valueForKey:@"name"]];
                     
                     [self.commute setValue:@YES forKey:@"sendAlert"];
                     
@@ -767,6 +773,7 @@
                 //Otherwise, set switch status to off in Core Data
                 else {
                     [newCommute setValue:@NO forKey:@"sendAlert"];
+                    //and because it's new, we don't need to cancel
                 }
                 
             }
