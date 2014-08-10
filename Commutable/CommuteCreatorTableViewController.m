@@ -606,42 +606,31 @@
                         commuteNotification.soundName = UILocalNotificationDefaultSoundName;
                         [[UIApplication sharedApplication] scheduleLocalNotification:commuteNotification];
                         
+                        /*NSDictionary *infoDict = [NSDictionary dictionaryWithObject:notificationID forKey:notificationID];
+                        commuteNotification.userInfo = infoDict;*/
                     }
                     
-                    
-                    
-                    //UILocalNotification *commuteNotification = [[UILocalNotification alloc] init];
-                    
-                    
-                    
-                    
-                    
-                    //commuteNotification.fireDate = [commute valueForKey:@"alertTime"];
-                    
-                    /*
-                     
-                     //notification should repeat weekly
-                     commuteNotification.repeatInterval = NSWeekCalendarUnit;
-                     
-                     //calculate time of day
-                     NSString *timeOfDay = [[NSString alloc] init];
-                     if(hour >= 0 && hour < 12) {
-                     timeOfDay = @"morning";
-                     }
-                     else if(hour >= 12 && hour < 17) {
-                     timeOfDay = @"afternoon";
-                     }
-                     else if(hour >= 17){
-                     timeOfDay = @"evening";
-                     }
-                     
-                     //Change variable one depending on time of day.
-                     commuteNotification.alertBody = [NSString stringWithFormat:@"Good %@, your commute information is ready!", timeOfDay];
-                     commuteNotification.soundName = UILocalNotificationDefaultSoundName;
-                     [[UIApplication sharedApplication] scheduleLocalNotification:commuteNotification];*/
                 }
                 else {
                     [self.commute setValue:@NO forKey:@"sendAlert"];
+                    //Use this method to cancel Specific Notification with that Notification Id
+                    /*- (void)cancelLocalNotification:(NSString*)notificationID {
+                        //loop through all scheduled notifications and cancel the one we're looking for
+                        UILocalNotification *cancelThisNotification = nil;
+                        BOOL hasNotification = NO;
+                        
+                        for (UILocalNotification *someNotification in [[UIApplication sharedApplication] scheduledLocalNotifications]) {
+                            if([[someNotification.userInfo objectForKey:notificationID] isEqualToString:notificationID]) {
+                                cancelThisNotification = someNotification;
+                                hasNotification = YES;
+                                break;
+                            }
+                        }
+                        if (hasNotification == YES) {
+                            NSLog(@"%@ ",cancelThisNotification);
+                            [[UIApplication sharedApplication] cancelLocalNotification:cancelThisNotification];        
+                        }
+                    }*/
                 }
                 
             } else {

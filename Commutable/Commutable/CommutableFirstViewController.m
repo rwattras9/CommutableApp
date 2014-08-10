@@ -391,7 +391,7 @@
     
     
     // update the text of the current UIlabel page showing
-    NSString *dirText = [NSString stringWithFormat:@"Route Name: %@\nDirections: Take %@.\nDistance = %@, Duration = %@", [self.commuteNameArray objectAtIndex:currentPage],routes[@"summary"], distanceText, durationText];
+    NSString *dirText = [NSString stringWithFormat:@"Commute Name: %@\nDirections: Take %@.\nDistance = %@, Duration = %@", [self.commuteNameArray objectAtIndex:currentPage],routes[@"summary"], distanceText, durationText];
     [[self.labelArray objectAtIndex:currentPage] setText:dirText];
     
 }
