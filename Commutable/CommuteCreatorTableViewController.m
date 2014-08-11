@@ -399,12 +399,15 @@
     return weekdayString;
 }
 - (void)cancelLocalNotification:(NSString*)notificationID {
+    NSLog(@"The method was called");
     //loop through all scheduled notifications and cancel the one we're looking for
     UILocalNotification *cancelThisNotification = nil;
     BOOL hasNotification = NO;
     
     for (UILocalNotification *someNotification in [[UIApplication sharedApplication] scheduledLocalNotifications]) {
-        if([[someNotification.userInfo objectForKey:notificationID] isEqualToString:notificationID]) {
+        NSLog(@"The value of someNotification's userinfo is %@", someNotification.userInfo);
+        if([[someNotification.userInfo objectForKey:@"notificationID"] isEqualToString:notificationID]) {
+            NSLog(@"The conditions are true");
             cancelThisNotification = someNotification;
             hasNotification = YES;
             break;
@@ -635,7 +638,7 @@
                     [self.commute setValue:@NO forKey:@"sendAlert"];
                     //Use this method to cancel Specific Notification with that Notification Id
                 [self cancelLocalNotification:[self.commute valueForKey:@"name"]];
-                    
+
                 }
                 
             } else {
@@ -681,7 +684,7 @@
                     //cancel all previous notifications. Just kidding. This isn't necessary.
                     //[self cancelLocalNotification:[newCommute valueForKey:@"name"]];
                     
-                    [self.commute setValue:@YES forKey:@"sendAlert"];
+                    [newCommute setValue:@YES forKey:@"sendAlert"];
                     
                     NSMutableArray *repeatIntervalDays = [[NSMutableArray alloc] init];
                     //convert items in recurrenceScheduleArray to ints, add 1
@@ -735,6 +738,11 @@
                         commuteNotification.alertBody = [NSString stringWithFormat:@"Good %@, your commute information is ready!", timeOfDay];
                         commuteNotification.soundName = UILocalNotificationDefaultSoundName;
                         [[UIApplication sharedApplication] scheduleLocalNotification:commuteNotification];
+                        
+                        //store the name of the commute along with the local notification so that deleting and rescheduling will be easier later
+                        NSDictionary *infoDict = [NSDictionary dictionaryWithObject:_commuteNameLabel.text forKey:@"notificationID"];
+                        NSLog(@"The new commute's infoDict is %@", infoDict);
+                        commuteNotification.userInfo = infoDict;
                     
                     }
                     
