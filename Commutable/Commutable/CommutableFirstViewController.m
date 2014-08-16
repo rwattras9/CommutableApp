@@ -70,23 +70,23 @@
 {
     [super viewDidLoad];
     
- self.waypoints = [NSMutableArray array];
- self.waypointStrings = [NSMutableArray array];
+    self.waypoints = [NSMutableArray array];
+    self.waypointStrings = [NSMutableArray array];
  
- GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:43.0667
- longitude:-89.4000
- zoom:1];
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:43.0667
+                                                            longitude:-89.4000
+                                                                 zoom:1];
  
  
- mapView = [GMSMapView mapWithFrame:CGRectMake(0, 0, 320, 397) camera:camera];
- mapView.myLocationEnabled = YES;
- mapView.settings.scrollGestures = YES;
- mapView.settings.zoomGestures = YES;
- mapView.settings.compassButton = YES;
- mapView.settings.myLocationButton = YES;
- mapView.trafficEnabled = YES;
- 
- [self.view addSubview:mapView];
+    mapView = [GMSMapView mapWithFrame:CGRectMake(0, 0, 320, 397) camera:camera];
+    mapView.myLocationEnabled = YES;
+    mapView.settings.scrollGestures = YES;
+    mapView.settings.zoomGestures = YES;
+    mapView.settings.compassButton = YES;
+    mapView.settings.myLocationButton = YES;
+    mapView.trafficEnabled = YES;
+    
+    [self.view addSubview:mapView];
  
 }
 
@@ -97,6 +97,8 @@
 // get the commute info from the data store
 -(void)fetchData
 {
+    self.scrollView.delegate = self;
+    
     self.commuteNameArray = [NSMutableArray array];
     self.originArray = [NSMutableArray array];
     self.destinationArray = [NSMutableArray array];
@@ -109,30 +111,45 @@
     self.commuteArray = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
     
     
-    self.pageControl.numberOfPages = self.commuteArray.count;
-    
     if (self.commuteArray.count == 0) {
         
         if (needToClearLabel)
         {
             [self.noCommuteLabel removeFromSuperview];
-            //[self.textArray removeAllObjects];
         }
         
+        if (self.labelArray.count > 0)
+        {
+            for (int i=0; i < self.labelArray.count; i++)
+            {
+                [[self.labelArray objectAtIndex:i] removeFromSuperview];
+            }
+            [self.mapView clear];
+        }
+        
+        self.pageControl.numberOfPages = 1;
+        
+        CGRect frame;
+        frame.origin.x = 0;
+        frame.origin.y = 0;
+        frame.size = self.scrollView.frame.size;
+        
         // create UILabel and customize label text
-        self.noCommuteLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 397, 320, 123)];
-        //self.noCommuteLabel.backgroundColor = [UIColor clearColor];
+        self.noCommuteLabel = [[UILabel alloc] initWithFrame:frame];
         self.noCommuteLabel.textColor = [UIColor whiteColor];
         self.noCommuteLabel.textAlignment = NSTextAlignmentCenter;
         self.noCommuteLabel.lineBreakMode = YES;
-        self.noCommuteLabel.numberOfLines = 2;
+        self.noCommuteLabel.numberOfLines = 4;
         self.noCommuteLabel.adjustsFontSizeToFitWidth = YES;
         self.noCommuteLabel.minimumScaleFactor = 0;
-        self.noCommuteLabel.text = @"No commutes set!\nSet a commute in the commute tab.";
+        self.noCommuteLabel.userInteractionEnabled = YES;
+        self.noCommuteLabel.text = @"No commutes set!\nSet a commute in the 'Commutes' tab.";
         
-        [self.view addSubview:self.noCommuteLabel];
+        [self.scrollView addSubview:self.noCommuteLabel];
         
         needToClearLabel = true;
+        
+        firstLocationUpdate_ = NO;
         
         [mapView addObserver:self
                   forKeyPath:@"myLocation"
@@ -145,6 +162,14 @@
         //[self showCurrentLocation];
     }
     else if (self.commuteArray.count > 0){
+        
+        if (needToClearLabel)
+        {
+            [self.noCommuteLabel removeFromSuperview];
+            needToClearLabel = false;
+        }
+        
+        self.pageControl.numberOfPages = self.commuteArray.count;
         
         for (int i=0; i < self.commuteArray.count; i++){
             
@@ -164,11 +189,9 @@
 
 
 
-// create the uilabels to go within the scroll view
+// create the uilabels for the commutes to go within the scroll view
 - (void)createUILabels
 {
-    self.scrollView.delegate = self;
-    
     self.labelArray = [NSMutableArray array];
     
     for (int i=0; i < self.commuteArray.count; i++){
@@ -180,7 +203,6 @@
         
         // create UILabel and customize label text
         UILabel *label = [[UILabel alloc] initWithFrame:frame];
-        //label.backgroundColor = [UIColor clearColor];
         label.textColor = [UIColor whiteColor];
         label.textAlignment = NSTextAlignmentCenter;
         label.lineBreakMode = YES;
@@ -191,14 +213,7 @@
         
         [self.labelArray addObject:label];
         
-        if (needToClearLabel)
-        {
-            [self.noCommuteLabel removeFromSuperview];
-        }
-        
         [self.scrollView addSubview:label];
-        
-        needToClearLabel = false;
         
     }
     
@@ -223,7 +238,6 @@
     // Update the page when more than 50% of the previous/next page is visible
     CGFloat pageWidth = self.scrollView.frame.size.width;
     CGFloat offset = self.scrollView.contentOffset.x;
-    //int page = floor((offset - pageWidth / 2) / pageWidth) + 1;
     currentPage = floor((offset - pageWidth / 2) / pageWidth) + 1;
     self.pageControl.currentPage = currentPage;
     
