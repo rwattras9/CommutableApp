@@ -625,12 +625,14 @@
                         //Change variable one depending on time of day.
                         commuteNotification.alertBody = [NSString stringWithFormat:@"Good %@, your commute information is ready!", timeOfDay];
                         commuteNotification.soundName = UILocalNotificationDefaultSoundName;
-                        [[UIApplication sharedApplication] scheduleLocalNotification:commuteNotification];
                         
                         //store the name of the commute along with the local notification so that deleting and rescheduling will be easier later
                         NSDictionary *infoDict = [NSDictionary dictionaryWithObject:[self.commute valueForKey:@"name"] forKey:@"notificationID"];
                         
                         commuteNotification.userInfo = infoDict;
+                        
+                        [[UIApplication sharedApplication] scheduleLocalNotification:commuteNotification];
+                        
                     }
                     
                 }
@@ -737,12 +739,14 @@
                         //Change variable one depending on time of day.
                         commuteNotification.alertBody = [NSString stringWithFormat:@"Good %@, your commute information is ready!", timeOfDay];
                         commuteNotification.soundName = UILocalNotificationDefaultSoundName;
-                        [[UIApplication sharedApplication] scheduleLocalNotification:commuteNotification];
                         
                         //store the name of the commute along with the local notification so that deleting and rescheduling will be easier later
                         NSDictionary *infoDict = [NSDictionary dictionaryWithObject:_commuteNameLabel.text forKey:@"notificationID"];
                         NSLog(@"The new commute's infoDict is %@", infoDict);
                         commuteNotification.userInfo = infoDict;
+                        [[UIApplication sharedApplication] scheduleLocalNotification:commuteNotification];
+                        
+                        
                     
                     }
                     
