@@ -188,8 +188,7 @@
 {
     if ([[segue identifier] isEqualToString:@"editCommute"]) {
         NSManagedObject *selectedCommute = [self.commuteArray objectAtIndex:[[self.tableView indexPathForSelectedRow] row]];
-        CommuteCreatorTableViewController *destViewController = segue.destinationViewController; 
-        NSLog(@"The destination view controller is %@", destViewController);
+        CommuteCreatorTableViewController *destViewController = segue.destinationViewController;
         NSLog(@"The selected commute is %@", selectedCommute);
         destViewController.commute = selectedCommute;
         

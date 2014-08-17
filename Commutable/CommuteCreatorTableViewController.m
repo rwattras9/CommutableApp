@@ -338,6 +338,11 @@
         self.destinationTapToChooseLabel.hidden = YES;
         self.startingLocationLabel.text = @"Add a Location";
         self.destinationLocationLabel.text = @"Add a Location";
+        //need to disable expansion
+    }
+    else {
+        self.startingTapToChooseLabel.hidden = NO;
+        self.destinationTapToChooseLabel.hidden = NO;
     }
     
     [self.existingStartingLocationsPicker reloadAllComponents];
@@ -697,7 +702,7 @@
                         [repeatIntervalDays addObject:repeatDay];
                     }
                     
-                    NSDate *fireTime = [commute valueForKey:@"alertTime"];
+                    NSDate *fireTime = [newCommute valueForKey:@"alertTime"];
                     NSLog(@"The fireTime is %@", fireTime);
                     
                     //interate through the repeatIntervalDays and schedule a local notification for each
