@@ -38,20 +38,20 @@
 // called before the view finishes loading, both on start and after tab is in focus
 - (void) viewWillAppear:(BOOL)animated
 {
-    /*
-    for (UIView *view in self.view.subviews) {
-        [view removeFromSuperview];
-    }
-     */
-    
     [super viewWillAppear:animated];
     
-    NSLog(@"test4");
+    // testing a way to clear things before the view is presented, especially to refresh after the tab has been switched back to
+    for (int i=0; i < self.labelArray.count; i++)
+    {
+        [[self.labelArray objectAtIndex:i] removeFromSuperview];
+    }
+    [self.mapView clear];
+    
+    // while the view is loading, make the call to grab the data from the datastore
     [self fetchData];
-    
-    
-    
 }
+
+
 
 
 /*
@@ -65,19 +65,20 @@
 
 
 
-// called when the view loads
+
+// called when the view loads, called once at first app load (not everytime tab is opened)
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
+    // initialize waypoint arrays for storing multiple routes
     self.waypoints = [NSMutableArray array];
     self.waypointStrings = [NSMutableArray array];
  
+    // initialize map camera and enable some settings
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:43.0667
                                                             longitude:-89.4000
                                                                  zoom:1];
- 
- 
     mapView = [GMSMapView mapWithFrame:CGRectMake(0, 0, 320, 397) camera:camera];
     mapView.myLocationEnabled = YES;
     mapView.settings.scrollGestures = YES;
@@ -86,8 +87,8 @@
     mapView.settings.myLocationButton = YES;
     mapView.trafficEnabled = YES;
     
+    // add the map subview to the main view
     [self.view addSubview:mapView];
- 
 }
 
 
@@ -97,36 +98,34 @@
 // get the commute info from the data store
 -(void)fetchData
 {
+    // not sure what this does, but basically says the scrollview delegate is the main view
     self.scrollView.delegate = self;
     
+    // initialize some arrays for storing the route info in memory once we get it from the store
     self.commuteNameArray = [NSMutableArray array];
     self.originArray = [NSMutableArray array];
     self.destinationArray = [NSMutableArray array];
     self.originZipArray = [NSMutableArray array];
     self.destinationZipArray = [NSMutableArray array];
     
-    // Fetch the commute info from persistent data store
+    // Fetch the commute info from persistent data store, store it in commuteArray
     NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Commute"];
     self.commuteArray = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
     
-    
+   
+    //if there are no commutes
     if (self.commuteArray.count == 0) {
         
+        // if the label is currently there
         if (needToClearLabel)
         {
+            // remove it
             [self.noCommuteLabel removeFromSuperview];
+            needToClearLabel = false;
         }
         
-        if (self.labelArray.count > 0)
-        {
-            for (int i=0; i < self.labelArray.count; i++)
-            {
-                [[self.labelArray objectAtIndex:i] removeFromSuperview];
-            }
-            [self.mapView clear];
-        }
-        
+        // still need one scroll page to put the 'no commute' message on
         self.pageControl.numberOfPages = 1;
         
         CGRect frame;
@@ -134,7 +133,7 @@
         frame.origin.y = 0;
         frame.size = self.scrollView.frame.size;
         
-        // create UILabel and customize label text
+        // create 'no commute' UILabel and customize label text
         self.noCommuteLabel = [[UILabel alloc] initWithFrame:frame];
         self.noCommuteLabel.textColor = [UIColor whiteColor];
         self.noCommuteLabel.textAlignment = NSTextAlignmentCenter;
@@ -145,34 +144,38 @@
         self.noCommuteLabel.userInteractionEnabled = YES;
         self.noCommuteLabel.text = @"No commutes set!\nSet a commute in the 'Commutes' tab.";
         
+        // add the 'no commute' label to the scroll view
         [self.scrollView addSubview:self.noCommuteLabel];
         
+        // label has been added, so need to remove it later
         needToClearLabel = true;
         
+        // test value and call for showing the user's current location
         firstLocationUpdate_ = NO;
-        
         [mapView addObserver:self
                   forKeyPath:@"myLocation"
                      options:NSKeyValueObservingOptionNew
                      context:NULL];
-        
-        NSLog(@"no commutes yet");
         
         // Show current location if there's no commutes set
         //[self showCurrentLocation];
     }
     else if (self.commuteArray.count > 0){
         
+        // if the 'no commute' label needs to be removed
         if (needToClearLabel)
         {
+            // remove it and mark it as renewed
             [self.noCommuteLabel removeFromSuperview];
             needToClearLabel = false;
         }
         
+        // number of pages in the scroll view = number of commutes
         self.pageControl.numberOfPages = self.commuteArray.count;
         
-        for (int i=0; i < self.commuteArray.count; i++){
-            
+        // for each commute, add the info into memory in each array
+        for (int i=0; i < self.commuteArray.count; i++)
+        {
             NSManagedObject *commute = [self.commuteArray objectAtIndex:i];
             
             [self.commuteNameArray addObject:[commute valueForKey:@"name"]];
@@ -182,6 +185,7 @@
             [self.destinationZipArray addObject:[commute valueForKey:@"destinationZip"]];
         }
         
+        // make the call to create the labels for each commute
         [self createUILabels];
     }
 }
@@ -192,8 +196,10 @@
 // create the uilabels for the commutes to go within the scroll view
 - (void)createUILabels
 {
+    // initialize the label array
     self.labelArray = [NSMutableArray array];
-    
+ 
+    // for each commute, create the label and add it to the scroll view and the label array
     for (int i=0; i < self.commuteArray.count; i++){
             
         CGRect frame;
@@ -217,6 +223,7 @@
         
     }
     
+    // make sure the content fits on the scroll view
     self.scrollView.contentSize = CGSizeMake(scrollView.frame.size.width * [self.commuteArray count], scrollView.frame.size.height);
     
     // when the scroll view is done loading, send the query for the first commute
