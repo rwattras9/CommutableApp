@@ -45,7 +45,11 @@
     {
         [[self.labelArray objectAtIndex:i] removeFromSuperview];
     }
-    [self.mapView clear];
+    [mapView clear];
+    
+    // add an observer for the user's current location
+    [mapView addObserver:self forKeyPath:@"myLocation" options:NSKeyValueObservingOptionNew context: nil];
+    
     
     // while the view is loading, make the call to grab the data from the datastore
     [self fetchData];
@@ -62,6 +66,7 @@
     //[self fetchData];
 }
  */
+
 
 
 
@@ -150,15 +155,12 @@
         // label has been added, so need to remove it later
         needToClearLabel = true;
         
-        // test value and call for showing the user's current location
-        firstLocationUpdate_ = NO;
-        [mapView addObserver:self
-                  forKeyPath:@"myLocation"
-                     options:NSKeyValueObservingOptionNew
-                     context:NULL];
         
-        // Show current location if there's no commutes set
-        //[self showCurrentLocation];
+        // move the camera back to the user's location
+        [mapView animateToCameraPosition:[GMSCameraPosition cameraWithLatitude:mapView.myLocation.coordinate.latitude
+                                                                     longitude:mapView.myLocation.coordinate.longitude
+                                                                          zoom:5.0]];
+        
     }
     else if (self.commuteArray.count > 0){
         
@@ -281,38 +283,14 @@
 
 
 
-/*
-// Get current location
-- (void)showCurrentLocation {
-    mapView.myLocationEnabled = YES;
-    [self.locationManager startUpdatingLocation];
-}
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
-    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:newLocation.coordinate.latitude
-                                                            longitude:newLocation.coordinate.longitude
-                                                                 zoom:17.0];
-    [mapView animateToCameraPosition:camera];
-}
-
-*/
-
-
-
-
-
-
-// something to do with setting the camera to the user's location..?
-- (void)observeValueForKeyPath:(NSString *)keyPath
-                      ofObject:(id)object
-                        change:(NSDictionary *)change
-                       context:(void *)context {
-    if (!firstLocationUpdate_) {
-        // If the first location update has not yet been recieved, then jump to that location.
-        firstLocationUpdate_ = YES;
-        CLLocation *location = [change objectForKey:NSKeyValueChangeNewKey];
-        mapView.camera = [GMSCameraPosition cameraWithTarget:location.coordinate
-                                                        zoom:5];
+// for getting the user's location
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"myLocation"] && [object isKindOfClass:[GMSMapView class]] && self.labelArray.count == 0)
+    {
+        [mapView animateToCameraPosition:[GMSCameraPosition cameraWithLatitude:mapView.myLocation.coordinate.latitude
+                                                                                 longitude:mapView.myLocation.coordinate.longitude
+                                                                                      zoom:5.0]];
     }
 }
 
@@ -320,12 +298,26 @@
 
 
 
+// before the view finishes, cleanup the myLocation observer
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    // Implement here if the view has registered KVO
+    
+    [mapView removeObserver:self forKeyPath:@"myLocation"];
+}
+
+
+
+
+
+/*
 - (void)dealloc {
     [mapView removeObserver:self
                  forKeyPath:@"myLocation"
                     context:NULL];
 }
-
+*/
 
 
 
@@ -410,6 +402,7 @@
     GMSCameraUpdate *update = [GMSCameraUpdate fitBounds:bounds];
     [mapView moveCamera:update];
     
+    NSLog(@"test3");
     
     // update the text of the current UIlabel page showing
     NSString *dirText = [NSString stringWithFormat:@"Commute Name: %@\nDirections: Take %@.\nDistance = %@, Duration = %@", [self.commuteNameArray objectAtIndex:currentPage],routes[@"summary"], distanceText, durationText];
