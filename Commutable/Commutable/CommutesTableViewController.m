@@ -44,12 +44,15 @@
 }
 
 - (void)cancelLocalNotification:(NSString*)notificationID {
+    NSLog(@"The method was called");
     //loop through all scheduled notifications and cancel the one we're looking for
     UILocalNotification *cancelThisNotification = nil;
     BOOL hasNotification = NO;
     
     for (UILocalNotification *someNotification in [[UIApplication sharedApplication] scheduledLocalNotifications]) {
-        if([[someNotification.userInfo objectForKey:notificationID] isEqualToString:notificationID]) {
+        NSLog(@"The value of someNotification's userinfo is %@", someNotification.userInfo);
+        if([[someNotification.userInfo objectForKey:@"notificationID"] isEqualToString:notificationID]) {
+            NSLog(@"The conditions are true");
             cancelThisNotification = someNotification;
             hasNotification = YES;
             break;

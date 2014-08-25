@@ -15,12 +15,20 @@
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
     // Add in your API key here:
     [GMSServices provideAPIKey:@"AIzaSyAUlmQMSyQyZEKdcRhPeLWmi3Vfdl9Jg5E"];
     return YES;
+    
+
+        
+        //[[UIApplication sharedApplication] cancelAllLocalNotifications];
+        
+
+    
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application
