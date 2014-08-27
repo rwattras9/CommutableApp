@@ -332,17 +332,23 @@
     //if the locationsArray is empty (no locations exist), hide the Edit Location button, set text to Please Add a Location
     if (!self.locationsArray || !self.locationsArray.count){
         //moved the below to ViewDidLoad
-        //self.editStartingLocationButton.hidden = YES;
-        //self.editDestinationLocationButton.hidden = YES;
+        self.editStartingLocationButton.hidden = YES;
+        self.editDestinationLocationButton.hidden = YES;
         self.startingTapToChooseLabel.hidden = YES;
         self.destinationTapToChooseLabel.hidden = YES;
         self.startingLocationLabel.text = @"Add a Location";
         self.destinationLocationLabel.text = @"Add a Location";
         //need to disable expansion
+        self.startingLocationCell.userInteractionEnabled = NO;
+        self.destinationLocationCell.userInteractionEnabled = NO;
+        [self hideStartingLocationPickerCell];
+        [self hideDestinationLocationPickerCell];
     }
     else {
         self.startingTapToChooseLabel.hidden = NO;
         self.destinationTapToChooseLabel.hidden = NO;
+        self.destinationLocationCell.userInteractionEnabled = YES;
+        self.startingLocationCell.userInteractionEnabled = YES;
     }
     
     [self.existingStartingLocationsPicker reloadAllComponents];
