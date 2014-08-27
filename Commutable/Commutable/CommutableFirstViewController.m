@@ -58,16 +58,6 @@
 
 
 
-/*
-// called after the view appears (after it loads, or after the tab is clicked)
-- (void) viewDidAppear:(BOOL)animated
-{
-    NSLog(@"test3");
-    //[self fetchData];
-}
- */
-
-
 
 
 
@@ -349,7 +339,6 @@
 // we should be able to just add more dictionary calls here to grab the rest of the data methinks!
 -(void)addDirections:(NSDictionary *)json
 {
-    
     NSDictionary *routes = json[@"routes"][0];
     
     NSDictionary *legs = routes[@"legs"][0];
@@ -383,9 +372,11 @@
     destination.latitude = endLatDouble;
     destination.longitude = endLngDouble;
     
-    // add markers to the map for the origin and destination
+    // add markers to the map for the origin and destination, include address in marker title
     GMSMarker *startMarker = [GMSMarker markerWithPosition:origin];
+    startMarker.title = [self.originArray objectAtIndex:currentPage];
     GMSMarker *endMarker = [GMSMarker markerWithPosition:destination];
+    endMarker.title = [self.destinationArray objectAtIndex:currentPage];
     startMarker.map = mapView;
     endMarker.map = mapView;
     
@@ -402,12 +393,9 @@
     GMSCameraUpdate *update = [GMSCameraUpdate fitBounds:bounds];
     [mapView moveCamera:update];
     
-    NSLog(@"test3");
-    
     // update the text of the current UIlabel page showing
     NSString *dirText = [NSString stringWithFormat:@"Commute Name: %@\nDirections: Take %@.\nDistance = %@, Duration = %@", [self.commuteNameArray objectAtIndex:currentPage],routes[@"summary"], distanceText, durationText];
     [[self.labelArray objectAtIndex:currentPage] setText:dirText];
-    
 }
 
 

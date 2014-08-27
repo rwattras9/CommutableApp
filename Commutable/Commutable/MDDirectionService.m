@@ -77,13 +77,11 @@ static NSString *kMDDirectionsURL = @"http://maps.googleapis.com/maps/api/direct
                                      error:&error]; // read the JSON return into a dictionary
     
     // call the method the selector is pointing to (addDirections) and pass in the JSON return dictionary as a parameter
-  [delegate performSelector:selector
-                 withObject:json];
-    
-    //IMP imp = [delegate methodForSelector:selector];
-    //void (*func)(id, SEL) = (void *)imp;
-    //func(delegate, selector);
-    
+    // the pragmas silence a warning about a possible memory leak, which i don't think is possible so hopefully this is a fine solution
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+    [delegate performSelector:selector withObject:json];
+    #pragma clang diagnostic pop
 }
 
 @end
