@@ -19,18 +19,18 @@
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V1F-qM-HH5" customClass="GMSMapView">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="397"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" red="0.14509804546833038" green="0.60392159223556519" blue="0.18039216101169586" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="backgroundColor" red="0.30196079609999998" green="0.79607850309999995" blue="0.32941177490000001" alpha="1" colorSpace="deviceRGB"/>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zUt-Qn-Saj">
                                 <rect key="frame" x="0.0" y="397" width="320" height="86"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <color key="backgroundColor" red="0.094117656349999995" green="0.64313727620000005" blue="0.19215688110000001" alpha="1" colorSpace="deviceRGB"/>
-                                <color key="tintColor" red="0.086274512110000007" green="0.74117648599999997" blue="0.28627452250000002" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="backgroundColor" red="0.30196079611778259" green="0.79607850313186646" blue="0.32941177487373352" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="tintColor" red="0.30196079609999998" green="0.79607850309999995" blue="0.32941177490000001" alpha="1" colorSpace="deviceRGB"/>
                             </scrollView>
                             <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="AG6-f6-MMk">
                                 <rect key="frame" x="0.0" y="483" width="320" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.094117656349999995" green="0.64313727620000005" blue="0.23921570180000001" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="backgroundColor" red="0.30196079609999998" green="0.79607850309999995" blue="0.32941177490000001" alpha="1" colorSpace="deviceRGB"/>
                             </pageControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -768,6 +768,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <objects>
                 <tabBarController id="8YX-ce-x5E" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="JQR-rB-NYL">
                         <rect key="frame" x="0.0" y="431" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -788,6 +789,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="d5L-6l-eQv" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Commutes" image="CommutesTabIcon" id="BTb-iZ-OkW"/>
                     <toolbarItems/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="s9d-ph-7Js">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -806,6 +808,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="j6h-T4-pAW" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="olr-Rj-0ay">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -830,7 +833,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="9PJ-aG-Amd"/>
+        <segue reference="f63-ks-QhQ"/>
         <segue reference="oX2-Hu-3ST"/>
     </inferredMetricsTieBreakers>
 </document>
