@@ -154,7 +154,7 @@
                 //if (cell.accessoryType == UITableViewCellAccessoryCheckmark)
                 if (cell.accessoryType != UITableViewCellAccessoryNone)
                 {
-                    [cellsWithCheckMarks addObject:[NSNumber numberWithInt:checkmarkedRow]];
+                    [cellsWithCheckMarks addObject:[NSNumber numberWithInteger:checkmarkedRow]];
                     
                 }
             }_recurranceDays = cellsWithCheckMarks;

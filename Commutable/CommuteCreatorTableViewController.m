@@ -44,6 +44,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *destinationTapToChooseLabel;
 @property (assign) BOOL startingLocationPickerWasUsed;
 @property (assign) BOOL destinationLocationPickerWasUsed;
+@property (assign) BOOL alertTimeDatePickerWasUsed;
 
 - (NSString *)convertToWeekDayNames:(NSMutableArray*)recurrenceScheduleArray;
 - (void)cancelLocalNotification:(NSString*)notificationID;
@@ -92,8 +93,6 @@
     NSString *prettyVersion = [dateFormatter stringFromDate:self.alertTime];
     //NSLog(@"The selected time is %@", prettyVersion);
     self.alertTimeLabel.text = [NSString stringWithFormat:@"%@", prettyVersion];
-    //To do: Set the alert time to a commute property.
-    
     
 }
 //Sets the default value of Alert Date Picker
@@ -355,12 +354,21 @@
     [self.existingDestinationLocationsPicker reloadAllComponents];
 }
 
+/*I want to use this to find the index of a certain object
+ for (id locationObject in self.locationsArray){
+ 
+ if ([locationObject valueForKey:@"name"] == locationName) {
+ NSInteger selectedLocationIndex=[self.locationsArray indexOfObject:locationObject];
+ }
+ }*/
+
 
 //old method to pass data to List of Locations
 - (IBAction) unwindToCommuteCreatorTable:(UIStoryboardSegue *)segue
 {
     
 }
+
 
 //Method to convert array of numbers into a string of weekdays for label
 - (NSString *)convertToWeekDayNames:(NSMutableArray*)recurrenceScheduleArray {
@@ -483,6 +491,58 @@
 - (void) loadInitialData {
     
 }
+
+//States whether the segue should be performed
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
+    //Do nothing if it isn't the save button that triggers the segue
+    if (sender != self.commuteCreatorDoneButton) return YES;
+    else{
+        
+        if (![self.commuteNameLabel.text  isEqual: @"Name"]) {
+            //if we are creating a new commute, check to see if the UI pickers have been used
+            if (!self.commute) {
+                //if the starting location picker wasn't used for a new commute, don't perform the segue and tell user to select a starting point
+                if (self.startingLocationPickerWasUsed == YES) {
+                    if (self.destinationLocationPickerWasUsed == YES) {
+                        //if date picker wasn't used... The condition here is an inverse of all the rest, which is stupid.
+                        if ([self.alertTimeLabel.text isEqual: @"Alert Time"]) {
+                            self.alertTimeLabel.textColor = [UIColor redColor];
+                            return NO;
+                        }
+                        else {
+                            return YES;
+                        }
+                        
+                    }
+                    else {
+                        self.destinationLocationLabel.textColor = [UIColor redColor];
+                        return NO;
+                    }
+                }
+                else {
+                    self.startingLocationLabel.textColor = [UIColor redColor];
+                    return NO;
+                }
+            }
+            //if you are editing an existing commute, there is no need to do data integrity checks
+            else {
+                return YES;
+            }
+        }
+        else {
+            self.commuteNameLabel.text = @"Name the commute";
+            self.commuteNameLabel.textColor = [UIColor redColor];
+            return NO;
+
+            }
+            
+            
+        
+    
+        
+    }
+}
+
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -830,6 +890,7 @@
     
     self.startingLocationPickerWasUsed = NO;
     self.destinationLocationPickerWasUsed = NO;
+    self.alertTimeDatePickerWasUsed = NO;
     
     self.editStartingLocationButton.hidden = YES;
     self.editDestinationLocationButton.hidden = YES;

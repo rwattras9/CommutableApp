@@ -14,6 +14,9 @@
 @property (strong, nonatomic) IBOutlet UITextField *zipCodeTextField;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *saveNewLocationButton;
 @property (strong, nonatomic) IBOutlet UIButton *deleteLocationButton;
+@property (strong, nonatomic) IBOutlet UILabel *locationNameErrorLabel;
+@property (strong, nonatomic) IBOutlet UILabel *streetAddressErrorLabel;
+@property (strong, nonatomic) IBOutlet UILabel *zipCodeErrorLabel;
 
 @end
 
@@ -96,24 +99,27 @@
     
     //check to see if Location Name text field is populated
     if (self.locationNameTextField.text.length > 0){
-        
+        self.locationNameErrorLabel.hidden = YES;
         //check to see if Address text field is populated,
         if (self.streetAddressTextField.text.length > 0){
-            
+            self.streetAddressErrorLabel.hidden = YES;
             //check to see if Zip Code text field is populated
             if (self.zipCodeTextField.text.length == 5){
-                
+                self.zipCodeErrorLabel.hidden = YES;
                 return YES;
             }
             else {NSLog(@"Please enter a valid zip code");
+                self.locationNameErrorLabel.hidden = NO;
                 return NO;
             }}
         else {
             NSLog(@"Please enter a valid street address");
+            self.streetAddressErrorLabel.hidden = NO;
             return NO;
         }}
     else {
         NSLog(@"Please enter a valid location name");
+        self.zipCodeErrorLabel.hidden = NO;
         return NO;
     }
     }
