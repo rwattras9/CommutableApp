@@ -19,23 +19,23 @@
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V1F-qM-HH5" customClass="GMSMapView">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="397"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" red="0.30196079609999998" green="0.79607850309999995" blue="0.32941177490000001" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="backgroundColor" red="0.39607846736907959" green="0.87058830261230469" blue="0.47843140363693237" alpha="1" colorSpace="deviceRGB"/>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zUt-Qn-Saj">
                                 <rect key="frame" x="0.0" y="397" width="320" height="86"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <color key="backgroundColor" red="0.30196079611778259" green="0.79607850313186646" blue="0.32941177487373352" alpha="1" colorSpace="deviceRGB"/>
-                                <color key="tintColor" red="0.30196079609999998" green="0.79607850309999995" blue="0.32941177490000001" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="backgroundColor" red="0.20000000000000001" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.20000000000000001" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                             </scrollView>
                             <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="AG6-f6-MMk">
                                 <rect key="frame" x="0.0" y="483" width="320" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.30196079609999998" green="0.79607850309999995" blue="0.32941177490000001" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="backgroundColor" red="0.20000000000000001" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                             </pageControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Traffic Report" image="first" id="u1e-5L-l1D"/>
+                    <tabBarItem key="tabBarItem" title="Traffic Report" image="TrafficReportTabIcon" id="u1e-5L-l1D"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <connections>
                         <outlet property="mapView" destination="V1F-qM-HH5" id="Yxt-Bt-Rdu"/>
@@ -825,8 +825,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
     </scenes>
     <resources>
         <image name="CommutesTabIcon" width="50" height="50"/>
-        <image name="first" width="30" height="30"/>
+        <image name="TrafficReportTabIcon" width="30" height="30"/>
     </resources>
+    <color key="tintColor" red="0.22352942824363708" green="0.59215688705444336" blue="0.7137255072593689" alpha="1" colorSpace="deviceRGB"/>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
