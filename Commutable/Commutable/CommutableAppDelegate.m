@@ -23,11 +23,28 @@
     [GMSServices provideAPIKey:@"AIzaSyAUlmQMSyQyZEKdcRhPeLWmi3Vfdl9Jg5E"];
     return YES;
     
-
+    /*
+    // this flag will need to be stored somewhere non-volatile such as using CoreData
+    // or user defaults
+    if(flag == nil || [flag count] ==0){
         
-        //[[UIApplication sharedApplication] cancelAllLocalNotifications];
+        [[UIApplication sharedApplication] cancelAllLocalNotifications];
         
+        // update your flag so that it fails this check on any subsequent launches
+        flag = 1;
+    }*/
 
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedOnce"])
+    {
+        // app already launched
+    }
+    else
+    {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasLaunchedOnce"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        // This is the first launch ever
+        [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    }
     
 }
 							

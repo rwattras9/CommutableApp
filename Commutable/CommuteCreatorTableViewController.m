@@ -93,6 +93,7 @@
     NSString *prettyVersion = [dateFormatter stringFromDate:self.alertTime];
     //NSLog(@"The selected time is %@", prettyVersion);
     self.alertTimeLabel.text = [NSString stringWithFormat:@"%@", prettyVersion];
+    self.alertTimeLabel.textColor = [UIColor blackColor];
     
 }
 //Sets the default value of Alert Date Picker
@@ -485,6 +486,7 @@
     // if value isn't nil...
     //if (source.commuteNameTextField.text !=)
     self.commuteNameLabel.text = source.commuteNameTextField.text;
+    self.commuteNameLabel.textColor = [UIColor blackColor];
 }
 
 
@@ -498,6 +500,32 @@
     if (sender != self.commuteCreatorDoneButton) return YES;
     else{
         
+        BOOL performSegue = YES;
+        
+        if ([self.commuteNameLabel.text  isEqual: @"Name"]) {
+            self.commuteNameLabel.textColor = [UIColor redColor];
+            performSegue = NO;
+        }
+        
+        //if we are creating a new commute, check to see if the UI pickers have been used
+        if (!self.commute) {
+            //if the starting location picker wasn't used for a new commute, don't perform the segue and tell user to select a starting point
+            if (self.startingLocationPickerWasUsed == NO) {
+                self.startingLocationLabel.textColor = [UIColor redColor];
+                performSegue = NO;
+            }
+            if (self.destinationLocationPickerWasUsed == NO) {
+                self.destinationLocationLabel.textColor = [UIColor redColor];
+                performSegue = NO;
+            }
+            if ([self.alertTimeLabel.text isEqual: @"Alert Time"]) {
+                self.alertTimeLabel.textColor = [UIColor redColor];
+                performSegue = NO;
+            }
+        }
+        return performSegue;
+        
+        /*
         if (![self.commuteNameLabel.text  isEqual: @"Name"]) {
             //if we are creating a new commute, check to see if the UI pickers have been used
             if (!self.commute) {
@@ -534,7 +562,7 @@
             self.commuteNameLabel.textColor = [UIColor redColor];
             return NO;
 
-            }
+            }*/
             
             
         
@@ -966,6 +994,7 @@
         _startingLocationLabel.text = [[self.locationsArray objectAtIndex:[_existingStartingLocationsPicker selectedRowInComponent:0]] valueForKey:@"name"];
         //a value was selected
         self.startingLocationPickerWasUsed = YES;
+        self.startingLocationLabel.textColor = [UIColor blackColor];
         //if an item is selected, show the edit button
         self.editStartingLocationButton.hidden = NO;
     }
@@ -974,6 +1003,7 @@
         _destinationLocationLabel.text = [[self.locationsArray objectAtIndex:[_existingDestinationLocationsPicker selectedRowInComponent:0]] valueForKey:@"name"];
         //a value was selected
         self.destinationLocationPickerWasUsed = YES;
+        self.destinationLocationLabel.textColor = [UIColor blackColor];
         //if an item is selected, show the edit button
         self.editDestinationLocationButton.hidden = NO;
     }

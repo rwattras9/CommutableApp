@@ -96,7 +96,7 @@
 {//Do nothing if it isn't the save button that triggers the segue
     if (sender != self.saveNewLocationButton) return YES;
     else{
-    
+    /*
     //check to see if Location Name text field is populated
     if (self.locationNameTextField.text.length > 0){
         self.locationNameErrorLabel.hidden = YES;
@@ -121,7 +121,29 @@
         NSLog(@"Please enter a valid location name");
         self.zipCodeErrorLabel.hidden = NO;
         return NO;
-    }
+    }*/
+        BOOL performSegue = YES;
+        
+        if (self.locationNameTextField.text && self.locationNameTextField.text.length > 0){
+            NSLog(@"The error should be hidden");
+            self.locationNameErrorLabel.hidden = YES;}
+        else {
+            NSLog(@"Please enter a valid location name");
+            self.locationNameErrorLabel.hidden = NO;
+            performSegue = NO;}
+        if (self.streetAddressTextField.text.length > 0){
+            self.streetAddressErrorLabel.hidden = YES;}
+        else {
+            NSLog(@"Please enter a valid street address");
+            self.streetAddressErrorLabel.hidden = NO;
+            performSegue = NO;}
+        if (self.zipCodeTextField.text.length == 5){
+            self.zipCodeErrorLabel.hidden = YES;}
+        else {NSLog(@"Please enter a valid zip code");
+            self.zipCodeErrorLabel.hidden = NO;
+            performSegue = NO;}
+        return performSegue;
+        
     }
 }
 
