@@ -14,6 +14,8 @@
 
 @interface CommutesTableViewController ()
 
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *createNewCommuteButton;
+
 - (void)cancelLocalNotification:(NSString*)notificationID;
 
 @end
@@ -39,7 +41,9 @@
     NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Commute"];
     self.commuteArray = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
-    
+    if (self.commuteArray.count == 5) {
+        self.createNewCommuteButton.enabled = NO;
+    }
     [self.tableView reloadData];
 }
 
@@ -156,9 +160,12 @@
             return;
         }
         
-        //remove the device from table view
+        //remove the commute from table view
         [self.commuteArray removeObjectAtIndex:indexPath.row];
-        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];}
+        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        self.createNewCommuteButton.enabled = YES;
+    }
+    
     
         /*
      else if (editingStyle == UITableViewCellEditingStyleInsert) {

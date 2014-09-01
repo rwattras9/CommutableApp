@@ -92,6 +92,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+                    <connections>
+                        <outlet property="createNewCommuteButton" destination="7XS-7v-cED" id="Jte-B6-g8b"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3EJ-D8-NtH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
