@@ -22,6 +22,7 @@
 		2C5B0002193A929D00A229EA /* Commutes Tab Car Icon 50px.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C5B0001193A929D00A229EA /* Commutes Tab Car Icon 50px.png */; };
 		2C6E3B8F19564797005FCB02 /* Car and Menu Icon 50px.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C6E3B8D19564797005FCB02 /* Car and Menu Icon 50px.png */; };
 		2C6E3B9019564797005FCB02 /* Car and Menu Icon 100px.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C6E3B8E19564797005FCB02 /* Car and Menu Icon 100px.png */; };
+		2C9C556019B42E8100C6012E /* CommutableTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C9C555F19B42E8100C6012E /* CommutableTabBarController.m */; };
 		2CA120D61929637C004825D4 /* Commutable.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2CA120D41929637C004825D4 /* Commutable.xcdatamodeld */; };
 		2CAEC215198407A000569703 /* CommuteAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAEC214198407A000569703 /* CommuteAlert.m */; };
 		2CAEC21819840A8500569703 /* CommuteNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAEC21719840A8500569703 /* CommuteNameViewController.m */; };
@@ -89,6 +90,8 @@
 		2C5BFFFF193A916700A229EA /* Commutes Tab Car Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Commutes Tab Car Icon.png"; sourceTree = "<group>"; };
 		2C6E3B8D19564797005FCB02 /* Car and Menu Icon 50px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Car and Menu Icon 50px.png"; sourceTree = "<group>"; };
 		2C6E3B8E19564797005FCB02 /* Car and Menu Icon 100px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Car and Menu Icon 100px.png"; sourceTree = "<group>"; };
+		2C9C555E19B42E8100C6012E /* CommutableTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommutableTabBarController.h; sourceTree = "<group>"; };
+		2C9C555F19B42E8100C6012E /* CommutableTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommutableTabBarController.m; sourceTree = "<group>"; };
 		2CA120D51929637C004825D4 /* Commutable.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Commutable.xcdatamodel; sourceTree = "<group>"; };
 		2CAEC213198407A000569703 /* CommuteAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommuteAlert.h; sourceTree = "<group>"; };
 		2CAEC214198407A000569703 /* CommuteAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommuteAlert.m; sourceTree = "<group>"; };
@@ -231,6 +234,8 @@
 				2CE53EF618F98C43005BCEC9 /* CommutableAppDelegate.m */,
 				2CA120D41929637C004825D4 /* Commutable.xcdatamodeld */,
 				2CE53EF818F98C43005BCEC9 /* Main.storyboard */,
+				2C9C555E19B42E8100C6012E /* CommutableTabBarController.h */,
+				2C9C555F19B42E8100C6012E /* CommutableTabBarController.m */,
 				2CE53EFB18F98C43005BCEC9 /* CommutableFirstViewController.h */,
 				2CE53EFC18F98C43005BCEC9 /* CommutableFirstViewController.m */,
 				2CE53F1E18F991AF005BCEC9 /* CommutesTableViewController.h */,
@@ -424,6 +429,7 @@
 				2CAEC215198407A000569703 /* CommuteAlert.m in Sources */,
 				2CD2000018FB3559005F1338 /* CommuteCreatorTableViewController.m in Sources */,
 				2CE53EF318F98C43005BCEC9 /* main.m in Sources */,
+				2C9C556019B42E8100C6012E /* CommutableTabBarController.m in Sources */,
 				2CE53EF718F98C43005BCEC9 /* CommutableAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
