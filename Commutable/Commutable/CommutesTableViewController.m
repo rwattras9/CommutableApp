@@ -32,6 +32,11 @@
     return context;
 }
 
+- (IBAction)commutesTableDoneButton:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
 //get location data from Core Data
 - (void)viewDidAppear:(BOOL)animated
 {

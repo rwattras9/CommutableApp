@@ -35,6 +35,7 @@
 
 
 
+
 // called before the view finishes loading, both on start and after tab is in focus
 - (void) viewWillAppear:(BOOL)animated
 {

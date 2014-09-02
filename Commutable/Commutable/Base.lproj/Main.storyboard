@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="8YX-ce-x5E">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="CZ4-MO-1fc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -22,20 +22,33 @@
                                 <color key="backgroundColor" red="0.39607846736907959" green="0.87058830261230469" blue="0.47843140363693237" alpha="1" colorSpace="deviceRGB"/>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zUt-Qn-Saj">
-                                <rect key="frame" x="0.0" y="397" width="320" height="86"/>
+                                <rect key="frame" x="0.0" y="397" width="320" height="134"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <color key="backgroundColor" red="0.20000000000000001" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" red="0.20000000000000001" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                             </scrollView>
                             <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="AG6-f6-MMk">
-                                <rect key="frame" x="0.0" y="483" width="320" height="37"/>
+                                <rect key="frame" x="0.0" y="531" width="320" height="37"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.20000000000000001" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                             </pageControl>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tWB-Mt-SEO">
+                                <rect key="frame" x="290" y="537" width="25" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <accessibility key="accessibilityConfiguration" label="Commutes">
+                                    <accessibilityTraits key="traits" none="YES" button="YES" image="YES"/>
+                                </accessibility>
+                                <inset key="titleEdgeInsets" minX="-140" minY="80" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="Commutes" image="Car and Menu Icon white 50px.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="d5L-6l-eQv" kind="modal" id="VyJ-89-IQA"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Traffic Report" image="TrafficReportTabIcon" id="u1e-5L-l1D"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <connections>
                         <outlet property="mapView" destination="V1F-qM-HH5" id="Yxt-Bt-Rdu"/>
@@ -47,7 +60,7 @@
                 <swipeGestureRecognizer direction="right" id="15p-0M-iV0"/>
                 <swipeGestureRecognizer direction="right" id="oxl-l4-oAQ"/>
             </objects>
-            <point key="canvasLocation" x="622" y="-166"/>
+            <point key="canvasLocation" x="192" y="560"/>
         </scene>
         <!--Commutes Table View Controller - Commutes-->
         <scene sceneID="cBe-Hy-fao">
@@ -85,6 +98,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Commutes" id="vvy-P3-rPr">
+                        <barButtonItem key="leftBarButtonItem" title="Done" id="osl-3E-kPV">
+                            <connections>
+                                <action selector="commutesTableDoneButton:" destination="o2j-li-IZm" id="Wdn-rV-Yx9"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="7XS-7v-cED">
                             <connections>
                                 <segue destination="j6h-T4-pAW" kind="modal" id="Zu5-tB-z7j"/>
@@ -766,26 +784,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="2436" y="368"/>
         </scene>
-        <!--Commutable Tab Bar Controller-->
-        <scene sceneID="Vex-rW-GRa">
-            <objects>
-                <tabBarController id="8YX-ce-x5E" customClass="CommutableTabBarController" sceneMemberID="viewController">
-                    <nil key="simulatedBottomBarMetrics"/>
-                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="JQR-rB-NYL">
-                        <rect key="frame" x="0.0" y="431" width="320" height="49"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="CZ4-MO-1fc" kind="relationship" relationship="viewControllers" id="SUk-Ux-ee1"/>
-                        <segue destination="d5L-6l-eQv" kind="relationship" relationship="viewControllers" id="uJ4-Wq-k3H"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="FNP-y4-bzi" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="132" y="180"/>
-        </scene>
         <!--Navigation Controller - Commutes-->
         <scene sceneID="lKF-Li-QNY">
             <objects>
@@ -827,8 +825,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         </scene>
     </scenes>
     <resources>
+        <image name="Car and Menu Icon white 50px.png" width="50" height="50"/>
         <image name="CommutesTabIcon" width="50" height="50"/>
-        <image name="TrafficReportTabIcon" width="30" height="30"/>
     </resources>
     <color key="tintColor" red="0.22352942824363708" green="0.59215688705444336" blue="0.7137255072593689" alpha="1" colorSpace="deviceRGB"/>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

@@ -18,5 +18,6 @@
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 
 @property (nonatomic, strong) NSMutableArray *commuteArray;
+@property (strong, nonatomic) IBOutlet UIImageView *commutesListIcon;
 
 @end
