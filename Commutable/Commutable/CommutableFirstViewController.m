@@ -7,7 +7,7 @@
 //
 
 #import "CommutableFirstViewController.h"
-#import "MDDirectionService.h"
+#import "DirectionService.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface CommutableFirstViewController () <GMSMapViewDelegate>
@@ -82,6 +82,8 @@
     mapView.settings.compassButton = YES;
     mapView.settings.myLocationButton = YES;
     mapView.trafficEnabled = YES;
+    
+    
     
     // add the map subview to the main view
     [self.view addSubview:mapView];
@@ -323,7 +325,7 @@
                              @"originZip" : originZip,
                              @"destination" : destination,
                              @"destZip" : destZip};
-    MDDirectionService *mds = [[MDDirectionService alloc] init];
+    DirectionService *mds = [[DirectionService alloc] init];
     SEL selector = @selector(addDirections:);
     [mds setDirectionsQuery:query
                withSelector:selector
@@ -386,7 +388,8 @@
     NSString *overview_route = route[@"points"];
     GMSPath *path = [GMSPath pathFromEncodedPath:overview_route];
     GMSPolyline *polyline = [GMSPolyline polylineWithPath:path];
-    polyline.strokeWidth = 8;
+    polyline.strokeWidth = 5;
+    polyline.zIndex = 1;
     polyline.map = mapView;
     
     // focus camera on route (still working on this..). It's being overruled by the method that's focusing on your location I believe

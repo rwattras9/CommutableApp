@@ -1,21 +1,21 @@
 //
-//  MDDirectionService.m
-//  MapsDirections
+//  DirectionService.m
+//  Commutable
 //
-//  Created by Mano Marks on 4/8/13.
-//  Copyright (c) 2013 Google. All rights reserved.
+//  Created by Edward Damisch and Rick Wattras on 4/12/14.
+//  Copyright (c) 2014 Commutable. All rights reserved.
 //
 
-#import "MDDirectionService.h"
+#import "DirectionService.h"
 
-@interface MDDirectionService()
+@interface DirectionService()
 @property (assign, nonatomic) BOOL sensor;
 @property (assign, nonatomic) BOOL alternatives;
 @property (strong, nonatomic) NSURL *directionsURL;
 @property (strong, nonatomic) NSArray *waypoints;
 @end
 
-@implementation MDDirectionService
+@implementation DirectionService
 
 static NSString *kMDDirectionsURL = @"http://maps.googleapis.com/maps/api/directions/json?"; // directions api URL query string
 

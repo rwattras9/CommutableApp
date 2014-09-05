@@ -1,14 +1,14 @@
 //
-//  MDDirectionService.h
-//  MapsDirections
+//  DirectionService.h
+//  Commutable
 //
-//  Created by Mano Marks on 4/8/13.
-//  Copyright (c) 2013 Google. All rights reserved.
+//  Created by Edward Damisch and Rick Wattras on 4/12/14.
+//  Copyright (c) 2014 Commutable. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
-@interface MDDirectionService : NSObject
+@interface DirectionService : NSObject
 
 // method that takes the inputted info and creates a directions query
 - (void)setDirectionsQuery:(NSDictionary *)object withSelector:(SEL)selector
