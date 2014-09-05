@@ -484,9 +484,13 @@
 - (IBAction)unwindFromCommuteNameToCommuteCreatorTable:(UIStoryboardSegue *)segue {
     CommuteNameViewController *source = [segue sourceViewController];
     // if value isn't nil...
-    //if (source.commuteNameTextField.text !=)
-    self.commuteNameLabel.text = source.commuteNameTextField.text;
-    self.commuteNameLabel.textColor = [UIColor blackColor];
+    if ([source.commuteNameTextField.text isEqual: @""]) {
+        //do nothing
+    }
+    else {
+        self.commuteNameLabel.text = source.commuteNameTextField.text;
+        self.commuteNameLabel.textColor = [UIColor blackColor];
+    }
 }
 
 

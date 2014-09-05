@@ -21,7 +21,16 @@
     // Override point for customization after application launch.
     // Add in your API key here:
     [GMSServices provideAPIKey:@"AIzaSyAUlmQMSyQyZEKdcRhPeLWmi3Vfdl9Jg5E"];
-    return YES;
+    
+    // see if we've been woken by a notification
+    NSDictionary *notificationOptions = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+    
+    if ([notificationOptions objectForKey:@"notificationID"]) {
+        NSLog(@"The app was launched from a local notification for %@", [notificationOptions objectForKey:@"notificationID"]);
+    } else {
+        NSLog(@"Haven't been launched as a result of a local notification");
+    }
+    
     
     /*
     // this flag will need to be stored somewhere non-volatile such as using CoreData
@@ -35,17 +44,24 @@
     }*/
 
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedOnce"])
-    {
+    {   NSLog(@"The application has launched before");
         // app already launched
     }
     else
-    {
+    {   NSLog(@"It's already launched before");
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasLaunchedOnce"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         // This is the first launch ever
         [[UIApplication sharedApplication] cancelAllLocalNotifications];
     }
     
+    return YES;
+    
+}
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+    
+    NSLog(@"A local notification was just sent for: %@", [notification.userInfo objectForKey:@"notificationID"]);
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application

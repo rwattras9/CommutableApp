@@ -28,7 +28,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     if (self.commuteName) {
-        self.commuteNameTextField.text = self.commuteName;
+        
+        if (![self.commuteName isEqual:@"Name"]){
+            self.commuteNameTextField.text = self.commuteName;
+        }
     }
 
     self.commuteNameTextField.delegate = self;
@@ -67,6 +70,20 @@
 }*/
 
 #pragma mark - Navigation
+
+/*
+//States whether the segue should be performed
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
+    
+    
+    if ([self.commuteNameTextField.text  isEqual: @"Name"]) {
+        return NO;
+    }
+    else {
+        return YES;
+    }
+    
+}*/
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
