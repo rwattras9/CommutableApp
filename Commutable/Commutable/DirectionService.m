@@ -17,7 +17,7 @@
 
 @implementation DirectionService
 
-static NSString *kMDDirectionsURL = @"http://maps.googleapis.com/maps/api/directions/json?"; // directions api URL query string
+static NSString *directionsURL = @"http://maps.googleapis.com/maps/api/directions/json?"; // directions api URL query string
 
 // method to set the directions query
 // accepts arguments: dictionary query, selector, and delegate
@@ -34,7 +34,7 @@ static NSString *kMDDirectionsURL = @"http://maps.googleapis.com/maps/api/direct
     NSString *sensor = query[@"sensor"]; // get sensor info from the query. sensor is used to tell Google Maps you're using a 'sensor' to locate the user. fine to be false.
     NSMutableString *url =
     [NSMutableString stringWithFormat:@"%@&origin=%@, %@&destination=%@, %@&sensor=%@",
-            kMDDirectionsURL, origin, originZip, destination, destZip, sensor]; // start building the url with the origin, destination, and sensor info extracted from the query
+            directionsURL, origin, originZip, destination, destZip, sensor]; // start building the url with the origin, destination, and sensor info extracted from the query
     
 
     url = [[url

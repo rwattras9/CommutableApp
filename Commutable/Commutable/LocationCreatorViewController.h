@@ -15,4 +15,8 @@
 @property LocationItem *locationItem;
 @property (strong) NSManagedObject *location;
 
+
+// added by Rick for passing current location info
+@property (strong) NSDictionary *currentLocationDictionary;
+
 @end

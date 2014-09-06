@@ -9,6 +9,7 @@
 #import "CommutableFirstViewController.h"
 #import "DirectionService.h"
 #import <QuartzCore/QuartzCore.h>
+#import "LocationCreatorViewController.h"
 
 @interface CommutableFirstViewController () <GMSMapViewDelegate>
 @property (nonatomic, retain) CLLocationManager *locationManager;
@@ -401,6 +402,49 @@
     NSString *dirText = [NSString stringWithFormat:@"Commute Name: %@\nDirections: Take %@.\nDistance = %@, Duration = %@", [self.commuteNameArray objectAtIndex:currentPage],routes[@"summary"], distanceText, durationText];
     [[self.labelArray objectAtIndex:currentPage] setText:dirText];
 }
+
+
+
+
+
+
+//for passing current location info to Location Creator screen
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if([segue.identifier isEqualToString:@"showDetailSegue"]){
+        LocationCreatorViewController *controller = (LocationCreatorViewController *)segue.destinationViewController;
+        controller.currentLocationDictionary = [self getCurrentLocationAddress];
+    }
+}
+
+
+
+
+// get the current location
+-(NSDictionary*)getCurrentLocationAddress
+{
+    static NSString *coordToAddressString = @"https://maps.googleapis.com/maps/api/geocode/json?latlng"; // begin reverse geocoding api URL query string
+    NSString *currentLat = [NSString stringWithFormat:@"%g", mapView.myLocation.coordinate.latitude];
+    NSString *currentLong = [NSString stringWithFormat:@"%g", mapView.myLocation.coordinate.longitude];
+    
+    NSMutableString *url = [NSMutableString stringWithFormat:@"%@=%@,%@", coordToAddressString, currentLat, currentLong];
+    
+    url = [[url
+            stringByAddingPercentEscapesUsingEncoding: NSASCIIStringEncoding] mutableCopy]; // turn the query into a viable URL with %20 escapes for spaces, etc
+    
+    NSURL* coordToAddressURL = [NSURL URLWithString:url]; // turn the finshed URL query into the global variable of type NSURL
+    
+    NSData* data = [NSData dataWithContentsOfURL:coordToAddressURL]; // create a data variable to store the return, make the call
+    
+    NSError* error;
+    NSDictionary *tempDict = [NSJSONSerialization
+                          JSONObjectWithData:data
+                          options:kNilOptions
+                          error:&error]; // read the JSON return into a dictionary
+    return tempDict;
+}
+
+
+
 
 
 

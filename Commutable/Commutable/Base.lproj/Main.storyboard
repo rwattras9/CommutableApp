@@ -54,6 +54,7 @@
                         <outlet property="mapView" destination="V1F-qM-HH5" id="Yxt-Bt-Rdu"/>
                         <outlet property="pageControl" destination="AG6-f6-MMk" id="Egz-kj-0xr"/>
                         <outlet property="scrollView" destination="zUt-Qn-Saj" id="boK-MY-4Ty"/>
+                        <segue destination="qfm-4w-opH" kind="push" identifier="currentLocationSegue" id="BaF-aQ-B20"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qh2-T1-AhA" sceneMemberID="firstResponder"/>
@@ -836,6 +837,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="9PJ-aG-Amd"/>
-        <segue reference="oX2-Hu-3ST"/>
+        <segue reference="BaF-aQ-B20"/>
     </inferredMetricsTieBreakers>
 </document>
