@@ -27,28 +27,19 @@
     
     if ([notificationOptions objectForKey:@"notificationID"]) {
         NSLog(@"The app was launched from a local notification for %@", [notificationOptions objectForKey:@"notificationID"]);
+        //NSString *commuteName = [notificationOptions objectForKey:@"notificationID"];
+        //[CommutableFirstViewController displayCommute:commuteName];  // custom method
     } else {
         NSLog(@"Haven't been launched as a result of a local notification");
     }
     
-    
-    /*
-    // this flag will need to be stored somewhere non-volatile such as using CoreData
-    // or user defaults
-    if(flag == nil || [flag count] ==0){
-        
-        [[UIApplication sharedApplication] cancelAllLocalNotifications];
-        
-        // update your flag so that it fails this check on any subsequent launches
-        flag = 1;
-    }*/
-
+    //NSLog(@"The value for HasLaunchedOnce is %@", [[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedOnce"]);
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedOnce"])
     {   NSLog(@"The application has launched before");
         // app already launched
     }
     else
-    {   NSLog(@"It's already launched before");
+    {   NSLog(@"It's never launched before.");
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasLaunchedOnce"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         // This is the first launch ever
