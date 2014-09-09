@@ -155,6 +155,7 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <color key="tintColor" red="0.44705885649999999" green="0.81960791349999995" blue="0.87058830259999997" alpha="1" colorSpace="deviceRGB"/>
                                         <connections>
                                             <segue destination="TQI-zy-Snq" kind="push" identifier="editCommuteName" id="7Yd-Qi-lMn"/>
                                         </connections>
@@ -846,6 +847,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="9PJ-aG-Amd"/>
-        <segue reference="BaF-aQ-B20"/>
+        <segue reference="oX2-Hu-3ST"/>
     </inferredMetricsTieBreakers>
 </document>

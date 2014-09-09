@@ -186,7 +186,19 @@
     }
 }
 
-
+//display the commute based on the commute name passed in. This method may still change a lot.
+- (NSInteger) displayCommute:(NSString *)commuteName {
+    NSInteger commuteIndex=[self.commuteNameArray indexOfObject:commuteName];
+    if(NSNotFound == commuteIndex) {
+        NSLog(@"Commute not found");
+        //there's probably a better way to do this.
+        commuteIndex = 255;
+        return commuteIndex;
+    }
+    else {
+        return commuteIndex;
+    }
+}
 
 
 // create the uilabels for the commutes to go within the scroll view

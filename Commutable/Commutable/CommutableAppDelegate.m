@@ -8,6 +8,7 @@
 
 #import "CommutableAppDelegate.h"
 #import <GoogleMaps/GoogleMaps.h>
+#import "CommutableFirstViewController.h"
 
 @implementation CommutableAppDelegate
 
@@ -27,8 +28,10 @@
     
     if ([notificationOptions objectForKey:@"notificationID"]) {
         NSLog(@"The app was launched from a local notification for %@", [notificationOptions objectForKey:@"notificationID"]);
-        //NSString *commuteName = [notificationOptions objectForKey:@"notificationID"];
-        //[CommutableFirstViewController displayCommute:commuteName];  // custom method
+        NSString *commuteName = [notificationOptions objectForKey:@"notificationID"];
+        CommutableFirstViewController* mainViewController = (CommutableFirstViewController*)  self.window.rootViewController;
+        [mainViewController displayCommute:commuteName];  // custom method
+         
     } else {
         NSLog(@"Haven't been launched as a result of a local notification");
     }

@@ -21,4 +21,6 @@
 @property (nonatomic, strong) NSMutableArray *commuteArray;
 @property (strong, nonatomic) IBOutlet UIImageView *commutesListIcon;
 
+- (NSInteger)displayCommute:(NSString*)commuteName;
+
 @end
