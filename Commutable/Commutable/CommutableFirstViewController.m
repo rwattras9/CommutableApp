@@ -186,6 +186,13 @@
     }
 }
 
+
+
+
+
+
+
+
 //display the commute based on the commute name passed in. This method may still change a lot.
 - (NSInteger) displayCommute:(NSString *)commuteName {
     NSInteger commuteIndex=[self.commuteNameArray indexOfObject:commuteName];
@@ -199,6 +206,11 @@
         return commuteIndex;
     }
 }
+
+
+
+
+
 
 
 // create the uilabels for the commutes to go within the scroll view
@@ -422,8 +434,12 @@
 
 //for passing current location info to Location Creator screen
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if([segue.identifier isEqualToString:@"showDetailSegue"]){
-        LocationCreatorViewController *controller = (LocationCreatorViewController *)segue.destinationViewController;
+    NSLog(@"segue = %@", segue.identifier);
+    
+    if([segue.identifier isEqualToString:@"currentLocationSegue"]){
+        NSLog(@"preparing for segue");
+        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
+        LocationCreatorViewController *controller = (LocationCreatorViewController *)navController.topViewController;
         controller.currentLocationDictionary = [self getCurrentLocationAddress];
     }
 }
@@ -434,6 +450,10 @@
 // get the current location
 -(NSDictionary*)getCurrentLocationAddress
 {
+    NSLog(@"getting location address");
+    NSLog(@"latitude = %f", mapView.myLocation.coordinate.latitude);
+    NSLog(@"longitude = %f", mapView.myLocation.coordinate.longitude);
+    
     static NSString *coordToAddressString = @"https://maps.googleapis.com/maps/api/geocode/json?latlng"; // begin reverse geocoding api URL query string
     NSString *currentLat = [NSString stringWithFormat:@"%g", mapView.myLocation.coordinate.latitude];
     NSString *currentLong = [NSString stringWithFormat:@"%g", mapView.myLocation.coordinate.longitude];
@@ -445,6 +465,8 @@
     
     NSURL* coordToAddressURL = [NSURL URLWithString:url]; // turn the finshed URL query into the global variable of type NSURL
     
+    NSLog(@"URL = %@", coordToAddressURL);
+    
     NSData* data = [NSData dataWithContentsOfURL:coordToAddressURL]; // create a data variable to store the return, make the call
     
     NSError* error;
@@ -452,6 +474,10 @@
                           JSONObjectWithData:data
                           options:kNilOptions
                           error:&error]; // read the JSON return into a dictionary
+    
+    NSLog(@"error = %@", error);
+    NSLog(@"here..");
+    
     return tempDict;
 }
 

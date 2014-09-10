@@ -17,11 +17,13 @@
 @property (strong, nonatomic) IBOutlet UILabel *locationNameErrorLabel;
 @property (strong, nonatomic) IBOutlet UILabel *streetAddressErrorLabel;
 @property (strong, nonatomic) IBOutlet UILabel *zipCodeErrorLabel;
+@property (strong, nonatomic) IBOutlet UIButton *useCurrentLocationButton;
 
 @end
 
 @implementation LocationCreatorViewController
 @synthesize location;
+@synthesize currentLocationDictionary;
 
 
 - (NSManagedObjectContext *)managedObjectContext {
@@ -64,6 +66,22 @@
     
         
 }
+
+// when Use Current Location Button is clicked, grab location dictionary from segue and place info in correct text boxes
+- (IBAction)useCurrentLocation:(id)sender {
+    
+    NSDictionary *results = currentLocationDictionary[@"results"][0];
+    NSDictionary *address_componentsSTRNUM = results[@"address_components"][0];
+    NSDictionary *address_componentsSTRADD = results[@"address_components"][1];
+    NSDictionary *address_componentsZIP = results[@"address_components"][7];
+
+    [self.streetAddressTextField setText:[NSString stringWithFormat:@"%@ %@", address_componentsSTRNUM[@"short_name"], address_componentsSTRADD[@"short_name"]]];
+    [self.zipCodeTextField setText:[NSString stringWithFormat:@"%@", address_componentsZIP[@"short_name"]]];
+    
+}
+
+
+
 
 - (void)viewDidLoad
 {
