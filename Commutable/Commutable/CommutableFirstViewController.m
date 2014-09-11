@@ -9,7 +9,7 @@
 #import "CommutableFirstViewController.h"
 #import "DirectionService.h"
 #import <QuartzCore/QuartzCore.h>
-#import "LocationCreatorViewController.h"
+#import "CommutesTableViewController.h"
 
 @interface CommutableFirstViewController () <GMSMapViewDelegate>
 @property (nonatomic, retain) CLLocationManager *locationManager;
@@ -27,6 +27,7 @@
 
 @implementation CommutableFirstViewController{
     BOOL firstLocationUpdate_;
+    BOOL cameFromLocalNotification;
     bool needToClearLabel;
     int currentPage;
 }
@@ -203,6 +204,8 @@
         return commuteIndex;
     }
     else {
+        cameFromLocalNotification = YES;
+        currentPage = commuteIndex;
         return commuteIndex;
     }
 }
@@ -247,10 +250,24 @@
     self.scrollView.contentSize = CGSizeMake(scrollView.frame.size.width * [self.commuteArray count], scrollView.frame.size.height);
     
     // when the scroll view is done loading, send the query for the first commute
-    [self setOrigin:[self.originArray objectAtIndex:0]
-       setOriginZip:[self.originZipArray objectAtIndex:0]
-     setDestination:[self.destinationArray objectAtIndex:0]
-         setDestZip:[self.destinationZipArray objectAtIndex:0]];
+    if (cameFromLocalNotification)
+    {
+        self.pageControl.currentPage = currentPage;
+        
+        [self setOrigin:[self.originArray objectAtIndex:currentPage]
+           setOriginZip:[self.originZipArray objectAtIndex:currentPage]
+         setDestination:[self.destinationArray objectAtIndex:currentPage]
+             setDestZip:[self.destinationZipArray objectAtIndex:currentPage]];
+        
+        cameFromLocalNotification = NO;
+    }
+    else if (!cameFromLocalNotification)
+    {
+        [self setOrigin:[self.originArray objectAtIndex:0]
+           setOriginZip:[self.originZipArray objectAtIndex:0]
+         setDestination:[self.destinationArray objectAtIndex:0]
+             setDestZip:[self.destinationZipArray objectAtIndex:0]];
+    }
     
 }
 
@@ -432,28 +449,22 @@
 
 
 
-//for passing current location info to Location Creator screen
+//for passing current location info to next screen
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    NSLog(@"segue = %@", segue.identifier);
     
-    if([segue.identifier isEqualToString:@"currentLocationSegue"]){
-        NSLog(@"preparing for segue");
-        UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
-        LocationCreatorViewController *controller = (LocationCreatorViewController *)navController.topViewController;
-        controller.currentLocationDictionary = [self getCurrentLocationAddress];
-    }
+    NSLog(@"preparing for segue");
+    UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
+    CommutesTableViewController *controller = (CommutesTableViewController *)navController.topViewController;
+    controller.currentLocationDictionary = [self getCurrentLocationAddress];
+
 }
 
 
 
 
-// get the current location
+// get the current location by calling the reverse geocoding api with the current coordinates; returns a dictionary of the json query result
 -(NSDictionary*)getCurrentLocationAddress
 {
-    NSLog(@"getting location address");
-    NSLog(@"latitude = %f", mapView.myLocation.coordinate.latitude);
-    NSLog(@"longitude = %f", mapView.myLocation.coordinate.longitude);
-    
     static NSString *coordToAddressString = @"https://maps.googleapis.com/maps/api/geocode/json?latlng"; // begin reverse geocoding api URL query string
     NSString *currentLat = [NSString stringWithFormat:@"%g", mapView.myLocation.coordinate.latitude];
     NSString *currentLong = [NSString stringWithFormat:@"%g", mapView.myLocation.coordinate.longitude];
@@ -465,8 +476,6 @@
     
     NSURL* coordToAddressURL = [NSURL URLWithString:url]; // turn the finshed URL query into the global variable of type NSURL
     
-    NSLog(@"URL = %@", coordToAddressURL);
-    
     NSData* data = [NSData dataWithContentsOfURL:coordToAddressURL]; // create a data variable to store the return, make the call
     
     NSError* error;
@@ -474,9 +483,6 @@
                           JSONObjectWithData:data
                           options:kNilOptions
                           error:&error]; // read the JSON return into a dictionary
-    
-    NSLog(@"error = %@", error);
-    NSLog(@"here..");
     
     return tempDict;
 }

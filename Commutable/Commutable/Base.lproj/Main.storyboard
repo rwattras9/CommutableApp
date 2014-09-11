@@ -63,14 +63,13 @@
                         <outlet property="mapView" destination="V1F-qM-HH5" id="Yxt-Bt-Rdu"/>
                         <outlet property="pageControl" destination="AG6-f6-MMk" id="Egz-kj-0xr"/>
                         <outlet property="scrollView" destination="zUt-Qn-Saj" id="boK-MY-4Ty"/>
-                        <segue destination="d5L-6l-eQv" kind="push" identifier="currentLocationSegue" id="XLx-lk-YXD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qh2-T1-AhA" sceneMemberID="firstResponder"/>
                 <swipeGestureRecognizer direction="right" id="15p-0M-iV0"/>
                 <swipeGestureRecognizer direction="right" id="oxl-l4-oAQ"/>
             </objects>
-            <point key="canvasLocation" x="192" y="560"/>
+            <point key="canvasLocation" x="196" y="566"/>
         </scene>
         <!--Commutes Table View Controller - Commutes-->
         <scene sceneID="cBe-Hy-fao">
@@ -804,7 +803,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YJB-aV-HdM" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Rwd-ra-nTm" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2436" y="368"/>
+            <point key="canvasLocation" x="2436" y="402"/>
         </scene>
         <!--Navigation Controller - Commutes-->
         <scene sceneID="lKF-Li-QNY">
@@ -858,8 +857,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="9PJ-aG-Amd"/>
         <segue reference="oX2-Hu-3ST"/>
-        <segue reference="f63-ks-QhQ"/>
-        <segue reference="XLx-lk-YXD"/>
     </inferredMetricsTieBreakers>
 </document>

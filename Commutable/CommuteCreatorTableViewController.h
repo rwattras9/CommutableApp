@@ -19,6 +19,9 @@
 @property CommuteItem *commuteItem;
 @property (strong) NSManagedObject *commute;
 
+// added by Rick for passing current location info
+@property (strong) NSDictionary *currentLocationDictionary;
+
 //Unwind Transition to go back to CommuteCreatorTableViewController
 - (IBAction)unwindToCommuteCreatorTable:(UIStoryboardSegue *)segue;
 

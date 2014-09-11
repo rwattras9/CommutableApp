@@ -54,6 +54,8 @@
 
 @implementation CommuteCreatorTableViewController
 @synthesize commute;
+@synthesize currentLocationDictionary;
+
 - (IBAction)sendAlert:(id)sender {
     
     
@@ -615,6 +617,10 @@
         NSLog(@"The selected Location is %@", selectedLocation);
         LocationCreatorViewController *destViewController = segue.destinationViewController;
         destViewController.location = selectedLocation;
+        
+        // added by Rick for passing current location
+        destViewController.currentLocationDictionary = currentLocationDictionary;
+        
     }
     
     //if sender is destination location edit button, prepare to edit a location by passing location information
@@ -623,6 +629,27 @@
         NSLog(@"The selected Location is %@", selectedLocation);
         LocationCreatorViewController *destViewController = segue.destinationViewController;
         destViewController.location = selectedLocation;
+        
+        // added by Rick for passing current location
+        destViewController.currentLocationDictionary = currentLocationDictionary;
+    }
+    
+    //if sender is  starting location add button, prepare to edit a location by passing location information
+    if ([[segue identifier] isEqualToString:@"StartingLocationEditor"]) {
+        LocationCreatorViewController *destViewController = segue.destinationViewController;
+        
+        // added by Rick for passing current location
+        destViewController.currentLocationDictionary = currentLocationDictionary;
+        
+    }
+    
+    //if sender is  destination location add button, prepare to edit a location by passing location information
+    if ([[segue identifier] isEqualToString:@"DestinationLocationEditor"]) {
+        LocationCreatorViewController *destViewController = segue.destinationViewController;
+        
+        // added by Rick for passing current location
+        destViewController.currentLocationDictionary = currentLocationDictionary;
+        
     }
     
     if (sender == self.commuteCreatorDoneButton) {

@@ -21,6 +21,7 @@
 @end
 
 @implementation CommutesTableViewController
+@synthesize currentLocationDictionary;
 
 - (NSManagedObjectContext *)managedObjectContext
 {
@@ -206,6 +207,9 @@
         CommuteCreatorTableViewController *destViewController = segue.destinationViewController;
         NSLog(@"The selected commute is %@", selectedCommute);
         destViewController.commute = selectedCommute;
+        
+        // rick still passing current location
+        destViewController.currentLocationDictionary = currentLocationDictionary;
         
     }
     // Get the new view controller using [segue destinationViewController].

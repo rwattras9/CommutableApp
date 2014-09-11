@@ -10,6 +10,9 @@
 
 @interface CommutesTableViewController : UITableViewController
 
+// added by Rick for passing current location info
+@property (strong) NSDictionary *currentLocationDictionary;
+
 
 -(IBAction)unwindToCommutesTable:(UIStoryboardSegue *)segue;
 
