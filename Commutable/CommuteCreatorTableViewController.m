@@ -719,11 +719,11 @@
                     //interate through the repeatIntervalDays and schedule a local notification for each
                     for (id dayOfTheWeek in repeatIntervalDays) {
                         UILocalNotification *commuteNotification = [[UILocalNotification alloc] init];
-                        NSCalendar *gregCalendar = [[NSCalendar alloc]initWithCalendarIdentifier:NSGregorianCalendar];
-                        NSDateComponents *dateComponent = [gregCalendar components:NSYearCalendarUnit  | NSWeekCalendarUnit fromDate:[NSDate date]];
+                        NSCalendar *gregCalendar = [[NSCalendar alloc]initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+                        NSDateComponents *dateComponent = [gregCalendar components:NSCalendarUnitYear  | NSCalendarUnitWeekOfYear fromDate:[NSDate date]];
                         
                         NSCalendar *calendar = [NSCalendar currentCalendar];
-                        NSDateComponents *fireTimeComponents = [calendar components:(NSHourCalendarUnit | NSMinuteCalendarUnit) fromDate:fireTime];
+                        NSDateComponents *fireTimeComponents = [calendar components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:fireTime];
                         NSInteger hour = [fireTimeComponents hour];
                         NSInteger minute = [fireTimeComponents minute];
                         
@@ -738,7 +738,7 @@
                         commuteNotification.fireDate = fireDate;
                         
                         //notification should repeat weekly
-                        commuteNotification.repeatInterval = NSWeekCalendarUnit;
+                        commuteNotification.repeatInterval = NSCalendarUnitWeekOfYear;
                         
                         //calculate time of day
                         NSString *timeOfDay = [[NSString alloc] init];
@@ -833,11 +833,11 @@
                     //interate through the repeatIntervalDays and schedule a local notification for each
                     for (id dayOfTheWeek in repeatIntervalDays) {
                         UILocalNotification *commuteNotification = [[UILocalNotification alloc] init];
-                        NSCalendar *gregCalendar = [[NSCalendar alloc]initWithCalendarIdentifier:NSGregorianCalendar];
-                        NSDateComponents *dateComponent = [gregCalendar components:NSYearCalendarUnit  | NSWeekCalendarUnit fromDate:[NSDate date]];
+                        NSCalendar *gregCalendar = [[NSCalendar alloc]initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+                        NSDateComponents *dateComponent = [gregCalendar components:NSCalendarUnitYear  | NSCalendarUnitWeekOfYear fromDate:[NSDate date]];
                     
                         NSCalendar *calendar = [NSCalendar currentCalendar];
-                        NSDateComponents *fireTimeComponents = [calendar components:(NSHourCalendarUnit | NSMinuteCalendarUnit) fromDate:fireTime];
+                        NSDateComponents *fireTimeComponents = [calendar components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:fireTime];
                         NSInteger hour = [fireTimeComponents hour];
                         NSInteger minute = [fireTimeComponents minute];
                      
@@ -852,7 +852,7 @@
                         commuteNotification.fireDate = fireDate;
                     
                         //notification should repeat weekly
-                        commuteNotification.repeatInterval = NSWeekCalendarUnit;
+                        commuteNotification.repeatInterval = NSCalendarUnitWeekOfYear;
                         
                         //calculate time of day
                         NSString *timeOfDay = [[NSString alloc] init];

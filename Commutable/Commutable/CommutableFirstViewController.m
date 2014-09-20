@@ -205,7 +205,7 @@
     }
     else {
         cameFromLocalNotification = YES;
-        currentPage = commuteIndex;
+        currentPage = (int)commuteIndex;
         return commuteIndex;
     }
 }
