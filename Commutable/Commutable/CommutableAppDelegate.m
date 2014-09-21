@@ -49,6 +49,10 @@
         [[UIApplication sharedApplication] cancelAllLocalNotifications];
     }
     
+    UIUserNotificationType notificationTypes = UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
+    UIUserNotificationSettings *notificationSettings = [UIUserNotificationSettings settingsForTypes:notificationTypes categories:nil];
+    [[UIApplication sharedApplication] registerUserNotificationSettings:notificationSettings];
+    
     return YES;
     
 }
