@@ -531,48 +531,9 @@
         }
         return performSegue;
         
-        /*
-        if (![self.commuteNameLabel.text  isEqual: @"Name"]) {
-            //if we are creating a new commute, check to see if the UI pickers have been used
-            if (!self.commute) {
-                //if the starting location picker wasn't used for a new commute, don't perform the segue and tell user to select a starting point
-                if (self.startingLocationPickerWasUsed == YES) {
-                    if (self.destinationLocationPickerWasUsed == YES) {
-                        //if date picker wasn't used... The condition here is an inverse of all the rest, which is stupid.
-                        if ([self.alertTimeLabel.text isEqual: @"Alert Time"]) {
-                            self.alertTimeLabel.textColor = [UIColor redColor];
-                            return NO;
-                        }
-                        else {
-                            return YES;
-                        }
-                        
-                    }
-                    else {
-                        self.destinationLocationLabel.textColor = [UIColor redColor];
-                        return NO;
-                    }
-                }
-                else {
-                    self.startingLocationLabel.textColor = [UIColor redColor];
-                    return NO;
-                }
-            }
-            //if you are editing an existing commute, there is no need to do data integrity checks
-            else {
-                return YES;
-            }
-        }
-        else {
-            self.commuteNameLabel.text = @"Name the commute";
-            self.commuteNameLabel.textColor = [UIColor redColor];
-            return NO;
-
-            }*/
-            
-            
-        
-    
+        //check to see if notifications are being allowed. 
+        UIUserNotificationSettings *currentSettings = [[UIApplication sharedApplication] currentUserNotificationSettings];
+        NSLog(@"The current notification settings are: %@", currentSettings);
         
     }
 }
