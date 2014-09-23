@@ -53,6 +53,7 @@
     // add an observer for the user's current location
     [mapView addObserver:self forKeyPath:@"myLocation" options:NSKeyValueObservingOptionNew context: nil];
     
+    [self setupScrollViewBlur];
     
     // while the view is loading, make the call to grab the data from the datastore
     [self fetchData];
@@ -92,7 +93,15 @@
 }
 
 
-
+-(void) setupScrollViewBlur {
+    //commented out, because this would turn the color white until the map is a subview beneath it. 
+    //self.scrollView.backgroundColor = [UIColor clearColor];
+    UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+    UIVisualEffectView *blurredBackgroundView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+    blurredBackgroundView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    blurredBackgroundView.frame = self.scrollView.bounds;
+    [self.scrollView addSubview:blurredBackgroundView];
+}
 
 
 // get the commute info from the data store
