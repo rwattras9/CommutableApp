@@ -23,6 +23,7 @@
 @property (strong, nonatomic) NSMutableArray *originZipArray;
 @property (strong, nonatomic) NSMutableArray *destinationZipArray;
 @property (strong, nonatomic) UILabel *noCommuteLabel;
+//@property (strong, nonatomic) CLLocationManager *locationAuthorizationManager;
 @end
 
 @implementation CommutableFirstViewController{
@@ -70,6 +71,19 @@
 {
     [super viewDidLoad];
     
+    //[self enableMyLocation];
+    
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    // Check for iOS 8. Without this guard the code will crash with "unknown selector" on iOS 7.
+    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+        [self.locationManager requestWhenInUseAuthorization];
+    }
+    [self.locationManager startUpdatingLocation];
+    
+    NSLog(@"Latitude: %f", mapView.myLocation.coordinate.latitude);
+    NSLog(@"Longitude: %f", mapView.myLocation.coordinate.longitude);
+    
     // initialize waypoint arrays for storing multiple routes
     self.waypoints = [NSMutableArray array];
     self.waypointStrings = [NSMutableArray array];
@@ -93,6 +107,10 @@
 }
 
 
+
+
+
+
 -(void) setupScrollViewBlur {
     //commented out, because this would turn the color white until the map is a subview beneath it. 
     //self.scrollView.backgroundColor = [UIColor clearColor];
@@ -102,6 +120,9 @@
     blurredBackgroundView.frame = self.scrollView.bounds;
     [self.scrollView addSubview:blurredBackgroundView];
 }
+
+
+
 
 
 // get the commute info from the data store
@@ -284,7 +305,7 @@
 
 
 
-// page control/scrolling funcitonality
+// page control/scrolling functionality
 #pragma mark - UIScrollView Delegate
 - (void)scrollViewDidScroll:(UIScrollView *)sender
 {
@@ -362,6 +383,54 @@
                     context:NULL];
 }
 */
+
+
+
+
+
+
+// iOS 8 location stuff
+// Rather than setting -myLocationEnabled to YES directly,
+// call this method:
+/*
+- (void)enableMyLocation
+{
+    CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
+    
+    if (status == kCLAuthorizationStatusNotDetermined)
+        [self requestLocationAuthorization];
+    else if (status == kCLAuthorizationStatusDenied || status == kCLAuthorizationStatusRestricted)
+        return; // we weren't allowed to show the user's location so don't enable
+    else
+        [mapView setMyLocationEnabled:YES];
+}
+
+// Ask the CLLocationManager for location authorization,
+// and be sure to retain the manager somewhere on the class
+
+- (void)requestLocationAuthorization
+{
+    _locationAuthorizationManager = [[CLLocationManager alloc] init];
+    _locationAuthorizationManager.delegate = self;
+    
+    [_locationAuthorizationManager requestWhenInUseAuthorization];
+}
+
+// Handle the authorization callback. This is usually
+// called on a background thread so go back to main.
+
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
+{
+    if (status != kCLAuthorizationStatusNotDetermined) {
+        [self performSelectorOnMainThread:@selector(enableMyLocation) withObject:nil waitUntilDone:[NSThread isMainThread]];
+        
+        _locationAuthorizationManager.delegate = nil;
+        _locationAuthorizationManager = nil;
+    }
+}
+*/
+
+
 
 
 
