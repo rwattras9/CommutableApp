@@ -31,6 +31,7 @@
     BOOL cameFromLocalNotification;
     bool needToClearLabel;
     int currentPage;
+    BOOL dontGetUserAuth;
 }
 @synthesize mapView;
 @synthesize scrollView;
@@ -43,6 +44,12 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    //if (!dontGetUserAuth)
+    //{
+        //[self getUserAuth];
+        [self enableMyLocation];
+    //}
     
     // testing a way to clear things before the view is presented, especially to refresh after the tab has been switched back to
     for (int i=0; i < self.labelArray.count; i++)
@@ -63,6 +70,22 @@
 
 
 
+// ask user for permission to get their location. should only do this once at the very beginning
+- (void) getUserAuth
+{
+    self.locationManager = [[CLLocationManager alloc] init];
+    //self.locationManager.delegate = self;
+    // Check for iOS 8. Without this guard the code will crash with "unknown selector" on iOS 7.
+    //if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])
+    //{
+        [self.locationManager requestWhenInUseAuthorization];
+    //}
+    [self.locationManager startUpdatingLocation];
+    
+    dontGetUserAuth = YES;
+}
+
+
 
 
 
@@ -70,16 +93,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    //[self enableMyLocation];
-    
-    self.locationManager = [[CLLocationManager alloc] init];
-    self.locationManager.delegate = self;
-    // Check for iOS 8. Without this guard the code will crash with "unknown selector" on iOS 7.
-    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
-        [self.locationManager requestWhenInUseAuthorization];
-    }
-    [self.locationManager startUpdatingLocation];
     
     NSLog(@"Latitude: %f", mapView.myLocation.coordinate.latitude);
     NSLog(@"Longitude: %f", mapView.myLocation.coordinate.longitude);
@@ -93,7 +106,7 @@
                                                             longitude:-89.4000
                                                                  zoom:1];
     mapView = [GMSMapView mapWithFrame:CGRectMake(0, 0, 320, 397) camera:camera];
-    mapView.myLocationEnabled = YES;
+    //mapView.myLocationEnabled = YES;
     mapView.settings.scrollGestures = YES;
     mapView.settings.zoomGestures = YES;
     mapView.settings.compassButton = YES;
@@ -392,7 +405,7 @@
 // iOS 8 location stuff
 // Rather than setting -myLocationEnabled to YES directly,
 // call this method:
-/*
+
 - (void)enableMyLocation
 {
     CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
@@ -410,10 +423,10 @@
 
 - (void)requestLocationAuthorization
 {
-    _locationAuthorizationManager = [[CLLocationManager alloc] init];
-    _locationAuthorizationManager.delegate = self;
+    _locationManager = [[CLLocationManager alloc] init];
+    _locationManager.delegate = self;
     
-    [_locationAuthorizationManager requestWhenInUseAuthorization];
+    [_locationManager requestWhenInUseAuthorization];
 }
 
 // Handle the authorization callback. This is usually
@@ -424,11 +437,11 @@
     if (status != kCLAuthorizationStatusNotDetermined) {
         [self performSelectorOnMainThread:@selector(enableMyLocation) withObject:nil waitUntilDone:[NSThread isMainThread]];
         
-        _locationAuthorizationManager.delegate = nil;
-        _locationAuthorizationManager = nil;
+        _locationManager.delegate = nil;
+        _locationManager = nil;
     }
 }
-*/
+
 
 
 
@@ -552,6 +565,8 @@
     url = [[url
             stringByAddingPercentEscapesUsingEncoding: NSASCIIStringEncoding] mutableCopy]; // turn the query into a viable URL with %20 escapes for spaces, etc
     
+    //NSLog(@"URL: %@", url);
+    
     NSURL* coordToAddressURL = [NSURL URLWithString:url]; // turn the finshed URL query into the global variable of type NSURL
     
     NSData* data = [NSData dataWithContentsOfURL:coordToAddressURL]; // create a data variable to store the return, make the call
@@ -561,6 +576,8 @@
                           JSONObjectWithData:data
                           options:kNilOptions
                           error:&error]; // read the JSON return into a dictionary
+    
+    
     
     return tempDict;
 }

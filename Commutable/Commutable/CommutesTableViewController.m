@@ -212,6 +212,14 @@
         destViewController.currentLocationDictionary = currentLocationDictionary;
         
     }
+    /*else if ([[segue identifier] isEqualToString:@"addCommute"]) {
+        NSLog(@"preparing for segue");
+        CommuteCreatorTableViewController *destViewController = segue.destinationViewController;
+        
+        // rick still passing current location
+        destViewController.currentLocationDictionary = currentLocationDictionary;
+    }*/
+    
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }

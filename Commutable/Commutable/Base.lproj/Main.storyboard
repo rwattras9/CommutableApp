@@ -16,10 +16,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V1F-qM-HH5" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="397"/>
-                                <color key="backgroundColor" red="0.39607846736907959" green="0.87058830261230469" blue="0.47843140363693237" alpha="1" colorSpace="deviceRGB"/>
-                            </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zUt-Qn-Saj">
                                 <rect key="frame" x="0.0" y="397" width="320" height="134"/>
                                 <color key="backgroundColor" red="0.20000000000000001" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -55,7 +51,6 @@
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <connections>
-                        <outlet property="mapView" destination="V1F-qM-HH5" id="Yxt-Bt-Rdu"/>
                         <outlet property="pageControl" destination="AG6-f6-MMk" id="Egz-kj-0xr"/>
                         <outlet property="scrollView" destination="zUt-Qn-Saj" id="boK-MY-4Ty"/>
                     </connections>
@@ -108,7 +103,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="7XS-7v-cED">
                             <connections>
-                                <segue destination="j6h-T4-pAW" kind="modal" id="Zu5-tB-z7j"/>
+                                <segue destination="j6h-T4-pAW" kind="modal" identifier="addCommute" id="Zu5-tB-z7j"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -793,7 +788,7 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="9PJ-aG-Amd"/>
-        <segue reference="oX2-Hu-3ST"/>
+        <segue reference="FQw-Ff-hh9"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.22352942824363708" green="0.59215688705444336" blue="0.7137255072593689" alpha="1" colorSpace="deviceRGB"/>
 </document>
