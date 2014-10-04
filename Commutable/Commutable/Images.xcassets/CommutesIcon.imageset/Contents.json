@@ -3,16 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "Car and Menu Icon 50px.png"
+      "filename" : "Car and Menu Icon 25px.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "Car and Menu Icon 50px-1.png"
+      "filename" : "Car and Menu Icon white 50px.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x"
+      "scale" : "3x",
+      "filename" : "Car and Menu Icon white 75px.png"
     }
   ],
   "info" : {

@@ -26,6 +26,7 @@
 		2C6E3B9019564797005FCB02 /* Car and Menu Icon 100px.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C6E3B8E19564797005FCB02 /* Car and Menu Icon 100px.png */; };
 		2C9C556019B42E8100C6012E /* CommutableTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C9C555F19B42E8100C6012E /* CommutableTabBarController.m */; };
 		2CA120D61929637C004825D4 /* Commutable.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2CA120D41929637C004825D4 /* Commutable.xcdatamodeld */; };
+		2CAC123C19E0700900B1091D /* Car and Menu Icon white 75px.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CAC123B19E0700900B1091D /* Car and Menu Icon white 75px.png */; };
 		2CAEC215198407A000569703 /* CommuteAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAEC214198407A000569703 /* CommuteAlert.m */; };
 		2CAEC21819840A8500569703 /* CommuteNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CAEC21719840A8500569703 /* CommuteNameViewController.m */; };
 		2CD2000018FB3559005F1338 /* CommuteCreatorTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CD2FFFF18FB3559005F1338 /* CommuteCreatorTableViewController.m */; };
@@ -98,6 +99,7 @@
 		2C9C555E19B42E8100C6012E /* CommutableTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommutableTabBarController.h; sourceTree = "<group>"; };
 		2C9C555F19B42E8100C6012E /* CommutableTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommutableTabBarController.m; sourceTree = "<group>"; };
 		2CA120D51929637C004825D4 /* Commutable.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Commutable.xcdatamodel; sourceTree = "<group>"; };
+		2CAC123B19E0700900B1091D /* Car and Menu Icon white 75px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Car and Menu Icon white 75px.png"; sourceTree = "<group>"; };
 		2CAEC213198407A000569703 /* CommuteAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommuteAlert.h; sourceTree = "<group>"; };
 		2CAEC214198407A000569703 /* CommuteAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommuteAlert.m; sourceTree = "<group>"; };
 		2CAEC21619840A8500569703 /* CommuteNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommuteNameViewController.h; sourceTree = "<group>"; };
@@ -271,6 +273,7 @@
 		2CE53EED18F98C43005BCEC9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2CAC123B19E0700900B1091D /* Car and Menu Icon white 75px.png */,
 				2CE6842719BA911500873608 /* Car and Menu Icon 25px.png */,
 				2C1A5BD819B509FA0025605C /* Car and Menu Icon Blue 50px.png */,
 				2C1A5BD919B509FA0025605C /* Car and Menu Icon white 50px.png */,
@@ -401,6 +404,7 @@
 				2C5B0002193A929D00A229EA /* Commutes Tab Car Icon 50px.png in Resources */,
 				2C19EE4E193A810A00745780 /* Commutable Logo 80px.png in Resources */,
 				2C6E3B8F19564797005FCB02 /* Car and Menu Icon 50px.png in Resources */,
+				2CAC123C19E0700900B1091D /* Car and Menu Icon white 75px.png in Resources */,
 				2C0644F619B3E8DA00F43D8A /* Traffic Light Icon 60px.png in Resources */,
 				2C0BC58D18FA0BAD00CF12F7 /* Car Icon v2 Gradient without Windows 80x80.png in Resources */,
 				2CE53EF118F98C43005BCEC9 /* InfoPlist.strings in Resources */,
