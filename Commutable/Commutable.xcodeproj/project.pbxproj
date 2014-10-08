@@ -364,6 +364,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = Commutable;
 				TargetAttributes = {
+					2CE53EE218F98C43005BCEC9 = {
+						DevelopmentTeam = Z7R2A3LUFQ;
+					};
 					2CE53F0618F98C43005BCEC9 = {
 						TestTargetID = 2CE53EE218F98C43005BCEC9;
 					};
