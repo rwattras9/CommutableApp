@@ -24,6 +24,7 @@
 @implementation LocationCreatorViewController
 @synthesize location;
 @synthesize currentLocationDictionary;
+@synthesize authorizedLocation;
 
 
 - (NSManagedObjectContext *)managedObjectContext {
@@ -70,17 +71,46 @@
 // when Use Current Location Button is clicked, grab location dictionary from segue and place info in correct text boxes
 - (IBAction)useCurrentLocation:(id)sender {
     
-    //NSLog(@"Dictionary: %@", currentLocationDictionary);
+    // if the API call had no results in getting the location, popup an error message. otherwise, go ahead and fill it in
+    if ([currentLocationDictionary[@"status"]  isEqual: @"ZERO_RESULTS"])
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                        message:@"Unable to get current location."
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
+    else
+    {
+        NSDictionary *results = currentLocationDictionary[@"results"][0];
+        NSDictionary *address_componentsSTRNUM = results[@"address_components"][0];
+        NSDictionary *address_componentsSTRADD = results[@"address_components"][1];
+        NSDictionary *address_componentsZIP = results[@"address_components"][7];
     
-    NSDictionary *results = currentLocationDictionary[@"results"][0];
-    NSDictionary *address_componentsSTRNUM = results[@"address_components"][0];
-    NSDictionary *address_componentsSTRADD = results[@"address_components"][1];
-    NSDictionary *address_componentsZIP = results[@"address_components"][7];
-    
-    [self.streetAddressTextField setText:[NSString stringWithFormat:@"%@ %@", address_componentsSTRNUM[@"short_name"], address_componentsSTRADD[@"short_name"]]];
-    [self.zipCodeTextField setText:[NSString stringWithFormat:@"%@", address_componentsZIP[@"short_name"]]];
+        [self.streetAddressTextField setText:[NSString stringWithFormat:@"%@ %@", address_componentsSTRNUM[@"short_name"], address_componentsSTRADD[@"short_name"]]];
+        [self.zipCodeTextField setText:[NSString stringWithFormat:@"%@", address_componentsZIP[@"short_name"]]];
+    }
     
 }
+
+
+
+
+// before the view loads, if the user did not allow location tracking, don't give the option to use current location
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    NSLog(@"checking button..");
+    
+    if (!authorizedLocation)
+    {
+        NSLog(@"hide button");
+        [self.useCurrentLocationButton setHidden:YES];
+    }
+}
+
 
 
 

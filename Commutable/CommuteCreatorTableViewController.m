@@ -55,6 +55,7 @@
 @implementation CommuteCreatorTableViewController
 @synthesize commute;
 @synthesize currentLocationDictionary;
+@synthesize authorizedLocation;
 
 - (IBAction)sendAlert:(id)sender {
     
@@ -581,6 +582,7 @@
         
         // added by Rick for passing current location
         destViewController.currentLocationDictionary = currentLocationDictionary;
+        destViewController.authorizedLocation = authorizedLocation;
         
     }
     
@@ -593,6 +595,7 @@
         
         // added by Rick for passing current location
         destViewController.currentLocationDictionary = currentLocationDictionary;
+        destViewController.authorizedLocation = authorizedLocation;
     }
     
     //if sender is  starting location add button, prepare to edit a location by passing location information
@@ -601,6 +604,7 @@
         
         // added by Rick for passing current location
         destViewController.currentLocationDictionary = currentLocationDictionary;
+        destViewController.authorizedLocation = authorizedLocation;
         
     }
     
@@ -610,6 +614,7 @@
         
         // added by Rick for passing current location
         destViewController.currentLocationDictionary = currentLocationDictionary;
+        destViewController.authorizedLocation = authorizedLocation;
         
     }
     

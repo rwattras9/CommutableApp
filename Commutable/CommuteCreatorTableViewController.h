@@ -21,6 +21,7 @@
 
 // added by Rick for passing current location info
 @property (strong) NSDictionary *currentLocationDictionary;
+@property (assign) BOOL authorizedLocation;
 
 //Unwind Transition to go back to CommuteCreatorTableViewController
 - (IBAction)unwindToCommuteCreatorTable:(UIStoryboardSegue *)segue;

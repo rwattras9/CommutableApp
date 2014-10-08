@@ -22,6 +22,7 @@
 
 @implementation CommutesTableViewController
 @synthesize currentLocationDictionary;
+@synthesize authorizedLocation;
 
 - (NSManagedObjectContext *)managedObjectContext
 {
@@ -210,6 +211,7 @@
         
         // rick still passing current location
         destViewController.currentLocationDictionary = currentLocationDictionary;
+        destViewController.authorizedLocation = authorizedLocation;
         
     }
     
@@ -220,6 +222,10 @@
         
         // rick still passing current location
         destViewController.currentLocationDictionary = currentLocationDictionary;
+        destViewController.authorizedLocation = authorizedLocation;
+        
+        //rick test
+        NSLog(@"Authorization status: %i", authorizedLocation);
     }
     
     // Get the new view controller using [segue destinationViewController].

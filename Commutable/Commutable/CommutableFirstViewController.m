@@ -32,6 +32,7 @@
     bool needToClearLabel;
     int currentPage;
     BOOL dontGetUserAuth;
+    BOOL authorizedLocation;
 }
 @synthesize mapView;
 @synthesize scrollView;
@@ -48,7 +49,7 @@
     //if (!dontGetUserAuth)
     //{
         //[self getUserAuth];
-        [self enableMyLocation];
+        //[self enableMyLocation];
     //}
     
     // testing a way to clear things before the view is presented, especially to refresh after the tab has been switched back to
@@ -56,6 +57,9 @@
     {
         [[self.labelArray objectAtIndex:i] removeFromSuperview];
     }
+    
+    NSLog(@"Check 1");
+    
     [mapView clear];
     
     // add an observer for the user's current location
@@ -94,6 +98,9 @@
 {
     [super viewDidLoad];
     
+    // run the method to get user authorization to use their location
+    [self enableMyLocation];
+    
     NSLog(@"Latitude: %f", mapView.myLocation.coordinate.latitude);
     NSLog(@"Longitude: %f", mapView.myLocation.coordinate.longitude);
     
@@ -113,7 +120,7 @@
     mapView.settings.myLocationButton = YES;
     mapView.trafficEnabled = YES;
     
-    
+    NSLog(@"Check 2");
     
     // add the map subview to the main view
     [self.view addSubview:mapView];
@@ -413,9 +420,18 @@
     if (status == kCLAuthorizationStatusNotDetermined)
         [self requestLocationAuthorization];
     else if (status == kCLAuthorizationStatusDenied || status == kCLAuthorizationStatusRestricted)
+    {
+        NSLog(@"Authorization denied");
+        authorizedLocation = NO;
         return; // we weren't allowed to show the user's location so don't enable
+    }
     else
+    {
+        NSLog(@"Authorization accepted");
+        authorizedLocation = YES;
+        [_locationManager startUpdatingLocation];
         [mapView setMyLocationEnabled:YES];
+    }
 }
 
 // Ask the CLLocationManager for location authorization,
@@ -547,7 +563,7 @@
     UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
     CommutesTableViewController *controller = (CommutesTableViewController *)navController.topViewController;
     controller.currentLocationDictionary = [self getCurrentLocationAddress];
-
+    controller.authorizedLocation = authorizedLocation;
 }
 
 
