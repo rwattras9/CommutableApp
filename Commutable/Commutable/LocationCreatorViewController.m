@@ -218,14 +218,14 @@
             [self.location setValue:self.streetAddressTextField.text forKey:@"address"];
             [self.location setValue:self.zipCodeTextField.text forKey:@"zipCode"];
         }
-        
+        else {
         //create a new a new Location Item object with the location Zip Code, location Name, and the location Name populated
         
         NSManagedObject *newLocation = [NSEntityDescription insertNewObjectForEntityForName:@"Location" inManagedObjectContext:context];
         [newLocation setValue:self.locationNameTextField.text forKey:@"name"];
         [newLocation setValue:self.streetAddressTextField.text forKey:@"address"];
         [newLocation setValue:self.zipCodeTextField.text forKey:@"zipCode"];
-        
+        }
         NSError *error = nil;
         //save object to a persistant store
         if (![context save:&error]) {
