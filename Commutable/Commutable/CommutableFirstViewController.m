@@ -23,7 +23,6 @@
 @property (strong, nonatomic) NSMutableArray *originZipArray;
 @property (strong, nonatomic) NSMutableArray *destinationZipArray;
 @property (strong, nonatomic) UILabel *noCommuteLabel;
-//@property (strong, nonatomic) CLLocationManager *locationAuthorizationManager;
 @end
 
 @implementation CommutableFirstViewController{
@@ -31,7 +30,6 @@
     BOOL cameFromLocalNotification;
     bool needToClearLabel;
     int currentPage;
-    BOOL dontGetUserAuth;
     BOOL authorizedLocation;
 }
 @synthesize mapView;
@@ -46,20 +44,21 @@
 {
     [super viewWillAppear:animated];
     
-    //if (!dontGetUserAuth)
-    //{
-        //[self getUserAuth];
-        //[self enableMyLocation];
-    //}
-    
     // testing a way to clear things before the view is presented, especially to refresh after the tab has been switched back to
     for (int i=0; i < self.labelArray.count; i++)
     {
         [[self.labelArray objectAtIndex:i] removeFromSuperview];
     }
     
-    NSLog(@"Check 1");
+    [self updateMap];
     
+}
+
+
+
+// clear the map of any commutes and update the user's location if possible
+- (void)updateMap
+{
     [mapView clear];
     
     // add an observer for the user's current location
@@ -67,26 +66,8 @@
     
     [self setupScrollViewBlur];
     
-    // while the view is loading, make the call to grab the data from the datastore
+    // make the call to grab the data from the datastore
     [self fetchData];
-}
-
-
-
-
-// ask user for permission to get their location. should only do this once at the very beginning
-- (void) getUserAuth
-{
-    self.locationManager = [[CLLocationManager alloc] init];
-    //self.locationManager.delegate = self;
-    // Check for iOS 8. Without this guard the code will crash with "unknown selector" on iOS 7.
-    //if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)])
-    //{
-        [self.locationManager requestWhenInUseAuthorization];
-    //}
-    [self.locationManager startUpdatingLocation];
-    
-    dontGetUserAuth = YES;
 }
 
 
@@ -107,23 +88,7 @@
     // initialize waypoint arrays for storing multiple routes
     self.waypoints = [NSMutableArray array];
     self.waypointStrings = [NSMutableArray array];
- 
-    // initialize map camera and enable some settings
-    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:43.0667
-                                                            longitude:-89.4000
-                                                                 zoom:1];
-    mapView = [GMSMapView mapWithFrame:CGRectMake(0, 0, 320, 397) camera:camera];
-    //mapView.myLocationEnabled = YES;
-    mapView.settings.scrollGestures = YES;
-    mapView.settings.zoomGestures = YES;
-    mapView.settings.compassButton = YES;
-    mapView.settings.myLocationButton = YES;
-    mapView.trafficEnabled = YES;
-    
-    NSLog(@"Check 2");
-    
-    // add the map subview to the main view
-    [self.view addSubview:mapView];
+
 }
 
 
@@ -423,7 +388,8 @@
     {
         NSLog(@"Authorization denied");
         authorizedLocation = NO;
-        return; // we weren't allowed to show the user's location so don't enable
+        // we weren't allowed to show the user's location so don't enable
+        [self loadMapView];
     }
     else
     {
@@ -431,7 +397,10 @@
         authorizedLocation = YES;
         [_locationManager startUpdatingLocation];
         [mapView setMyLocationEnabled:YES];
+        [self loadMapView];
     }
+    
+    
 }
 
 // Ask the CLLocationManager for location authorization,
@@ -459,6 +428,38 @@
 }
 
 
+
+
+
+
+// load the map view
+- (void)loadMapView
+{
+    // get size of screen to dynamically size map
+    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+    CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
+    screenHeight = screenHeight - self.scrollView.frame.size.height - self.pageControl.frame.size.height;
+    
+    NSLog(@"Width: %f", screenWidth);
+    NSLog(@"Height: %f", screenHeight);
+    NSLog(@"Height: %f", screenHeight);
+    
+    
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:43.0667
+                                                            longitude:-89.4000
+                                                                 zoom:3];
+    mapView = [GMSMapView mapWithFrame:CGRectMake(0, 0, screenWidth, screenHeight) camera:camera];
+    mapView.myLocationEnabled = YES;
+    mapView.settings.scrollGestures = YES;
+    mapView.settings.zoomGestures = YES;
+    mapView.settings.compassButton = YES;
+    mapView.settings.myLocationButton = YES;
+    mapView.trafficEnabled = YES;
+    
+    [self.view addSubview:mapView];
+    
+    [self updateMap];
+}
 
 
 
