@@ -11,8 +11,8 @@
 #import <QuartzCore/QuartzCore.h>
 #import "CommutesTableViewController.h"
 
-@interface CommutableFirstViewController () <GMSMapViewDelegate>
-@property (nonatomic, retain) CLLocationManager *locationManager;
+@interface CommutableFirstViewController () <GMSMapViewDelegate, CLLocationManagerDelegate>
+@property (nonatomic, strong) CLLocationManager *locationManager;
 @property (strong, nonatomic) NSMutableArray *waypoints;
 @property (strong, nonatomic) NSMutableArray *waypointStrings;
 @property (strong, nonatomic) NSMutableArray *commuteNameArray;
@@ -383,20 +383,20 @@
     CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
     
     if (status == kCLAuthorizationStatusNotDetermined)
+    {
+        NSLog(@"check one");
         [self requestLocationAuthorization];
+    }
     else if (status == kCLAuthorizationStatusDenied || status == kCLAuthorizationStatusRestricted)
     {
         NSLog(@"Authorization denied");
-        authorizedLocation = NO;
-        // we weren't allowed to show the user's location so don't enable
+        authorizedLocation = NO; // we weren't allowed to show the user's location so don't enable
         [self loadMapView];
     }
     else
     {
         NSLog(@"Authorization accepted");
-        authorizedLocation = YES;
-        [_locationManager startUpdatingLocation];
-        [mapView setMyLocationEnabled:YES];
+        authorizedLocation = YES; // allow the map to get the user's location!
         [self loadMapView];
     }
     
@@ -409,9 +409,13 @@
 - (void)requestLocationAuthorization
 {
     _locationManager = [[CLLocationManager alloc] init];
-    _locationManager.delegate = self;
+    self.locationManager.delegate = self;
     
-    [_locationManager requestWhenInUseAuthorization];
+    if ([_locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+        [_locationManager requestWhenInUseAuthorization];
+    }
+    
+    [self.locationManager startUpdatingLocation];
 }
 
 // Handle the authorization callback. This is usually
@@ -422,8 +426,8 @@
     if (status != kCLAuthorizationStatusNotDetermined) {
         [self performSelectorOnMainThread:@selector(enableMyLocation) withObject:nil waitUntilDone:[NSThread isMainThread]];
         
-        _locationManager.delegate = nil;
-        _locationManager = nil;
+        //_locationManager.delegate = nil;
+        //_locationManager = nil;
     }
 }
 
@@ -449,7 +453,12 @@
                                                             longitude:-89.4000
                                                                  zoom:3];
     mapView = [GMSMapView mapWithFrame:CGRectMake(0, 0, screenWidth, screenHeight) camera:camera];
-    mapView.myLocationEnabled = YES;
+    
+    if (authorizedLocation)
+        mapView.myLocationEnabled = YES;
+    else
+        mapView.myLocationEnabled = NO;
+    
     mapView.settings.scrollGestures = YES;
     mapView.settings.zoomGestures = YES;
     mapView.settings.compassButton = YES;
