@@ -444,11 +444,6 @@
     CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
     screenHeight = screenHeight - self.scrollView.frame.size.height - self.pageControl.frame.size.height;
     
-    NSLog(@"Width: %f", screenWidth);
-    NSLog(@"Height: %f", screenHeight);
-    NSLog(@"Height: %f", screenHeight);
-    
-    
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:43.0667
                                                             longitude:-89.4000
                                                                  zoom:3];
