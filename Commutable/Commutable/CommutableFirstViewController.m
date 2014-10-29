@@ -64,6 +64,8 @@
     // add an observer for the user's current location
     [mapView addObserver:self forKeyPath:@"myLocation" options:NSKeyValueObservingOptionNew context: nil];
     
+    NSLog(@"location status: %d", mapView.myLocationEnabled);
+    
     [self setupScrollViewBlur];
     
     // make the call to grab the data from the datastore
@@ -80,7 +82,8 @@
     [super viewDidLoad];
     
     // run the method to get user authorization to use their location
-    [self enableMyLocation];
+    //[self enableMyLocation];
+    [self loadMapView];
     
     NSLog(@"Latitude: %f", mapView.myLocation.coordinate.latitude);
     NSLog(@"Longitude: %f", mapView.myLocation.coordinate.longitude);
@@ -333,12 +336,13 @@
 
 
 
-// for getting the user's location
+// for moving the map camera to the user's location
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if ([keyPath isEqualToString:@"myLocation"] && [object isKindOfClass:[GMSMapView class]] && self.labelArray.count == 0)
     {
-        [mapView animateToCameraPosition:[GMSCameraPosition cameraWithLatitude:mapView.myLocation.coordinate.latitude
+            NSLog(@"coord not 0");
+            [mapView animateToCameraPosition:[GMSCameraPosition cameraWithLatitude:mapView.myLocation.coordinate.latitude
                                                                                  longitude:mapView.myLocation.coordinate.longitude
                                                                                       zoom:5.0]];
     }
@@ -391,13 +395,16 @@
     {
         NSLog(@"Authorization denied");
         authorizedLocation = NO; // we weren't allowed to show the user's location so don't enable
-        [self loadMapView];
+        //[self loadMapView];
+        [self updateMap];
     }
     else
     {
         NSLog(@"Authorization accepted");
         authorizedLocation = YES; // allow the map to get the user's location!
-        [self loadMapView];
+        //[self loadMapView];
+        //mapView.myLocationEnabled = YES;
+        [self updateMap];
     }
     
     
@@ -426,8 +433,8 @@
     if (status != kCLAuthorizationStatusNotDetermined) {
         [self performSelectorOnMainThread:@selector(enableMyLocation) withObject:nil waitUntilDone:[NSThread isMainThread]];
         
-        //_locationManager.delegate = nil;
-        //_locationManager = nil;
+        _locationManager.delegate = nil;
+        _locationManager = nil;
     }
 }
 
@@ -449,10 +456,18 @@
                                                                  zoom:3];
     mapView = [GMSMapView mapWithFrame:CGRectMake(0, 0, screenWidth, screenHeight) camera:camera];
     
-    if (authorizedLocation)
-        mapView.myLocationEnabled = YES;
-    else
-        mapView.myLocationEnabled = NO;
+    
+    [self enableMyLocation];
+    
+    mapView.myLocationEnabled = YES;
+    
+    //if (authorizedLocation)
+    //{
+        //mapView.myLocationEnabled = YES;
+        //NSLog(@"enable check");
+    //}
+    //else
+        //mapView.myLocationEnabled = NO;
     
     mapView.settings.scrollGestures = YES;
     mapView.settings.zoomGestures = YES;

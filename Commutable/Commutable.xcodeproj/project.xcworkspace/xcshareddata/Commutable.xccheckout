@@ -14,7 +14,7 @@
 		<string>https://github.com/rwattras9/CommutableApp.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Commutable/Commutable.xcodeproj/project.xcworkspace</string>
+	<string>Commutable/Commutable.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>CAF6C1EE02FF59C7657E39C7C9AC335435297F8C</key>
