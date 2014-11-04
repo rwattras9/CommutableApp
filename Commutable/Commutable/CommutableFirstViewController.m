@@ -64,8 +64,6 @@
     // add an observer for the user's current location
     [mapView addObserver:self forKeyPath:@"myLocation" options:NSKeyValueObservingOptionNew context: nil];
     
-    NSLog(@"location status: %d", mapView.myLocationEnabled);
-    
     [self setupScrollViewBlur];
     
     // make the call to grab the data from the datastore
@@ -82,16 +80,44 @@
     [super viewDidLoad];
     
     // run the method to get user authorization to use their location
-    //[self enableMyLocation];
     [self loadMapView];
-    
-    NSLog(@"Latitude: %f", mapView.myLocation.coordinate.latitude);
-    NSLog(@"Longitude: %f", mapView.myLocation.coordinate.longitude);
     
     // initialize waypoint arrays for storing multiple routes
     self.waypoints = [NSMutableArray array];
     self.waypointStrings = [NSMutableArray array];
 
+}
+
+
+
+
+
+
+// load the map view
+- (void)loadMapView
+{
+    // get size of screen to dynamically size map
+    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+    CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
+    screenHeight = screenHeight - self.scrollView.frame.size.height - self.pageControl.frame.size.height;
+    
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:43.0667
+                                                            longitude:-89.4000
+                                                                 zoom:3];
+    mapView = [GMSMapView mapWithFrame:CGRectMake(0, 0, screenWidth, screenHeight) camera:camera];
+    
+    // call the method to ask the user for permission, enable location through there
+    [self enableMyLocation];
+    
+    mapView.settings.scrollGestures = YES;
+    mapView.settings.zoomGestures = YES;
+    mapView.settings.compassButton = YES;
+    mapView.settings.myLocationButton = YES;
+    mapView.trafficEnabled = YES;
+    
+    [self.view addSubview:mapView];
+    
+    [self updateMap];
 }
 
 
@@ -170,9 +196,19 @@
         
         
         // move the camera back to the user's location
+        if (authorizedLocation)
+        {
         [mapView animateToCameraPosition:[GMSCameraPosition cameraWithLatitude:mapView.myLocation.coordinate.latitude
                                                                      longitude:mapView.myLocation.coordinate.longitude
                                                                           zoom:5.0]];
+        }
+        else
+        {
+            // if the user didn't authorize use of location, just center map on US geographic center
+            [mapView animateToCameraPosition:[GMSCameraPosition cameraWithLatitude:39.0
+                                                                         longitude:-98.0
+                                                                              zoom:3.0]];
+        }
         
     }
     else if (self.commuteArray.count > 0){
@@ -341,7 +377,6 @@
 {
     if ([keyPath isEqualToString:@"myLocation"] && [object isKindOfClass:[GMSMapView class]] && self.labelArray.count == 0)
     {
-            NSLog(@"coord not 0");
             [mapView animateToCameraPosition:[GMSCameraPosition cameraWithLatitude:mapView.myLocation.coordinate.latitude
                                                                                  longitude:mapView.myLocation.coordinate.longitude
                                                                                       zoom:5.0]];
@@ -381,29 +416,24 @@
 // iOS 8 location stuff
 // Rather than setting -myLocationEnabled to YES directly,
 // call this method:
-
 - (void)enableMyLocation
 {
     CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
     
     if (status == kCLAuthorizationStatusNotDetermined)
     {
-        NSLog(@"check one");
         [self requestLocationAuthorization];
     }
     else if (status == kCLAuthorizationStatusDenied || status == kCLAuthorizationStatusRestricted)
     {
-        NSLog(@"Authorization denied");
         authorizedLocation = NO; // we weren't allowed to show the user's location so don't enable
-        //[self loadMapView];
+        mapView.myLocationEnabled = NO;
         [self updateMap];
     }
     else
     {
-        NSLog(@"Authorization accepted");
         authorizedLocation = YES; // allow the map to get the user's location!
-        //[self loadMapView];
-        //mapView.myLocationEnabled = YES;
+        mapView.myLocationEnabled = YES;
         [self updateMap];
     }
     
@@ -412,7 +442,6 @@
 
 // Ask the CLLocationManager for location authorization,
 // and be sure to retain the manager somewhere on the class
-
 - (void)requestLocationAuthorization
 {
     _locationManager = [[CLLocationManager alloc] init];
@@ -427,7 +456,6 @@
 
 // Handle the authorization callback. This is usually
 // called on a background thread so go back to main.
-
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
 {
     if (status != kCLAuthorizationStatusNotDetermined) {
@@ -437,49 +465,6 @@
         _locationManager = nil;
     }
 }
-
-
-
-
-
-
-// load the map view
-- (void)loadMapView
-{
-    // get size of screen to dynamically size map
-    CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
-    CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
-    screenHeight = screenHeight - self.scrollView.frame.size.height - self.pageControl.frame.size.height;
-    
-    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:43.0667
-                                                            longitude:-89.4000
-                                                                 zoom:3];
-    mapView = [GMSMapView mapWithFrame:CGRectMake(0, 0, screenWidth, screenHeight) camera:camera];
-    
-    
-    [self enableMyLocation];
-    
-    mapView.myLocationEnabled = YES;
-    
-    //if (authorizedLocation)
-    //{
-        //mapView.myLocationEnabled = YES;
-        //NSLog(@"enable check");
-    //}
-    //else
-        //mapView.myLocationEnabled = NO;
-    
-    mapView.settings.scrollGestures = YES;
-    mapView.settings.zoomGestures = YES;
-    mapView.settings.compassButton = YES;
-    mapView.settings.myLocationButton = YES;
-    mapView.trafficEnabled = YES;
-    
-    [self.view addSubview:mapView];
-    
-    [self updateMap];
-}
-
 
 
 
@@ -617,8 +602,6 @@
     
     return tempDict;
 }
-
-
 
 
 

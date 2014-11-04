@@ -51,6 +51,8 @@
 		2CE53F2318F9921D005BCEC9 /* CommutesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CE53F2218F9921D005BCEC9 /* CommutesTableViewCell.m */; };
 		2CE6842819BA911500873608 /* Car and Menu Icon 25px.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CE6842719BA911500873608 /* Car and Menu Icon 25px.png */; };
 		2CF4DA8A19169A3C003762D3 /* LocationItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CF4DA8919169A3C003762D3 /* LocationItem.m */; };
+		790662921A08693D001C968B /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 790662911A08693D001C968B /* GoogleMaps.framework */; };
+		790662941A086951001C968B /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 790662931A086951001C968B /* GoogleMaps.bundle */; };
 		797883021943E0C9006AD6FD /* DirectionService.m in Sources */ = {isa = PBXBuildFile; fileRef = 797883011943E0C8006AD6FD /* DirectionService.m */; };
 		79AB6D051910997C0013E1D6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79AB6D041910997C0013E1D6 /* AVFoundation.framework */; };
 		79AB6D07191099830013E1D6 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79AB6D06191099830013E1D6 /* CoreData.framework */; };
@@ -64,8 +66,6 @@
 		79AB6D17191099DA0013E1D6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79AB6D16191099DA0013E1D6 /* QuartzCore.framework */; };
 		79AB6D19191099E20013E1D6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79AB6D18191099E20013E1D6 /* SystemConfiguration.framework */; };
 		79AB6D1B19109ADD0013E1D6 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 79AB6D1A19109ADD0013E1D6 /* libz.dylib */; };
-		79B107EA19528605006E6F1E /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79B107E919528605006E6F1E /* GoogleMaps.framework */; };
-		79B107EC19528617006E6F1E /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 79B107EB19528617006E6F1E /* GoogleMaps.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -138,6 +138,8 @@
 		2CE6842719BA911500873608 /* Car and Menu Icon 25px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Car and Menu Icon 25px.png"; sourceTree = "<group>"; };
 		2CF4DA8819169A3C003762D3 /* LocationItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationItem.h; sourceTree = "<group>"; };
 		2CF4DA8919169A3C003762D3 /* LocationItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationItem.m; sourceTree = "<group>"; };
+		790662911A08693D001C968B /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
+		790662931A086951001C968B /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
 		797883001943E0C8006AD6FD /* DirectionService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectionService.h; sourceTree = "<group>"; };
 		797883011943E0C8006AD6FD /* DirectionService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectionService.m; sourceTree = "<group>"; };
 		79AB6D041910997C0013E1D6 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -152,8 +154,6 @@
 		79AB6D16191099DA0013E1D6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		79AB6D18191099E20013E1D6 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		79AB6D1A19109ADD0013E1D6 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		79B107E919528605006E6F1E /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
-		79B107EB19528617006E6F1E /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,7 +175,7 @@
 				79AB6D051910997C0013E1D6 /* AVFoundation.framework in Frameworks */,
 				2CE53EE918F98C43005BCEC9 /* CoreGraphics.framework in Frameworks */,
 				2CE53EEB18F98C43005BCEC9 /* UIKit.framework in Frameworks */,
-				79B107EA19528605006E6F1E /* GoogleMaps.framework in Frameworks */,
+				790662921A08693D001C968B /* GoogleMaps.framework in Frameworks */,
 				2CE53EE718F98C43005BCEC9 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -215,8 +215,8 @@
 		2CE53EE518F98C43005BCEC9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				79B107EB19528617006E6F1E /* GoogleMaps.bundle */,
-				79B107E919528605006E6F1E /* GoogleMaps.framework */,
+				790662931A086951001C968B /* GoogleMaps.bundle */,
+				790662911A08693D001C968B /* GoogleMaps.framework */,
 				79AB6D1A19109ADD0013E1D6 /* libz.dylib */,
 				79AB6D18191099E20013E1D6 /* SystemConfiguration.framework */,
 				79AB6D16191099DA0013E1D6 /* QuartzCore.framework */,
@@ -404,6 +404,7 @@
 			files = (
 				2C19EE4D193A810A00745780 /* Commutable Logo 58px.png in Resources */,
 				2C19EE4F193A810A00745780 /* Commutable Logo 120px.png in Resources */,
+				790662941A086951001C968B /* GoogleMaps.bundle in Resources */,
 				2CE53F0218F98C43005BCEC9 /* Images.xcassets in Resources */,
 				2C0BC58F18FA0BB600CF12F7 /* Car Icon v2 Gradient without Windows 120x120.png in Resources */,
 				2C1A5BDA19B509FA0025605C /* Car and Menu Icon Blue 50px.png in Resources */,
@@ -423,7 +424,6 @@
 				2C5B0000193A916700A229EA /* Commutes Tab Car Icon.png in Resources */,
 				2CE53EFA18F98C43005BCEC9 /* Main.storyboard in Resources */,
 				2C6E3B9019564797005FCB02 /* Car and Menu Icon 100px.png in Resources */,
-				79B107EC19528617006E6F1E /* GoogleMaps.bundle in Resources */,
 				2CE6842819BA911500873608 /* Car and Menu Icon 25px.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
