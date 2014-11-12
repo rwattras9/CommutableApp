@@ -447,6 +447,10 @@
     _locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
     
+    // testing a threshold/accuracy setting as fix for zoom issue
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
+    self.locationManager.distanceFilter = 500; // meters..?
+    
     if ([_locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
         [_locationManager requestWhenInUseAuthorization];
     }
