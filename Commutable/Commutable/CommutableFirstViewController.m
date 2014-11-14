@@ -196,19 +196,23 @@
         
         
         // move the camera back to the user's location
+        /*
         if (authorizedLocation)
         {
         [mapView animateToCameraPosition:[GMSCameraPosition cameraWithLatitude:mapView.myLocation.coordinate.latitude
                                                                      longitude:mapView.myLocation.coordinate.longitude
                                                                           zoom:5.0]];
         }
-        else
+         */
+        if (!authorizedLocation)
         {
             // if the user didn't authorize use of location, just center map on US geographic center
             [mapView animateToCameraPosition:[GMSCameraPosition cameraWithLatitude:39.0
                                                                          longitude:-98.0
                                                                               zoom:3.0]];
+            mapView.settings.myLocationButton = NO;
         }
+        
         
     }
     else if (self.commuteArray.count > 0){
@@ -448,8 +452,8 @@
     self.locationManager.delegate = self;
     
     // testing a threshold/accuracy setting as fix for zoom issue
-    self.locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
-    self.locationManager.distanceFilter = 500; // meters..?
+    //self.locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
+    //self.locationManager.distanceFilter = 500; // meters..?
     
     if ([_locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
         [_locationManager requestWhenInUseAuthorization];
