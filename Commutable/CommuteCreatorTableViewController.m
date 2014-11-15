@@ -425,21 +425,27 @@
     NSLog(@"The method was called");
     //loop through all scheduled notifications and cancel the one we're looking for
     UILocalNotification *cancelThisNotification = nil;
-    BOOL hasNotification = NO;
+    //BOOL hasNotification = NO;
     
     for (UILocalNotification *someNotification in [[UIApplication sharedApplication] scheduledLocalNotifications]) {
         NSLog(@"The value of someNotification's userinfo is %@", someNotification.userInfo);
         if([[someNotification.userInfo objectForKey:@"notificationID"] isEqualToString:notificationID]) {
             NSLog(@"The conditions are true");
             cancelThisNotification = someNotification;
-            hasNotification = YES;
-            break;
+            NSLog(@"The firedate of the notification being canceled is %@",cancelThisNotification.fireDate);
+            //hasNotification = YES;
+            //break;
+            //if (hasNotification == YES) {
+                NSLog(@"%@ ",cancelThisNotification);
+                [[UIApplication sharedApplication] cancelLocalNotification:cancelThisNotification];
+                //hasNotification = NO;
+            //}
         }
     }
-    if (hasNotification == YES) {
+    /*if (hasNotification == YES) {
         NSLog(@"%@ ",cancelThisNotification);
         [[UIApplication sharedApplication] cancelLocalNotification:cancelThisNotification];
-    }
+    }*/
 }
 
 - (IBAction)unwindFromRecurrenceToCommuteCreatorTable:(UIStoryboardSegue *)segue {
@@ -661,7 +667,7 @@
                 
                 [self.commute setValue:self.alertTime forKey:@"alertTime"];
                 
-                //create Local Notification for this commute. This should probably be in core data
+                //create Local Notification for this commute.
                 //only if Send Alert Switch is on
                 if (_sendAlertSwitch.on == YES) {
                     
@@ -780,7 +786,7 @@
                 if (_sendAlertSwitch.on == YES){
                     
                     //cancel all previous notifications. Just kidding. This isn't necessary.
-                    //[self cancelLocalNotification:[newCommute valueForKey:@"name"]];
+                    [self cancelLocalNotification:[newCommute valueForKey:@"name"]];
                     
                     [newCommute setValue:@YES forKey:@"sendAlert"];
                     
