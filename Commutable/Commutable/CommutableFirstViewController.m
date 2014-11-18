@@ -64,7 +64,7 @@
     // add an observer for the user's current location
     [mapView addObserver:self forKeyPath:@"myLocation" options:NSKeyValueObservingOptionNew context: nil];
     
-    [self setupScrollViewBlur];
+    //[self setupScrollViewBlur];
     
     // make the call to grab the data from the datastore
     [self fetchData];
@@ -186,7 +186,10 @@
         self.noCommuteLabel.adjustsFontSizeToFitWidth = YES;
         self.noCommuteLabel.minimumScaleFactor = 0;
         self.noCommuteLabel.userInteractionEnabled = YES;
-        self.noCommuteLabel.text = @"No commutes set!\nSet a commute in the 'Commutes' tab.";
+        self.noCommuteLabel.text = @"No commutes set!\nSet a commute with the 'Commutes'\nbutton below.";
+        
+        //NSLog(@"Scroll view x: %f", self.scrollView.frame.origin.x);
+        //NSLog(@"Commute label x: %f", self.noCommuteLabel.frame.origin.x);
         
         // add the 'no commute' label to the scroll view
         [self.scrollView addSubview:self.noCommuteLabel];
@@ -196,14 +199,13 @@
         
         
         // move the camera back to the user's location
-        /*
         if (authorizedLocation)
         {
-        [mapView animateToCameraPosition:[GMSCameraPosition cameraWithLatitude:mapView.myLocation.coordinate.latitude
-                                                                     longitude:mapView.myLocation.coordinate.longitude
-                                                                          zoom:5.0]];
+        //[mapView animateToCameraPosition:[GMSCameraPosition cameraWithLatitude:mapView.myLocation.coordinate.latitude
+          //                                                           longitude:mapView.myLocation.coordinate.longitude
+            //                                                              zoom:5.0]];
+            mapView.settings.myLocationButton = YES;
         }
-         */
         if (!authorizedLocation)
         {
             // if the user didn't authorize use of location, just center map on US geographic center

@@ -102,8 +102,6 @@
 {
     [super viewWillAppear:animated];
     
-    NSLog(@"checking button..");
-    
     if (!authorizedLocation)
     {
         NSLog(@"hide button");

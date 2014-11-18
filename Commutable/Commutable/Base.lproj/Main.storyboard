@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="CZ4-MO-1fc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="CZ4-MO-1fc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -18,18 +18,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="AG6-f6-MMk">
-                                <rect key="frame" x="-6" y="524" width="332" height="44"/>
+                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                                 <color key="backgroundColor" red="0.20000000000000001" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="YrV-VK-Mmj"/>
                                 </constraints>
                             </pageControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tWB-Mt-SEO">
-                                <rect key="frame" x="270" y="526" width="34" height="34"/>
+                                <rect key="frame" x="271" y="526" width="34" height="34"/>
                                 <accessibility key="accessibilityConfiguration" label="Commutes">
                                     <accessibilityTraits key="traits" none="YES" button="YES" image="YES"/>
                                 </accessibility>
                                 <constraints>
+                                    <constraint firstAttribute="width" constant="34" id="YNd-aK-AhZ"/>
                                     <constraint firstAttribute="height" constant="34" id="gFj-9w-n0g"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
@@ -52,26 +53,34 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zUt-Qn-Saj">
-                                <rect key="frame" x="-6" y="397" width="332" height="128"/>
+                                <rect key="frame" x="0.0" y="396" width="320" height="128"/>
                                 <color key="backgroundColor" red="0.20000000000000001" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" red="0.20000000000000001" green="0.80000000000000004" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="128" id="RGR-Ra-GzT"/>
                                 </constraints>
                             </scrollView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Commutable Logo 58px.png" translatesAutoresizingMaskIntoConstraints="NO" id="TQc-1a-gyh">
+                                <rect key="frame" x="5" y="528" width="35" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="35" id="Qdl-dw-Z5h"/>
+                                    <constraint firstAttribute="height" constant="35" id="rVf-wf-yU1"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="tWB-Mt-SEO" firstAttribute="trailing" secondItem="2VE-Yg-loa" secondAttribute="trailingMargin" id="FUJ-NM-Tft"/>
-                            <constraint firstItem="AG6-f6-MMk" firstAttribute="top" secondItem="zUt-Qn-Saj" secondAttribute="bottom" constant="-1" id="HTe-Kx-PnN"/>
+                            <constraint firstItem="AG6-f6-MMk" firstAttribute="top" secondItem="zUt-Qn-Saj" secondAttribute="bottom" id="HTe-Kx-PnN"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="tWB-Mt-SEO" secondAttribute="trailing" constant="-1" id="J4F-BY-RRM"/>
+                            <constraint firstItem="dtj-EO-iXF" firstAttribute="top" secondItem="TQc-1a-gyh" secondAttribute="bottom" constant="5" id="MTS-rC-iof"/>
                             <constraint firstItem="bfx-Sc-P3G" firstAttribute="top" secondItem="tWB-Mt-SEO" secondAttribute="bottom" constant="-7" id="N0X-qB-Nt0"/>
-                            <constraint firstAttribute="centerX" secondItem="zUt-Qn-Saj" secondAttribute="centerX" id="SdY-JR-mgn"/>
-                            <constraint firstItem="zUt-Qn-Saj" firstAttribute="leading" secondItem="2VE-Yg-loa" secondAttribute="leadingMargin" constant="-22" id="TmO-R1-Rfy"/>
-                            <constraint firstItem="AG6-f6-MMk" firstAttribute="leading" secondItem="2VE-Yg-loa" secondAttribute="leadingMargin" constant="-22" id="Vga-hB-ecO"/>
+                            <constraint firstAttribute="centerX" secondItem="AG6-f6-MMk" secondAttribute="centerX" id="Tby-PD-CP2"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="AG6-f6-MMk" secondAttribute="trailing" constant="-16" id="fAR-gi-lay"/>
                             <constraint firstItem="bfx-Sc-P3G" firstAttribute="centerX" secondItem="tWB-Mt-SEO" secondAttribute="centerX" id="iZI-j0-e8J"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="AG6-f6-MMk" secondAttribute="trailing" constant="-22" id="n8R-2L-Enu"/>
                             <constraint firstItem="dtj-EO-iXF" firstAttribute="top" secondItem="AG6-f6-MMk" secondAttribute="bottom" id="pvm-So-Cz4"/>
-                            <constraint firstItem="tWB-Mt-SEO" firstAttribute="leading" secondItem="AG6-f6-MMk" secondAttribute="trailing" constant="-56" id="xhv-pM-meZ"/>
+                            <constraint firstAttribute="leading" secondItem="zUt-Qn-Saj" secondAttribute="leading" id="spk-8A-75b"/>
+                            <constraint firstAttribute="trailing" secondItem="zUt-Qn-Saj" secondAttribute="trailing" id="tzm-xR-hpp"/>
+                            <constraint firstAttribute="leading" secondItem="TQc-1a-gyh" secondAttribute="leading" constant="-5" id="vBd-Es-t2X"/>
                             <constraint firstItem="dtj-EO-iXF" firstAttribute="top" secondItem="tWB-Mt-SEO" secondAttribute="bottom" constant="8" symbolic="YES" id="zWY-3d-CVv"/>
                         </constraints>
                     </view>
@@ -785,8 +794,8 @@
                                     <action selector="dismissKeyboard:" destination="qfm-4w-opH" eventType="editingDidEndOnExit" id="7fj-qG-5Bz"/>
                                 </connections>
                             </textField>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Street Address:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xES-x9-Mb0">
-                                <rect key="frame" x="20" y="171" width="119" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Street Address:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xES-x9-Mb0">
+                                <rect key="frame" x="20" y="170" width="119" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="119" id="b51-wc-Yyk"/>
                                 </constraints>
@@ -801,16 +810,16 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Location Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U31-C3-yNt">
-                                <rect key="frame" x="20" y="104" width="122" height="25"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U31-C3-yNt">
+                                <rect key="frame" x="20" y="105" width="122" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="121.5" id="dlD-NV-T9j"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FzK-c5-TR1">
-                                <rect key="frame" x="149" y="102" width="151" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FzK-c5-TR1">
+                                <rect key="frame" x="150" y="102" width="150" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next"/>
                                 <connections>
@@ -970,6 +979,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Commutable Logo 58px.png" width="58" height="58"/>
         <image name="CommutesIcon" width="25" height="25"/>
         <image name="CommutesTabIcon" width="50" height="50"/>
     </resources>
