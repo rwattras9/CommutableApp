@@ -117,7 +117,7 @@
     
     [self.view addSubview:mapView];
     
-    [self updateMap];
+    //[self updateMap];
 }
 
 
@@ -164,6 +164,7 @@
         // if the label is currently there
         if (needToClearLabel)
         {
+            NSLog(@"Clearing label.");
             // remove it
             [self.noCommuteLabel removeFromSuperview];
             needToClearLabel = false;
@@ -189,7 +190,7 @@
         self.noCommuteLabel.text = @"No commutes set!\nSet a commute with the 'Commutes'\nbutton below.";
         
         //NSLog(@"Scroll view x: %f", self.scrollView.frame.origin.x);
-        //NSLog(@"Commute label x: %f", self.noCommuteLabel.frame.origin.x);
+        NSLog(@"Commute label x: %f", self.noCommuteLabel.frame.origin.x);
         
         // add the 'no commute' label to the scroll view
         [self.scrollView addSubview:self.noCommuteLabel];
@@ -596,7 +597,7 @@
     url = [[url
             stringByAddingPercentEscapesUsingEncoding: NSASCIIStringEncoding] mutableCopy]; // turn the query into a viable URL with %20 escapes for spaces, etc
     
-    //NSLog(@"URL: %@", url);
+    NSLog(@"URL: %@", url);
     
     NSURL* coordToAddressURL = [NSURL URLWithString:url]; // turn the finshed URL query into the global variable of type NSURL
     

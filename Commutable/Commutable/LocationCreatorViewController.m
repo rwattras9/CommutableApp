@@ -83,13 +83,52 @@
     }
     else
     {
+        // get the query results in dictionary form
         NSDictionary *results = currentLocationDictionary[@"results"][0];
-        NSDictionary *address_componentsSTRNUM = results[@"address_components"][0];
-        NSDictionary *address_componentsSTRADD = results[@"address_components"][1];
-        NSDictionary *address_componentsZIP = results[@"address_components"][7];
+        NSDictionary *address_componentsSTRNUM;
+        NSDictionary *address_componentsSTRADD;
+        NSDictionary *address_componentsZIP;
+        
+        // have to make sure we grab the right info since the query results are dynamic
+        // ie. some places don't have street numbers
+        int comp = 0;
+        while (true)
+        {
+            NSDictionary *check = results[@"address_components"][comp]; // grab the address components
+            // iterate through the components, setting the right ones
+            if ([check[@"types"][0] isEqual: @"street_number"])
+            {
+                address_componentsSTRNUM = check;
+            }
+            else if ([check[@"types"][0] isEqual: @"route"])
+            {
+                address_componentsSTRADD = check;
+            }
+            else if ([check[@"types"][0] isEqual: @"postal_code"])
+            {
+                address_componentsZIP = check;
+                break; // once we get the zip, we can hop out of the iterating loop
+            }
+            
+            comp++; // our counter for the iteration
+            
+            if (comp > 7)
+            {
+                break; // make sure this isn't an infinite loop
+            }
+        }
     
-        [self.streetAddressTextField setText:[NSString stringWithFormat:@"%@ %@", address_componentsSTRNUM[@"short_name"], address_componentsSTRADD[@"short_name"]]];
-        [self.zipCodeTextField setText:[NSString stringWithFormat:@"%@", address_componentsZIP[@"short_name"]]];
+        // if there's no street number, don't put it into the text field
+        if (address_componentsSTRNUM == NULL)
+        {
+            [self.streetAddressTextField setText:[NSString stringWithFormat:@"%@", address_componentsSTRADD[@"short_name"]]];
+        }
+        else
+        {
+            [self.streetAddressTextField setText:[NSString stringWithFormat:@"%@ %@", address_componentsSTRNUM[@"short_name"], address_componentsSTRADD[@"short_name"]]];
+        }
+        
+        [self.zipCodeTextField setText:[NSString stringWithFormat:@"%@", address_componentsZIP[@"short_name"]]]; // put the zip into the zip field
     }
     
 }
