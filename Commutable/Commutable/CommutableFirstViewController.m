@@ -144,6 +144,7 @@
 {
     // not sure what this does, but basically says the scrollview delegate is the main view
     self.scrollView.delegate = self;
+    self.scrollView.autoresizesSubviews = YES;
     
     // initialize some arrays for storing the route info in memory once we get it from the store
     self.commuteNameArray = [NSMutableArray array];
@@ -173,10 +174,16 @@
         // still need one scroll page to put the 'no commute' message on
         self.pageControl.numberOfPages = 1;
         
-        CGRect frame;
-        frame.origin.x = 0;
-        frame.origin.y = 0;
-        frame.size = self.scrollView.frame.size;
+        
+        // possible 'fix' for the weird scroll view text auto-layout issue
+        // use the mapview frame since apparently the scrollview frame doesn't update fast enough
+        CGRect frame = CGRectMake(0, 0, self.mapView.frame.size.width, self.scrollView.frame.size.height);
+        
+        //frame.origin.x = 0;
+        //frame.origin.y = 0;
+        //frame.size = self.scrollView.frame.size;
+        
+        NSLog(@"test: %f", frame.size.width);
         
         // create 'no commute' UILabel and customize label text
         self.noCommuteLabel = [[UILabel alloc] initWithFrame:frame];
@@ -188,9 +195,6 @@
         self.noCommuteLabel.minimumScaleFactor = 0;
         self.noCommuteLabel.userInteractionEnabled = YES;
         self.noCommuteLabel.text = @"No commutes set!\nSet a commute with the 'Commutes'\nbutton below.";
-        
-        //NSLog(@"Scroll view x: %f", self.scrollView.frame.origin.x);
-        NSLog(@"Commute label x: %f", self.noCommuteLabel.frame.origin.x);
         
         // add the 'no commute' label to the scroll view
         [self.scrollView addSubview:self.noCommuteLabel];
@@ -286,10 +290,14 @@
     // for each commute, create the label and add it to the scroll view and the label array
     for (int i=0; i < self.commuteArray.count; i++){
             
-        CGRect frame;
-        frame.origin.x = self.scrollView.frame.size.width * i;
-        frame.origin.y = 0;
-        frame.size = self.scrollView.frame.size;
+        // possible 'fix' for the weird scroll view text auto-layout issue
+        // use the mapview frame since apparently the scrollview frame doesn't update fast enough
+        CGRect frame = CGRectMake(self.mapView.frame.size.width * i, 0, self.mapView.frame.size.width, self.scrollView.frame.size.height);
+        
+        //CGRect frame;
+        //frame.origin.x = self.scrollView.frame.size.width * i;
+        //frame.origin.y = 0;
+        //frame.size = self.scrollView.frame.size;
         
         // create UILabel and customize label text
         UILabel *label = [[UILabel alloc] initWithFrame:frame];
@@ -308,7 +316,8 @@
     }
     
     // make sure the content fits on the scroll view
-    self.scrollView.contentSize = CGSizeMake(scrollView.frame.size.width * [self.commuteArray count], scrollView.frame.size.height);
+    //self.scrollView.contentSize = CGSizeMake(scrollView.frame.size.width * [self.commuteArray count], scrollView.frame.size.height);
+    self.scrollView.contentSize = CGSizeMake(self.mapView.frame.size.width * [self.commuteArray count], scrollView.frame.size.height);
     
     // when the scroll view is done loading, send the query for the first commute
     if (cameFromLocalNotification)
