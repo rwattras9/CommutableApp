@@ -97,6 +97,7 @@
     //NSLog(@"The selected time is %@", prettyVersion);
     self.alertTimeLabel.text = [NSString stringWithFormat:@"%@", prettyVersion];
     self.alertTimeLabel.textColor = [UIColor blackColor];
+    self.alertTimeDatePickerWasUsed = YES;
     
 }
 //Sets the default value of Alert Date Picker
@@ -520,6 +521,11 @@
             performSegue = NO;
         }
         
+        if (self.alertTimeDatePickerWasUsed == NO) {
+            self.alertTimeLabel.textColor = [UIColor redColor];
+            performSegue = NO;
+        }
+        
         //if we are creating a new commute, check to see if the UI pickers have been used
         if (!self.commute) {
             //if the starting location picker wasn't used for a new commute, don't perform the segue and tell user to select a starting point
@@ -531,10 +537,16 @@
                 self.destinationLocationLabel.textColor = [UIColor redColor];
                 performSegue = NO;
             }
-            if ([self.alertTimeLabel.text isEqual: @"Alert Time"]) {
+            if (self.alertTimeDatePickerWasUsed == NO) {
                 self.alertTimeLabel.textColor = [UIColor redColor];
                 performSegue = NO;
             }
+
+            /*if ([self.alertTimeLabel.text isEqual: @"Alert Time"]) {
+                NSLog(@"This is true");
+                self.alertTimeLabel.textColor = [UIColor redColor];
+                performSegue = NO;
+            }*/
         }
         return performSegue;
         
@@ -687,9 +699,11 @@
                     
                     NSDate *fireTime = [commute valueForKey:@"alertTime"];
                     NSLog(@"The fireTime is %@", fireTime);
-                    
+                
                     //interate through the repeatIntervalDays and schedule a local notification for each
-                    for (id dayOfTheWeek in repeatIntervalDays) {
+                    int i = 0;
+                    for (i = 0; i < [repeatIntervalDays count]; i++) {
+                        
                         UILocalNotification *commuteNotification = [[UILocalNotification alloc] init];
                         NSCalendar *gregCalendar = [[NSCalendar alloc]initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
                         NSDateComponents *dateComponent = [gregCalendar components:NSCalendarUnitYear  | NSCalendarUnitWeekOfYear fromDate:[NSDate date]];
@@ -699,7 +713,9 @@
                         NSInteger hour = [fireTimeComponents hour];
                         NSInteger minute = [fireTimeComponents minute];
                         
-                        int weekDay = (int)dayOfTheWeek;
+                        int weekDay = (int)[repeatIntervalDays objectAtIndex:i];
+                        
+                        NSLog(@"The value of weekday is %d", weekDay);
                         
                         [dateComponent setWeekday:weekDay];
                         [dateComponent setHour:hour];
@@ -803,7 +819,8 @@
                     NSLog(@"The fireTime is %@", fireTime);
                     
                     //interate through the repeatIntervalDays and schedule a local notification for each
-                    for (id dayOfTheWeek in repeatIntervalDays) {
+                    int i = 0;
+                    for (i = 0; i < [repeatIntervalDays count]; i++) {
                         UILocalNotification *commuteNotification = [[UILocalNotification alloc] init];
                         NSCalendar *gregCalendar = [[NSCalendar alloc]initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
                         NSDateComponents *dateComponent = [gregCalendar components:NSCalendarUnitYear  | NSCalendarUnitWeekOfYear fromDate:[NSDate date]];
@@ -813,7 +830,7 @@
                         NSInteger hour = [fireTimeComponents hour];
                         NSInteger minute = [fireTimeComponents minute];
                      
-                        int weekDay = (int)dayOfTheWeek;
+                        int weekDay = (int)[repeatIntervalDays objectAtIndex:i];
                      
                         [dateComponent setWeekday:weekDay];
                         [dateComponent setHour:hour];
