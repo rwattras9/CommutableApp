@@ -695,6 +695,7 @@
                         intValue = intValue + 1;
                         NSNumber *repeatDay = [NSNumber numberWithInt:intValue];
                         [repeatIntervalDays addObject:repeatDay];
+                        
                     }
                     
                     NSDate *fireTime = [commute valueForKey:@"alertTime"];
@@ -712,10 +713,10 @@
                         NSDateComponents *fireTimeComponents = [calendar components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:fireTime];
                         NSInteger hour = [fireTimeComponents hour];
                         NSInteger minute = [fireTimeComponents minute];
+
                         
-                        int weekDay = (int)[repeatIntervalDays objectAtIndex:i];
-                        
-                        NSLog(@"The value of weekday is %d", weekDay);
+                        NSInteger weekDay = [[repeatIntervalDays objectAtIndex:i] integerValue];
+                        NSLog(@"The value of weekday is %ld", (long)weekDay);
                         
                         [dateComponent setWeekday:weekDay];
                         [dateComponent setHour:hour];
@@ -830,7 +831,8 @@
                         NSInteger hour = [fireTimeComponents hour];
                         NSInteger minute = [fireTimeComponents minute];
                      
-                        int weekDay = (int)[repeatIntervalDays objectAtIndex:i];
+                        NSInteger weekDay = [[repeatIntervalDays objectAtIndex:i] integerValue];
+                        NSLog(@"The value of weekday is %ld", (long)weekDay);
                      
                         [dateComponent setWeekday:weekDay];
                         [dateComponent setHour:hour];
