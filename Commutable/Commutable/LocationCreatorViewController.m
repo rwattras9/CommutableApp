@@ -112,23 +112,51 @@
             
             comp++; // our counter for the iteration
             
-            if (comp > 7)
+            if (comp > 20)
             {
-                break; // make sure this isn't an infinite loop
+                break; // make sure this isn't an infinite loop; there are max 20 types of address components to some locations
             }
         }
     
+        // booleans for determining what values we have adnwehther we should show an error
+        BOOL no_full_address = false;
+        BOOL no_zip = false;
+        
         // if there's no street number, don't put it into the text field
+        // also, if both are found print them into the address field
         if (address_componentsSTRNUM == NULL)
         {
             [self.streetAddressTextField setText:[NSString stringWithFormat:@"%@", address_componentsSTRADD[@"short_name"]]];
         }
-        else
+        else if (address_componentsSTRNUM != NULL && address_componentsSTRADD != NULL)
         {
             [self.streetAddressTextField setText:[NSString stringWithFormat:@"%@ %@", address_componentsSTRNUM[@"short_name"], address_componentsSTRADD[@"short_name"]]];
         }
+        else if (address_componentsSTRNUM == NULL && address_componentsSTRADD == NULL)
+        {
+            no_full_address = true;
+        }
         
-        [self.zipCodeTextField setText:[NSString stringWithFormat:@"%@", address_componentsZIP[@"short_name"]]]; // put the zip into the zip field
+        // if a zip code is found, print it on the zip input field
+        if (address_componentsZIP != NULL)
+        {
+            [self.zipCodeTextField setText:[NSString stringWithFormat:@"%@", address_componentsZIP[@"short_name"]]];
+        }
+        else if (address_componentsZIP == NULL)
+        {
+            no_zip = true;
+        }
+        
+        // if there're no values, show an error
+        if (no_full_address && no_zip)
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                            message:@"Unable to get current location."
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+        }
     }
     
 }

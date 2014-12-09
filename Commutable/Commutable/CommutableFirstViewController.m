@@ -165,7 +165,6 @@
         // if the label is currently there
         if (needToClearLabel)
         {
-            NSLog(@"Clearing label.");
             // remove it
             [self.noCommuteLabel removeFromSuperview];
             needToClearLabel = false;
@@ -178,12 +177,6 @@
         // possible 'fix' for the weird scroll view text auto-layout issue
         // use the mapview frame since apparently the scrollview frame doesn't update fast enough
         CGRect frame = CGRectMake(0, 0, self.mapView.frame.size.width, self.scrollView.frame.size.height);
-        
-        //frame.origin.x = 0;
-        //frame.origin.y = 0;
-        //frame.size = self.scrollView.frame.size;
-        
-        NSLog(@"test: %f", frame.size.width);
         
         // create 'no commute' UILabel and customize label text
         self.noCommuteLabel = [[UILabel alloc] initWithFrame:frame];
@@ -293,11 +286,6 @@
         // possible 'fix' for the weird scroll view text auto-layout issue
         // use the mapview frame since apparently the scrollview frame doesn't update fast enough
         CGRect frame = CGRectMake(self.mapView.frame.size.width * i, 0, self.mapView.frame.size.width, self.scrollView.frame.size.height);
-        
-        //CGRect frame;
-        //frame.origin.x = self.scrollView.frame.size.width * i;
-        //frame.origin.y = 0;
-        //frame.size = self.scrollView.frame.size;
         
         // create UILabel and customize label text
         UILabel *label = [[UILabel alloc] initWithFrame:frame];
@@ -584,7 +572,7 @@
 //for passing current location info to next screen
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     
-    NSLog(@"preparing for segue");
+    //NSLog(@"preparing for segue");
     UINavigationController *navController = (UINavigationController *)segue.destinationViewController;
     CommutesTableViewController *controller = (CommutesTableViewController *)navController.topViewController;
     controller.currentLocationDictionary = [self getCurrentLocationAddress];
@@ -606,7 +594,7 @@
     url = [[url
             stringByAddingPercentEscapesUsingEncoding: NSASCIIStringEncoding] mutableCopy]; // turn the query into a viable URL with %20 escapes for spaces, etc
     
-    NSLog(@"URL: %@", url);
+    //NSLog(@"URL: %@", url);
     
     NSURL* coordToAddressURL = [NSURL URLWithString:url]; // turn the finshed URL query into the global variable of type NSURL
     
