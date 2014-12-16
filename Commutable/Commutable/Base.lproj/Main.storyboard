@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="CZ4-MO-1fc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="CZ4-MO-1fc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -75,7 +75,7 @@
                             <constraint firstItem="dtj-EO-iXF" firstAttribute="top" secondItem="TQc-1a-gyh" secondAttribute="bottom" constant="5" id="MTS-rC-iof"/>
                             <constraint firstItem="bfx-Sc-P3G" firstAttribute="top" secondItem="tWB-Mt-SEO" secondAttribute="bottom" constant="-7" id="N0X-qB-Nt0"/>
                             <constraint firstAttribute="centerX" secondItem="AG6-f6-MMk" secondAttribute="centerX" id="Tby-PD-CP2"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="AG6-f6-MMk" secondAttribute="trailing" constant="-16" id="fAR-gi-lay"/>
+                            <constraint firstAttribute="trailing" secondItem="AG6-f6-MMk" secondAttribute="trailing" id="fAR-gi-lay"/>
                             <constraint firstItem="bfx-Sc-P3G" firstAttribute="centerX" secondItem="tWB-Mt-SEO" secondAttribute="centerX" id="iZI-j0-e8J"/>
                             <constraint firstItem="dtj-EO-iXF" firstAttribute="top" secondItem="AG6-f6-MMk" secondAttribute="bottom" id="pvm-So-Cz4"/>
                             <constraint firstAttribute="leading" secondItem="zUt-Qn-Saj" secondAttribute="leading" id="spk-8A-75b"/>

@@ -188,6 +188,8 @@
         self.noCommuteLabel.minimumScaleFactor = 0;
         self.noCommuteLabel.userInteractionEnabled = YES;
         self.noCommuteLabel.text = @"No commutes set!\nSet a commute with the 'Commutes'\nbutton below.";
+        self.noCommuteLabel.layer.borderWidth = 0.5;
+        self.noCommuteLabel.layer.borderColor = [UIColor blackColor].CGColor;
         
         // add the 'no commute' label to the scroll view
         [self.scrollView addSubview:self.noCommuteLabel];
@@ -296,6 +298,17 @@
         label.adjustsFontSizeToFitWidth = YES;
         label.minimumScaleFactor = 0;
         label.userInteractionEnabled = YES;
+        
+        CGFloat borderWidth = 0.5;
+        
+        label.layer.borderColor = [UIColor blackColor].CGColor;
+        label.layer.borderWidth = borderWidth;
+        
+        // testing out a mask to hide the non-scrolling borders
+        UIView* mask = [[UIView alloc] initWithFrame:CGRectMake(borderWidth, borderWidth, label.frame.size.width, label.frame.size.height + borderWidth)];
+        mask.backgroundColor = [UIColor blackColor];
+        label.layer.mask = mask.layer;
+        
         
         [self.labelArray addObject:label];
         
@@ -509,8 +522,8 @@
     NSDictionary *legs = routes[@"legs"][0];
     
     // get the distance in text form
-    NSDictionary *distance = legs[@"distance"];
-    NSString *distanceText = distance[@"text"];
+    //NSDictionary *distance = legs[@"distance"];
+    //NSString *distanceText = distance[@"text"];
     
     // get the duration in text form
     NSDictionary *duration = legs[@"duration"];
@@ -560,7 +573,7 @@
     [mapView moveCamera:update];
     
     // update the text of the current UIlabel page showing
-    NSString *dirText = [NSString stringWithFormat:@"Commute Name: %@\nDirections: Take %@.\nDistance = %@, Duration = %@", [self.commuteNameArray objectAtIndex:currentPage],routes[@"summary"], distanceText, durationText];
+    NSString *dirText = [NSString stringWithFormat:@"Current Commute: %@\nIf you take %@ today, it should only take\nyou %@.\nDrive safe!", [self.commuteNameArray objectAtIndex:currentPage],routes[@"summary"], durationText];
     [[self.labelArray objectAtIndex:currentPage] setText:dirText];
 }
 
