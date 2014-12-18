@@ -10,6 +10,7 @@
 #import "DirectionService.h"
 #import <QuartzCore/QuartzCore.h>
 #import "CommutesTableViewController.h"
+#import "UIBorderLabel.h"
 
 @interface CommutableFirstViewController () <GMSMapViewDelegate, CLLocationManagerDelegate>
 @property (nonatomic, strong) CLLocationManager *locationManager;
@@ -289,25 +290,33 @@
         // use the mapview frame since apparently the scrollview frame doesn't update fast enough
         CGRect frame = CGRectMake(self.mapView.frame.size.width * i, 0, self.mapView.frame.size.width, self.scrollView.frame.size.height);
         
-        // create UILabel and customize label text
-        UILabel *label = [[UILabel alloc] initWithFrame:frame];
+        // create UIBorderLabel (custom subclass of UIlabel) with padding and customize label text
+        UIBorderLabel *label = [[UIBorderLabel alloc] initWithFrame:frame];
+        
+        // playing around with padding
+        label.topInset = 5;
+        label.bottomInset = 5;
+        label.leftInset = 5;
+        label.rightInset = 5;
+        
         label.textColor = [UIColor whiteColor];
         label.textAlignment = NSTextAlignmentCenter;
-        label.lineBreakMode = YES;
-        label.numberOfLines = 4;
-        label.adjustsFontSizeToFitWidth = YES;
-        label.minimumScaleFactor = 0;
+        
+        //label.lineBreakMode = YES;
+        [label setLineBreakMode:NSLineBreakByWordWrapping];
+        
+        label.numberOfLines = 0;
+        //label.adjustsFontSizeToFitWidth = YES;
+        //label.minimumScaleFactor = 0;
         label.userInteractionEnabled = YES;
         
-        CGFloat borderWidth = 0.5;
+        // playing around with borders on the labels
+        CALayer *rightBorder = [CALayer layer];
+        rightBorder.borderColor = [UIColor blackColor].CGColor;
+        rightBorder.borderWidth = 1;
+        rightBorder.frame = CGRectMake(0, -1, CGRectGetWidth(label.frame), CGRectGetHeight(label.frame)+2);
         
-        label.layer.borderColor = [UIColor blackColor].CGColor;
-        label.layer.borderWidth = borderWidth;
-        
-        // testing out a mask to hide the non-scrolling borders
-        UIView* mask = [[UIView alloc] initWithFrame:CGRectMake(borderWidth, borderWidth, label.frame.size.width, label.frame.size.height + borderWidth)];
-        mask.backgroundColor = [UIColor blackColor];
-        label.layer.mask = mask.layer;
+        [label.layer addSublayer:rightBorder];
         
         
         [self.labelArray addObject:label];
@@ -573,7 +582,7 @@
     [mapView moveCamera:update];
     
     // update the text of the current UIlabel page showing
-    NSString *dirText = [NSString stringWithFormat:@"Current Commute: %@\nIf you take %@ today, it should only take\nyou %@.\nDrive safe!", [self.commuteNameArray objectAtIndex:currentPage],routes[@"summary"], durationText];
+    NSString *dirText = [NSString stringWithFormat:@"Current Commute: %@\nIf you take %@ today, it should only take you %@.\nDrive safe!", [self.commuteNameArray objectAtIndex:currentPage],routes[@"summary"], durationText];
     [[self.labelArray objectAtIndex:currentPage] setText:dirText];
 }
 
