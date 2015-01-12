@@ -19,7 +19,12 @@
 		2C19EE4F193A810A00745780 /* Commutable Logo 120px.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C19EE4C193A810A00745780 /* Commutable Logo 120px.png */; };
 		2C1A5BDA19B509FA0025605C /* Car and Menu Icon Blue 50px.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C1A5BD819B509FA0025605C /* Car and Menu Icon Blue 50px.png */; };
 		2C1A5BDB19B509FA0025605C /* Car and Menu Icon white 50px.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C1A5BD919B509FA0025605C /* Car and Menu Icon white 50px.png */; };
+		2C1E153B1A539127007379B0 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C1E153A1A539127007379B0 /* NotificationCenter.framework */; };
+		2C1E15411A539127007379B0 /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C1E15401A539127007379B0 /* TodayViewController.m */; };
+		2C1E15431A539127007379B0 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C1E15421A539127007379B0 /* MainInterface.storyboard */; };
+		2C1E15461A539127007379B0 /* CommutableWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 2C1E15391A539127007379B0 /* CommutableWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		2C2F1009193D563200D24F4D /* RepeatScheduleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2F1008193D563200D24F4D /* RepeatScheduleTableViewController.m */; };
+		2C47CD541A58976D000BD4AF /* Commutable.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2CA120D41929637C004825D4 /* Commutable.xcdatamodeld */; };
 		2C5B0000193A916700A229EA /* Commutes Tab Car Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C5BFFFF193A916700A229EA /* Commutes Tab Car Icon.png */; };
 		2C5B0002193A929D00A229EA /* Commutes Tab Car Icon 50px.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C5B0001193A929D00A229EA /* Commutes Tab Car Icon 50px.png */; };
 		2C6E3B8F19564797005FCB02 /* Car and Menu Icon 50px.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C6E3B8D19564797005FCB02 /* Car and Menu Icon 50px.png */; };
@@ -70,6 +75,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		2C1E15441A539127007379B0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2CE53EDB18F98C43005BCEC9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2C1E15381A539127007379B0;
+			remoteInfo = CommutableWidget;
+		};
 		2CE53F0C18F98C44005BCEC9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2CE53EDB18F98C43005BCEC9 /* Project object */;
@@ -78,6 +90,20 @@
 			remoteInfo = Commutable;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		2C1E154A1A539127007379B0 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				2C1E15461A539127007379B0 /* CommutableWidget.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		2C0644F319B3E8DA00F43D8A /* Traffic Light Icon 30px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Traffic Light Icon 30px.png"; sourceTree = "<group>"; };
@@ -93,6 +119,12 @@
 		2C19EE4C193A810A00745780 /* Commutable Logo 120px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Commutable Logo 120px.png"; sourceTree = "<group>"; };
 		2C1A5BD819B509FA0025605C /* Car and Menu Icon Blue 50px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Car and Menu Icon Blue 50px.png"; sourceTree = "<group>"; };
 		2C1A5BD919B509FA0025605C /* Car and Menu Icon white 50px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Car and Menu Icon white 50px.png"; sourceTree = "<group>"; };
+		2C1E15391A539127007379B0 /* CommutableWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CommutableWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C1E153A1A539127007379B0 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		2C1E153E1A539127007379B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2C1E153F1A539127007379B0 /* TodayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TodayViewController.h; sourceTree = "<group>"; };
+		2C1E15401A539127007379B0 /* TodayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TodayViewController.m; sourceTree = "<group>"; };
+		2C1E15421A539127007379B0 /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
 		2C2F1007193D563200D24F4D /* RepeatScheduleTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepeatScheduleTableViewController.h; sourceTree = "<group>"; };
 		2C2F1008193D563200D24F4D /* RepeatScheduleTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RepeatScheduleTableViewController.m; sourceTree = "<group>"; };
 		2C5B0001193A929D00A229EA /* Commutes Tab Car Icon 50px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Commutes Tab Car Icon 50px.png"; sourceTree = "<group>"; };
@@ -160,6 +192,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		2C1E15361A539127007379B0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C1E153B1A539127007379B0 /* NotificationCenter.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2CE53EE018F98C43005BCEC9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -196,11 +236,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2C1E153C1A539127007379B0 /* CommutableWidget */ = {
+			isa = PBXGroup;
+			children = (
+				2C1E153F1A539127007379B0 /* TodayViewController.h */,
+				2C1E15401A539127007379B0 /* TodayViewController.m */,
+				2C1E15421A539127007379B0 /* MainInterface.storyboard */,
+				2C1E153D1A539127007379B0 /* Supporting Files */,
+			);
+			path = CommutableWidget;
+			sourceTree = "<group>";
+		};
+		2C1E153D1A539127007379B0 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2C1E153E1A539127007379B0 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		2CE53EDA18F98C43005BCEC9 = {
 			isa = PBXGroup;
 			children = (
 				2CE53EEC18F98C43005BCEC9 /* Commutable */,
 				2CE53F0E18F98C44005BCEC9 /* CommutableTests */,
+				2C1E153C1A539127007379B0 /* CommutableWidget */,
 				2CE53EE518F98C43005BCEC9 /* Frameworks */,
 				2CE53EE418F98C43005BCEC9 /* Products */,
 			);
@@ -211,6 +271,7 @@
 			children = (
 				2CE53EE318F98C43005BCEC9 /* Commutable.app */,
 				2CE53F0718F98C43005BCEC9 /* CommutableTests.xctest */,
+				2C1E15391A539127007379B0 /* CommutableWidget.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -236,6 +297,7 @@
 				2CE53EE818F98C43005BCEC9 /* CoreGraphics.framework */,
 				2CE53EEA18F98C43005BCEC9 /* UIKit.framework */,
 				2CE53F0818F98C43005BCEC9 /* XCTest.framework */,
+				2C1E153A1A539127007379B0 /* NotificationCenter.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -330,6 +392,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		2C1E15381A539127007379B0 /* CommutableWidget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2C1E15491A539127007379B0 /* Build configuration list for PBXNativeTarget "CommutableWidget" */;
+			buildPhases = (
+				2C1E15351A539127007379B0 /* Sources */,
+				2C1E15361A539127007379B0 /* Frameworks */,
+				2C1E15371A539127007379B0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CommutableWidget;
+			productName = CommutableWidget;
+			productReference = 2C1E15391A539127007379B0 /* CommutableWidget.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		2CE53EE218F98C43005BCEC9 /* Commutable */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2CE53F1818F98C44005BCEC9 /* Build configuration list for PBXNativeTarget "Commutable" */;
@@ -337,10 +416,12 @@
 				2CE53EDF18F98C43005BCEC9 /* Sources */,
 				2CE53EE018F98C43005BCEC9 /* Frameworks */,
 				2CE53EE118F98C43005BCEC9 /* Resources */,
+				2C1E154A1A539127007379B0 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				2C1E15451A539127007379B0 /* PBXTargetDependency */,
 			);
 			name = Commutable;
 			productName = Commutable;
@@ -375,6 +456,10 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = Commutable;
 				TargetAttributes = {
+					2C1E15381A539127007379B0 = {
+						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = Z7R2A3LUFQ;
+					};
 					2CE53EE218F98C43005BCEC9 = {
 						DevelopmentTeam = Z7R2A3LUFQ;
 					};
@@ -398,11 +483,20 @@
 			targets = (
 				2CE53EE218F98C43005BCEC9 /* Commutable */,
 				2CE53F0618F98C43005BCEC9 /* CommutableTests */,
+				2C1E15381A539127007379B0 /* CommutableWidget */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		2C1E15371A539127007379B0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C1E15431A539127007379B0 /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2CE53EE118F98C43005BCEC9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -444,6 +538,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		2C1E15351A539127007379B0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C47CD541A58976D000BD4AF /* Commutable.xcdatamodeld in Sources */,
+				2C1E15411A539127007379B0 /* TodayViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2CE53EDF18F98C43005BCEC9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -478,6 +581,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		2C1E15451A539127007379B0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2C1E15381A539127007379B0 /* CommutableWidget */;
+			targetProxy = 2C1E15441A539127007379B0 /* PBXContainerItemProxy */;
+		};
 		2CE53F0D18F98C44005BCEC9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 2CE53EE218F98C43005BCEC9 /* Commutable */;
@@ -513,6 +621,40 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		2C1E15471A539127007379B0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = CommutableWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		2C1E15481A539127007379B0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				INFOPLIST_FILE = CommutableWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		2CE53F1618F98C44005BCEC9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -666,6 +808,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		2C1E15491A539127007379B0 /* Build configuration list for PBXNativeTarget "CommutableWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2C1E15471A539127007379B0 /* Debug */,
+				2C1E15481A539127007379B0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		2CE53EDE18F98C43005BCEC9 /* Build configuration list for PBXProject "Commutable" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
